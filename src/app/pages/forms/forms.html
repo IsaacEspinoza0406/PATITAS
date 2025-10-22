@@ -1,0 +1,31 @@
+<div class="form-container">
+  <h2>Información General del Adoptante</h2>
+
+  <div class="steps">
+    <div class="step" [class.active]="step === 1">1</div>
+    <div class="step" [class.active]="step === 2">2</div>
+    <div class="step" [class.active]="step === 3">3</div>
+  </div>
+
+  <form (ngSubmit)="onSubmit()" *ngIf="step === 1">
+    <label>¿Cuál es su nombre?</label>
+    <input type="text" name="nombre" required>
+
+    <label>¿Cuál es su número telefónico?</label>
+    <input type="tel" name="telefono" required>
+
+    <label>¿Cuántos años tiene?</label>
+    <input type="number" name="edad" required>
+
+    <label>¿A qué se dedica?</label>
+    <input type="text" name="ocupacion">
+
+    <label>Aproximadamente, ¿cuánto gana mensualmente?</label>
+    <input type="number" name="ingreso">
+
+    <label>¿Cuántas horas trabaja en el día?</label>
+    <input type="number" name="horas">
+
+    <button type="submit">Enviar</button>
+  </form>
+</div>
