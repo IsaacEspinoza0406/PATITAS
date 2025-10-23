@@ -7,25 +7,60 @@
     <div class="step" [class.active]="step === 3">3</div>
   </div>
 
-  <form (ngSubmit)="onSubmit()" *ngIf="step === 1">
+  <!-- Paso 1 -->
+  <form *ngIf="step === 1" (ngSubmit)="nextStep()" #form1="ngForm">
     <label>¿Cuál es su nombre?</label>
-    <input type="text" name="nombre" required>
+    <input type="text" name="nombre" ngModel required>
 
     <label>¿Cuál es su número telefónico?</label>
-    <input type="tel" name="telefono" required>
+    <input type="tel" name="telefono" ngModel required>
 
     <label>¿Cuántos años tiene?</label>
-    <input type="number" name="edad" required>
+    <input type="number" name="edad" ngModel required>
 
     <label>¿A qué se dedica?</label>
-    <input type="text" name="ocupacion">
+    <input type="text" name="ocupacion" ngModel>
 
     <label>Aproximadamente, ¿cuánto gana mensualmente?</label>
-    <input type="number" name="ingreso">
+    <input type="number" name="ingreso" ngModel>
 
     <label>¿Cuántas horas trabaja en el día?</label>
-    <input type="number" name="horas">
+    <input type="number" name="horas" ngModel>
 
+    <button type="submit">Siguiente</button>
+  </form>
+
+  <!-- Paso 2 -->
+  <form *ngIf="step === 2" (ngSubmit)="nextStep()" #form2="ngForm">
+    <h3>Información sobre la vivienda</h3>
+
+    <label>¿Vive en casa propia o rentada?</label>
+    <input type="text" name="vivienda" ngModel>
+
+    <label>¿Tiene patio o jardín?</label>
+    <select name="patio" ngModel>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+
+    <button type="button" (click)="prevStep()">Atrás</button>
+    <button type="submit">Siguiente</button>
+  </form>
+
+  <!-- Paso 3 -->
+  <form *ngIf="step === 3" (ngSubmit)="onSubmit()" #form3="ngForm">
+    <h3>Responsabilidad con el animal</h3>
+
+    <label>¿Por qué desea adoptar una mascota?</label>
+    <textarea name="motivo" ngModel></textarea>
+
+    <label>¿Está dispuesto a cubrir gastos veterinarios?</label>
+    <select name="gastos" ngModel>
+      <option value="si">Sí</option>
+      <option value="no">No</option>
+    </select>
+
+    <button type="button" (click)="prevStep()">Atrás</button>
     <button type="submit">Enviar</button>
   </form>
 </div>
