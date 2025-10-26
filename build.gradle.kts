@@ -34,5 +34,5 @@ dependencies {
     // 3. Driver de PostgreSQL
     implementation("org.postgresql:postgresql:42.6.0")
     // 4. metodo de pago
-    implementation("com.stripe:stripe-java:VERSION_MAS_RECIENTE")
+    implementation("com.stripe:stripe-java:25.10.0")
 }
