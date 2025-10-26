@@ -37,5 +37,4 @@ data class AdoptanteFullResponse(
     val aunConservaMascotas: String,
     val responsabilidadesMascota: String,
     val opinionEsterilizacion: String,
-    val fechaCreacion: String
 )

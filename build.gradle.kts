@@ -1,4 +1,3 @@
-// build.gradle.kts
 
 plugins {
     alias(libs.plugins.kotlin.jvm)
@@ -14,7 +13,6 @@ application {
 }
 
 dependencies {
-    // Ktor (esto ya lo tenías)
     implementation(libs.ktor.server.content.negotiation)
     implementation(libs.ktor.server.core)
     implementation(libs.ktor.serialization.kotlinx.json)
@@ -24,7 +22,6 @@ dependencies {
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 
-    // --- LÍNEAS QUE NECESITAS AÑADIR ---
 
     // 1. Dependencias de Exposed
     implementation("org.jetbrains.exposed:exposed-core:0.41.1")
@@ -36,6 +33,6 @@ dependencies {
 
     // 3. Driver de PostgreSQL
     implementation("org.postgresql:postgresql:42.6.0")
-
-    // --- FIN DE LAS LÍNEAS A AÑADIR ---
+    // 4. metodo de pago
+    implementation("com.stripe:stripe-java:VERSION_MAS_RECIENTE")
 }

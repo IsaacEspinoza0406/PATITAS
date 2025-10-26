@@ -24,7 +24,6 @@ object AdoptantesTable : Table("adoptantes") {
     val responsabilidadesMascota = text("responsabilidades_mascota")
     val opinionEsterilizacion = text("opinion_esterilizacion")
 
-    val fechaCreacion = datetime("fecha_creacion").default(LocalDateTime.now())
 
     override val primaryKey = PrimaryKey(id)
 }

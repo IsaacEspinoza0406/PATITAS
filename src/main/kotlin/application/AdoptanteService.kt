@@ -27,7 +27,6 @@ class AdoptanteService {
         aunConservaMascotas = row[AdoptantesTable.aunConservaMascotas],
         responsabilidadesMascota = row[AdoptantesTable.responsabilidadesMascota],
         opinionEsterilizacion = row[AdoptantesTable.opinionEsterilizacion],
-        fechaCreacion = row[AdoptantesTable.fechaCreacion].format(DateTimeFormatter.ISO_DATE_TIME)
     )
 
     suspend fun findAll(): List<AdoptanteFullResponse> = dbQuery {
