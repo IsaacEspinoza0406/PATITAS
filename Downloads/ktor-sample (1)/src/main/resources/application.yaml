@@ -1,0 +1,6 @@
+ktor:
+    application:
+        modules:
+            - com.patitas_web.ApplicationKt.module
+    deployment:
+        port: 5000
