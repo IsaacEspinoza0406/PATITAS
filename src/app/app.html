@@ -1,1 +1,28 @@
-<router-outlet></router-outlet>
+<header class="main-header">
+  <div class="header-content">
+    
+    <div class="logo-container">
+      <a routerLink="/">
+        <img src="assets/img/logo.png" alt="Patitas Desamparadas Logo" class="logo-img">
+        <span class="logo-text">Patitas Desamparadas</span>
+      </a>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a routerLink="/inicia-sesion">Inicia Sesión</a></li>
+        <li><a routerLink="/inicio">Inicio</a></li>
+        <li><a routerLink="/perros">Perros</a></li>
+        <li><a routerLink="/donations" routerLinkActive="active-link">Cómo Ayudar</a></li>
+        <li><a routerLink="/forms" routerLinkActive="active-link">Cuestionario</a></li>
+        <li><a routerLink="/contacto">Contacto</a></li>
+      </ul>
+    </nav>
+
+  </div>
+</header>
+
+<main class="content-container">
+  <router-outlet></router-outlet>
+</main>
+
