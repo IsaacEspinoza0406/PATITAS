@@ -1,9 +1,11 @@
 import { Routes } from '@angular/router';
+//Hasta 
+import { FormsComponent } from './pages/forms/forms';
+import { DonationsComponent } from './pages/donations/donations'; 
 
 export const routes: Routes = [
-  {
-    path: 'forms',
-    loadComponent: () =>
-      import('./pages/forms/forms').then(m => m.FormsComponent)
-  }
+  { path: 'forms', component: FormsComponent },
+  { path: 'donations', component: DonationsComponent },
+  { path: '', redirectTo: '/donations', pathMatch: 'full' },
 ];
+
