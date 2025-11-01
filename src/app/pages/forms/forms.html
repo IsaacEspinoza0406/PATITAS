@@ -78,6 +78,8 @@
     <div *ngIf="edades.invalid && (edades.dirty || edades.touched)" class="error-message">
       <span *ngIf="edades.errors?.['required']">Este campo es obligatorio.</span>
 
+    </div>
+
     <label>¿Vive en casa propia o rentada?</label>
     <input type="text" name="vivienda" [(ngModel)]="formData.vivienda" required #vivienda="ngModel">
     <div *ngIf="vivienda.invalid && (vivienda.dirty || vivienda.touched)" class="error-message">
