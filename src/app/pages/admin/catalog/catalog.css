@@ -110,11 +110,12 @@
 
 /* Pet Card */
 .pet-card {
-  border: 1px solid #333;
+  border: 1px solid #444;
   border-radius: 8px;
   overflow: hidden;
   background-color: #2a2a2a;
   display: flex;
+  flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -124,9 +125,19 @@
 }
 
 .pet-image-container {
-  width: 200px;
-  height: 200px;
+  width: 100%;
+  height: 250px;
   flex-shrink: 0;
+  background-color: #333;
+}
+
+.pet-image-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #3a3a3a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .pet-image {
@@ -154,41 +165,10 @@
 }
 
 .pet-value {
-  font-size: 1.1rem;
-  font-weight: bold;
+  font-size: 1rem;
+  font-weight: 500;
   margin: 0 0 10px 0;
   color: #ffffff;
-}
-
-/* Edit Form */
-.edit-form {
-  flex: 1;
-}
-
-.edit-field {
-  margin-bottom: 15px;
-}
-
-.edit-field label {
-  display: block;
-  font-size: 0.9rem;
-  color: #cccccc;
-  margin-bottom: 5px;
-}
-
-.edit-input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #444;
-  border-radius: 4px;
-  background-color: #1a1a1a;
-  color: #ffffff;
-  font-size: 1rem;
-}
-
-.edit-input:focus {
-  outline: none;
-  border-color: #007bff;
 }
 
 /* Action Buttons */
@@ -209,33 +189,6 @@
   transition: all 0.3s ease;
 }
 
-.btn-edit {
-  background-color: #2a2a2a;
-  color: #ffffff;
-}
-
-.btn-edit:hover {
-  background-color: #3a3a3a;
-}
-
-.btn-save {
-  background-color: #007bff;
-  color: #ffffff;
-}
-
-.btn-save:hover {
-  background-color: #0056b3;
-}
-
-.btn-cancel {
-  background-color: #6c757d;
-  color: #ffffff;
-}
-
-.btn-cancel:hover {
-  background-color: #545b62;
-}
-
 .btn-delete {
   background-color: #2a2a2a;
   color: #ffffff;
@@ -249,15 +202,6 @@
 @media (max-width: 1024px) {
   .pets-grid {
     grid-template-columns: 1fr;
-  }
-  
-  .pet-card {
-    flex-direction: column;
-  }
-  
-  .pet-image-container {
-    width: 100%;
-    height: 250px;
   }
 }
 

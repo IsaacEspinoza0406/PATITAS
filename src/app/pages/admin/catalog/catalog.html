@@ -2,14 +2,14 @@
   <!-- Sidebar -->
   <aside class="sidebar">
     <div class="sidebar-header">
+      <div class="profile-icon">
+        <span class="profile-icon-placeholder">👤</span>
+      </div>
       <button class="menu-toggle" aria-label="Toggle menu">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <div class="profile-icon">
-        <span class="profile-icon-placeholder">👤</span>
-      </div>
     </div>
     
     <nav class="sidebar-nav">
@@ -28,50 +28,18 @@
     <div class="pets-grid">
       <div *ngFor="let pet of pets" class="pet-card">
         <div class="pet-image-container">
-          <img [src]="pet.imagen" [alt]="pet.nombre" class="pet-image">
+          <div class="pet-image-placeholder"></div>
         </div>
         
         <div class="pet-info">
-          <div *ngIf="editingPet !== pet.id" class="pet-details">
+          <div class="pet-details">
             <p class="pet-label">Nombre(s):</p>
             <p class="pet-value">{{ pet.nombre }}</p>
             <p class="pet-label">Edad:</p>
             <p class="pet-value">{{ pet.edad || '---' }}</p>
           </div>
           
-          <div *ngIf="editingPet === pet.id" class="edit-form">
-            <div class="edit-field">
-              <label>Nombre(s):</label>
-              <input type="text" [(ngModel)]="editForm.nombre" class="edit-input">
-            </div>
-            <div class="edit-field">
-              <label>Edad:</label>
-              <input type="text" [(ngModel)]="editForm.edad" class="edit-input">
-            </div>
-          </div>
-          
           <div class="pet-actions">
-            <button 
-              *ngIf="editingPet !== pet.id"
-              type="button"
-              class="btn-edit"
-              (click)="editPet(pet)">
-              Editar
-            </button>
-            <button 
-              *ngIf="editingPet === pet.id"
-              type="button"
-              class="btn-save"
-              (click)="saveChanges(pet)">
-              Guardar
-            </button>
-            <button 
-              *ngIf="editingPet === pet.id"
-              type="button"
-              class="btn-cancel"
-              (click)="cancelEdit()">
-              Cancelar
-            </button>
             <button 
               type="button"
               class="btn-delete"
