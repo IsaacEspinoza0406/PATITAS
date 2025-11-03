@@ -31,5 +31,6 @@ export const routes: Routes = [
   // Redirección por defecto y fallback
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
   { path: '**', redirectTo: '/inicio' }
+  
 ];
 
