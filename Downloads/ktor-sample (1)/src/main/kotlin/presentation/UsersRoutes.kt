@@ -1,14 +1,10 @@
 package com.patitas_web.presentation
 
-import com.patitas_web.application.PaymentService
 import com.patitas_web.application.UsersService
-import com.patitas_web.domain.PaymentRequest
 import com.patitas_web.domain.UserRequest
-import com.patitas_web.domain.UserFullResponse
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
-import io.ktor.server.response.*
 import io.ktor.server.response.respond
 import io.ktor.server.routing.*
 

@@ -21,10 +21,6 @@ class UsersService {
         telefono = row[UsersTable.telefono]
     )
 
-//    suspend fun findByEmail(email: String): UserFullResponse? = dbQuery {
-//
-//    }
-
     suspend fun findAll(): List<UserFullResponse> = dbQuery {
         UsersTable.selectAll().map(::toUserFullResponse)
     }
