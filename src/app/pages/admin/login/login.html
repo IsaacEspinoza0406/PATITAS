@@ -1,106 +1,103 @@
 <div class="auth-container">
-  
-  <div class="auth-card">
-    
-    <!--Inicia sesión.-->
-    <div *ngIf="!isRegisterMode" class="form-wrapper">
-      <form (ngSubmit)="onLogin()" #loginForm="ngForm">
-        
-        <div class="profile-placeholder-container">
-          <div class="profile-placeholder"></div>
-        </div>
-        
-        <h2>Iniciar Sesión</h2>
-        
-        <div class="form-group">
-          <label for="loginEmail">Correo electrónico</label>
-          <input 
-            type="email" 
-            id="loginEmail" 
-            name="loginEmail"
-            [(ngModel)]="loginData.email"
-            required 
-            email>
-        </div>
-        
-        <div class="form-group">
-          <label for="loginPassword">Contraseña</label>
-          <input 
-            type="password" 
-            id="loginPassword" 
-            name="loginPassword"
-            [(ngModel)]="loginData.password"
-            required>
-        </div>
-        
-        <button type="submit" class="auth-button" [disabled]="!loginForm.valid">Iniciar Sesión</button>
-        
-        <p class="toggle-link">
-          ¿No tienes cuenta? <a (click)="toggleMode()">Regístrate aquí</a>
-        </p>
-      </form>
+  <div class="auth-layout">
+
+    <!--Izquierda: imagen. -->
+    <div class="auth-image">
+      <img src="../../../assets/img/login.png" alt="login">
     </div>
 
-    <!--Registrate.-->
-    <div *ngIf="isRegisterMode" class="form-wrapper">
-      <form (ngSubmit)="onRegister()" #registerForm="ngForm">
-        
-        <div class="profile-placeholder-container">
-          <div class="profile-placeholder"></div>
-        </div>
-        
-        <h2>Crear Cuenta</h2>
-        
-        <div class="form-group">
-          <label for="registerName">Nombre de usuario</label>
-          <input 
-            type="text" 
-            id="registerName" 
-            name="registerName"
-            [(ngModel)]="registerData.userName"
-            required>
-        </div>
+    <!--Derecha: formulario.-->
+    <div class="auth-card">
 
-        <div class="form-group">
-          <label for="registerEmail">Correo electrónico</label>
-          <input 
-            type="email" 
-            id="registerEmail" 
-            name="registerEmail"
-            [(ngModel)]="registerData.email"
-            required 
-            email>
-        </div>
-        
-        <div class="form-group">
-          <label for="registerPassword">Contraseña</label>
-          <input 
-            type="password" 
-            id="registerPassword" 
-            name="registerPassword"
-            [(ngModel)]="registerData.password"
-            required 
-            minlength="6">
-        </div>
+      <!-- Inicia sesión -->
+      <div *ngIf="!isRegisterMode" class="form-wrapper">
+        <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+          <h2>INICIA SESIÓN</h2>
 
-        <div class="form-group">
-          <label for="confirmPassword">Confirmar Contraseña</label>
-          <input 
-            type="password" 
-            id="confirmPassword" 
-            name="confirmPassword"
-            [(ngModel)]="registerData.confirmPassword"
-            required>
-        </div>
-        
-        <button type="submit" class="auth-button" [disabled]="!registerForm.valid">Registrarse</button>
-        
-        <p class="toggle-link">
-          ¿Ya tienes cuenta? <a (click)="toggleMode()">Inicia sesión</a>
-        </p>
-      </form>
+          <div class="form-group">
+            <label for="loginEmail">Correo electrónico</label>
+            <input
+              type="email"
+              id="loginEmail"
+              name="loginEmail"
+              [(ngModel)]="loginData.email"
+              required
+              email>
+          </div>
+
+          <div class="form-group">
+            <label for="loginPassword">Contraseña</label>
+            <input
+              type="password"
+              id="loginPassword"
+              name="loginPassword"
+              [(ngModel)]="loginData.password"
+              required>
+          </div>
+
+          <button type="submit" class="auth-button" [disabled]="!loginForm.valid">Iniciar Sesión</button>
+
+          <p class="toggle-link">
+            ¿No tienes cuenta? <a (click)="toggleMode()">Regístrate aquí</a>
+          </p>
+        </form>
+      </div>
+
+      <!-- Registro -->
+      <div *ngIf="isRegisterMode" class="form-wrapper">
+        <form (ngSubmit)="onRegister()" #registerForm="ngForm">
+          <h2>CREAR CUENTA</h2>
+
+          <div class="form-group">
+            <label for="registerName">Nombre de usuario</label>
+            <input
+              type="text"
+              id="registerName"
+              name="registerName"
+              [(ngModel)]="registerData.userName"
+              required>
+          </div>
+
+          <div class="form-group">
+            <label for="registerEmail">Correo electrónico</label>
+            <input
+              type="email"
+              id="registerEmail"
+              name="registerEmail"
+              [(ngModel)]="registerData.email"
+              required
+              email>
+          </div>
+
+          <div class="form-group">
+            <label for="registerPassword">Contraseña</label>
+            <input
+              type="password"
+              id="registerPassword"
+              name="registerPassword"
+              [(ngModel)]="registerData.password"
+              required
+              minlength="6">
+          </div>
+
+          <div class="form-group">
+            <label for="confirmPassword">Confirmar contraseña</label>
+            <input
+              type="password"
+              id="confirmPassword"
+              name="confirmPassword"
+              [(ngModel)]="registerData.confirmPassword"
+              required>
+          </div>
+
+          <button type="submit" class="auth-button" [disabled]="!registerForm.valid">Registrarse</button>
+
+          <p class="toggle-link">
+            ¿Ya tienes cuenta? <a (click)="toggleMode()">Inicia sesión</a>
+          </p>
+        </form>
+      </div>
+
     </div>
-
   </div>
 </div>
-
