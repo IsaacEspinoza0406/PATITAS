@@ -46,7 +46,7 @@ export class LoginComponent {
       alert('Las contraseñas no coinciden.');
       return;
     }
-    alert('¡Registrado con éxito! (simulación)');
+    alert('¡Registrado con éxito!');
   }
 }
 
