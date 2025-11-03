@@ -76,3 +76,8 @@ body {
   margin: 0 auto;
 }
 
+.active-link {
+  font-weight: bold;
+  color: #ff6f61;
+  text-decoration: underline;
+}
