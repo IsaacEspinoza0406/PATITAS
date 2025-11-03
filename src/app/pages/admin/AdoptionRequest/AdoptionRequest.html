@@ -29,53 +29,23 @@
 
     <section class="card-grid">
 
-      <article class="card">
-        <h3 class="card__title">Paula Jiménez</h3>
+      <article class="card" *ngFor="let request of requests">
+
+        <h3 class="card__title">{{ request.name }}</h3>
+
         <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
+          <button class="btn btn--view" (click)="viewRequest(request.id)">
+            Ver
+          </button>
+          <button class="btn btn--delete" (click)="deleteRequest(request.id)">
+            Eliminar
+          </button>
         </div>
       </article>
 
-      <article class="card">
-        <h3 class="card__title">Paulina Mendoza</h3>
-        <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3 class="card__title">Roberto Pinto</h3>
-        <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3 class="card__title">Octavio Cruz</h3>
-        <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3 class="card__title">David Molina</h3>
-        <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
-        </div>
-      </article>
-
-      <article class="card">
-        <h3 class="card__title">Daniela Vázquez</h3>
-        <div class="card__actions">
-          <button class="btn btn--view">Ver</button>
-          <button class="btn btn--delete">Eliminar</button>
-        </div>
-      </article>
+      <div *ngIf="requests.length === 0">
+        <p>No hay solicitudes de adopción pendientes.</p>
+      </div>
 
     </section>
   </main>
