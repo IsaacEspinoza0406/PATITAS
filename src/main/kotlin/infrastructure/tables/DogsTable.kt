@@ -1,7 +1,10 @@
 import org.jetbrains.exposed.sql.Table
 
-class DogsTable {
-    object DogsTable : Table("dogs") {
+package com.patitas_web.infrastructure.tables
+
+import org.jetbrains.exposed.sql.Table
+
+object DogsTable : Table("dogs") {
         val id = integer("id").autoIncrement()
         val name = varchar("name", 100)
         val age = integer("age").nullable()

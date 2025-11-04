@@ -4,10 +4,8 @@ import com.patitas_web.domain.AdoptanteRequest
 import com.patitas_web.domain.AdoptanteFullResponse
 import com.patitas_web.infrastructure.DatabaseFactory.dbQuery
 import com.patitas_web.infrastructure.tables.AdoptantesTable
-import org.jetbrains.exposed.sql.ResultRow
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.selectAll
-import java.time.format.DateTimeFormatter
+import org.jetbrains.exposed.sql.*
+
 
 class AdoptanteService {
 
@@ -26,7 +24,7 @@ class AdoptanteService {
         mascotasAnteriores = row[AdoptantesTable.mascotasAnteriores],
         aunConservaMascotas = row[AdoptantesTable.aunConservaMascotas],
         responsabilidadesMascota = row[AdoptantesTable.responsabilidadesMascota],
-        opinionEsterilizacion = row[AdoptantesTable.opinionEsterilizacion],
+        opinionEsterilizacion = row[AdoptantesTable.opinionEsterilizacion]
     )
 
     suspend fun findAll(): List<AdoptanteFullResponse> = dbQuery {
@@ -54,5 +52,21 @@ class AdoptanteService {
             insertStatement.resultedValues?.singleOrNull()?.let(::toAdoptanteFullResponse)
         }
         return result ?: throw IllegalStateException("Error al guardar el adoptante en la base de datos.")
+    }
+
+
+    suspend fun findById(id: Int): AdoptanteFullResponse? {
+        return dbQuery {
+            AdoptantesTable.select { AdoptantesTable.id eq id }
+                .map(::toAdoptanteFullResponse)
+                .singleOrNull()
+        }
+    }
+
+
+    suspend fun delete(id: Int): Boolean {
+        return dbQuery {
+            AdoptantesTable.deleteWhere { AdoptantesTable.id eq id } > 0
+        }
     }
 }

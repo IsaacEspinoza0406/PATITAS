@@ -14,11 +14,10 @@ fun Application.configureAdoptanteRoutes() {
     routing {
         route("/adoptantes") {
 
-            get {
+                    get {
                 val adoptantes = service.findAll()
                 call.respond(HttpStatusCode.OK, adoptantes)
             }
-
 
             post {
                 try {
@@ -27,6 +26,38 @@ fun Application.configureAdoptanteRoutes() {
                     call.respond(HttpStatusCode.Created, nuevoAdoptante)
                 } catch (e: Exception) {
                     call.respond(HttpStatusCode.BadRequest, "Error en los datos recibidos: ${e.message}")
+                }
+            }
+
+
+            get("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de adoptante inválido.")
+                    return@get
+                }
+
+                val adoptante = service.findById(id)
+                if (adoptante != null) {
+                    call.respond(HttpStatusCode.OK, adoptante)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Adoptante no encontrado.")
+                }
+            }
+
+
+            delete("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de adoptante inválido.")
+                    return@delete
+                }
+
+                val deleted = service.delete(id)
+                if (deleted) {
+                    call.respond(HttpStatusCode.OK, "Adoptante eliminado exitosamente.")
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Adoptante no encontrado.")
                 }
             }
         }
