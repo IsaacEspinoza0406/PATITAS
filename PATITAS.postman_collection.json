@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "PATITAS API",
+    "description": "Colección para probar las rutas de la API PATITAS (localhost:8080)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": "1.0.0"
+  },
+  "item": [
+    {
+      "name": "Health - GET /",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8080/",
+          "protocol": "http",
+          "host": ["127.0.0.1"],
+          "port": "8080",
+          "path": [""]
+        },
+        "description": "Health check: devuelve 'OK'"
+      }
+    },
+
+    {
+      "name": "Dogs - GET /dogs",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/dogs", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs"] },
+        "description": "Listado de perros"
+      }
+    },
+
+    {
+      "name": "Dogs - POST /dogs",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Firulais\",\n  \"age\": 3,\n  \"breed\": \"Labrador\",\n  \"history\": \"Encontrado en la calle, amigable\",\n  \"sterilized\": \"sí\",\n  \"adopted\": \"no\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/dogs", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs"] },
+        "description": "Crear un perro (devuelve 201 Created)"
+      }
+    },
+
+    {
+      "name": "Dogs - PUT /dogs/:id",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Firulais\",\n  \"age\": 4,\n  \"breed\": \"Labrador\",\n  \"history\": \"Adoptado temporalmente\",\n  \"sterilized\": \"sí\",\n  \"adopted\": \"sí\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":id"] },
+        "description": "Actualizar perro por id (reemplaza los campos provistos). Reemplazar :id por el id numérico"
+      }
+    },
+
+    {
+      "name": "Dogs - DELETE /dogs/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":id"] },
+        "description": "Eliminar perro por id (reemplazar :id)"
+      }
+    },
+
+    {
+      "name": "Adoptantes - GET /adoptantes",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/adoptantes", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes"] },
+        "description": "Listado de adoptantes"
+      }
+    },
+
+    {
+      "name": "Adoptantes - POST /adoptantes",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombreCompleto\": \"María Pérez\",\n  \"telefono\": \"555-1234\",\n  \"edad\": \"30\",\n  \"ocupacion\": \"Ingeniera\",\n  \"ingresoMensual\": \"1500\",\n  \"horasDeTrabajo\": \"8\",\n  \"tienePatio\": \"sí\",\n  \"ninosEnCasa\": \"no\",\n  \"tipoVivienda\": \"departamento\",\n  \"convivientes\": \"1\",\n  \"mascotasAnteriores\": \"sí\",\n  \"aunConservaMascotas\": \"no\",\n  \"responsabilidadesMascota\": \"alimentación, paseo\",\n  \"opinionEsterilizacion\": \"a favor\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/adoptantes", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes"] },
+        "description": "Crear un adoptante"
+      }
+    },
+
+    {
+      "name": "Adoptantes - GET /adoptantes/:id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/adoptantes/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes", ":id"] },
+        "description": "Obtener adoptante por id (reemplazar :id)"
+      }
+    },
+
+    {
+      "name": "Adoptantes - DELETE /adoptantes/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/adoptantes/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes", ":id"] },
+        "description": "Eliminar adoptante por id (reemplazar :id)"
+      }
+    }
+
+  ]
+}

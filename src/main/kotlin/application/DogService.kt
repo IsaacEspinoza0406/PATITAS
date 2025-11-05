@@ -39,7 +39,11 @@ class DogService {
 
     suspend fun create(request: DogRequest): DogResponse {
         val result = dbQuery {
-            val insertStatement = DogsTable.insert { statementToDog(it, request) }
+            val insertStatement = DogsTable.insert {
+                statementToDog(it, request)
+                // La BD exige created_by NOT NULL; usar un valor por defecto (ej. usuario 1) para pruebas
+                it[DogsTable.createdBy] = 1
+            }
             insertStatement.resultedValues?.singleOrNull()?.let(::toDogResponse)
         }
         return result ?: throw IllegalStateException("Error al crear el perro.")
