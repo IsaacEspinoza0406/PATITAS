@@ -1,5 +1,3 @@
-import org.jetbrains.exposed.sql.Table
-
 package com.patitas_web.infrastructure.tables
 
 import org.jetbrains.exposed.sql.Table
@@ -17,5 +15,5 @@ object DogsTable : Table("dogs") {
 
 
 
-    }
+    
 }

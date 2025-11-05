@@ -5,7 +5,7 @@ import com.patitas_web.domain.AdoptanteFullResponse
 import com.patitas_web.infrastructure.DatabaseFactory.dbQuery
 import com.patitas_web.infrastructure.tables.AdoptantesTable
 import org.jetbrains.exposed.sql.*
-
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class AdoptanteService {
 

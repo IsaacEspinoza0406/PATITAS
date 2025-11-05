@@ -55,6 +55,4 @@ fun Application.configureDogRoutes() {
                 }
             }
         }
-
     }
-}
