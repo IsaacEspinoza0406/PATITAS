@@ -2,9 +2,10 @@ package com.patitas_web.application
 
 import com.patitas_web.domain.DogRequest
 import com.patitas_web.domain.DogResponse
-import com.patitas_web.infrastructure.DatabaseFactory.dbQuery // Importamos nuestra función de ayuda
+import com.patitas_web.infrastructure.DatabaseFactory.dbQuery
 import com.patitas_web.infrastructure.tables.DogsTable
 import org.jetbrains.exposed.sql.*
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
 
 class DogService {
