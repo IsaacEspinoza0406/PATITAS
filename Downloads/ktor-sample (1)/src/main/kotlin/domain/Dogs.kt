@@ -9,7 +9,8 @@ data class DogsRequest(
     val breed: String?,
     val history: String?,
     val sterilized: String?,
-    val adopted: String?
+    val adopted: String?,
+    val created_by: Int
 )
 
 @Serializable
@@ -20,5 +21,6 @@ data class DogsFullResponse(
     val breed: String?,
     val history: String?,
     val sterilized: String?,
-    val adopted: String?
+    val adopted: String?,
+    val created_by: Int
 )

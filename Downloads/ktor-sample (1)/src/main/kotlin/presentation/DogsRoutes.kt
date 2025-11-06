@@ -19,15 +19,15 @@ fun Application.configureDogsRoutes() {
                 call.respond(dogs)
             }
 
-//            post {
-//                try{
-//                    val request = call.receive<DogsRequest>()
-//                    val newDog = service.create(request)
-//                    call.respond(HttpStatusCode.Created,newDog)
-//                }catch(e:Exception){
-//                    call.respond(HttpStatusCode.BadRequest, "error al añadir un perro ${e.message}")
-//                }
-//            }
+             post {
+                try{
+                    val request = call.receive<DogsRequest>()
+                    val newDog = service.create(request)
+                    call.respond(HttpStatusCode.Created,newDog)
+                }catch(e:Exception){
+                    call.respond(HttpStatusCode.BadRequest, "error al añadir un perro ${e.message}")
+                }
+            }
 
             delete {
                 try{
@@ -41,16 +41,22 @@ fun Application.configureDogsRoutes() {
 
         }
 
-        route("/dogs/{id} "){
+        route("/dogs/{id}") {
             get {
-                try{
-                    val request = call.receive<DogsRequest>()
-                    val getIdDog = service.getById(request.id)
-                    call.respond(HttpStatusCode.OK,getIdDog)
-                }catch(e:Exception){
-                    call.respond(HttpStatusCode.NotFound, "El ID del perro no existe ${e.message}")
-                }
+                call.parameters["id"]?.toIntOrNull()?.let { id ->
+                    try {
+                        val dog = service.getById(id)
+                        if (dog != null) {
+                            call.respond(HttpStatusCode.OK, dog)
+                        } else {
+                            call.respond(HttpStatusCode.NotFound, "El ID del perro no existe")
+                        }
+                    } catch (e: Exception) {
+                        call.respond(HttpStatusCode.InternalServerError, "Error al procesar la solicitud: ${e.message}")
+                    }
+                } ?: run { call.respond(HttpStatusCode.NotFound, "El ID del perro no existe") }
             }
         }
+
     }
 }
