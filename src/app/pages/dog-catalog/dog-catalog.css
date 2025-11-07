@@ -1,0 +1,93 @@
+.container{
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.header-message{
+  background-color: #2E0000;
+  color: white;
+  text-align: center;
+  padding: 25px;
+  border-radius: 10px;
+  margin-bottom:40px;
+}
+.header-message h2{
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom:8px;
+}
+.header-message p{
+  font-size: 1.2rem;
+  line-height: 1.5;
+  color: #e6e6e6;
+}
+.dogs-grid{
+  background-color: #f8f8f8;
+  border: 1px solid #dcdcdc ;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  
+}
+.dog-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.dog-card img{
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-bottom: 1px solid #dcdcdc;
+}
+
+.dog-info{
+  padding:15px;
+  text-align:left;
+}
+.dog-info p{
+  margin: 5px 0;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Botones */
+.dog-actions{
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  gap:10px;
+  margin-top:12px;
+  
+}
+
+.btn-adoptar, .btn-detalles{
+  padding:8x 16px;
+  border:none;
+  border-radius:5px;
+  font-weight:500;
+  cursor:pointer;
+  font-size:0.85rem;
+  transition: background-color 0.3s ease;
+  
+}
+.btn-adoptar{
+  background-color:#000;
+  color:white;
+  
+}
+.btn-adoptar:hover{
+  background-color:#333;
+}
+.btn-detalles{
+  background-color:transparent;
+  color:#000;
+  border:1.5px solid #000;
+}
+.btn-detalles:hover{
+  background-color:#f0f0f0;
+  color:#000;
+}
