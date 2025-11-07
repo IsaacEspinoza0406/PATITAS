@@ -3,6 +3,7 @@ import { Routes } from '@angular/router';
 import { FormsComponent } from './pages/forms/forms';
 import { DonationsComponent } from './pages/donations/donations';
 import { Home } from './pages/home/home';
+import { DogCatalog } from './pages/dog-catalog/dog-catalog';
 
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
 import { CatalogComponent } from './pages/admin/catalog/catalog';
@@ -15,7 +16,8 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
-
+  {path: 'catalog', component: DogCatalog },
+ 
   // Rutas de administración agrupadas bajo /admin
   {
     path: 'admin',
@@ -23,6 +25,7 @@ export const routes: Routes = [
       { path: 'catalog', component: CatalogComponent },
       { path: 'adoption-request', component: AdoptionRequestComponent },
       { path: 'login', component: LoginComponent },
+      
       // Por defecto dentro de /admin redirige al catálogo
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]
