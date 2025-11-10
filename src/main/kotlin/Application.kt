@@ -3,8 +3,10 @@ package com.patitas_web
 import com.patitas_web.infrastructure.DatabaseFactory
 import com.patitas_web.infrastructure.tables.AdoptantesTable
 import com.patitas_web.infrastructure.tables.DogsTable
+import com.patitas_web.infrastructure.tables.DogPhotosTable
 import com.patitas_web.presentation.configureAdoptanteRoutes
 import com.patitas_web.presentation.configureDogRoutes
+import com.patitas_web.presentation.configureDogPhotoRoutes
 import io.ktor.server.application.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -21,11 +23,10 @@ fun Application.module() {
     DatabaseFactory.init()
 
     transaction {
-        SchemaUtils.create(AdoptantesTable, DogsTable)
+        SchemaUtils.create(AdoptantesTable, DogsTable, DogPhotosTable)
     }
 
     configureSerialization()
-    // Ruta raíz simple para pruebas y verificación
     routing {
         get("/") {
             call.respondText("OK")
@@ -33,4 +34,5 @@ fun Application.module() {
     }
     configureAdoptanteRoutes()
     configureDogRoutes()
+    configureDogPhotoRoutes()
 }

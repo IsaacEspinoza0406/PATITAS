@@ -10,16 +10,23 @@ import org.jetbrains.exposed.sql.statements.UpdateBuilder
 
 class DogService {
 
+    private val photoService = DogPhotoService()
 
-    private fun toDogResponse(row: ResultRow) = DogResponse(
-        id = row[DogsTable.id],
-        name = row[DogsTable.name],
-        age = row[DogsTable.age],
-        breed = row[DogsTable.breed],
-        history = row[DogsTable.history],
-        sterilized = row[DogsTable.sterilized],
-        adopted = row[DogsTable.adopted]
-    )
+    private suspend fun toDogResponse(row: ResultRow): DogResponse {
+        val dogId = row[DogsTable.id]
+        val photos = photoService.findByDogId(dogId)
+        
+        return DogResponse(
+            id = row[DogsTable.id],
+            name = row[DogsTable.name],
+            age = row[DogsTable.age],
+            breed = row[DogsTable.breed],
+            history = row[DogsTable.history],
+            sterilized = row[DogsTable.sterilized],
+            adopted = row[DogsTable.adopted],
+            photos = photos
+        )
+    }
 
 
     private fun statementToDog(statement: UpdateBuilder<Int>, dog: DogRequest) {
@@ -32,21 +39,23 @@ class DogService {
     }
 
 
-    suspend fun findAll(): List<DogResponse> = dbQuery {
-        DogsTable.selectAll().map(::toDogResponse)
+    suspend fun findAll(): List<DogResponse> {
+        val dogs = dbQuery {
+            DogsTable.selectAll().toList()
+        }
+        return dogs.map { row -> toDogResponse(row) }
     }
 
 
     suspend fun create(request: DogRequest): DogResponse {
-        val result = dbQuery {
+        val insertedRow = dbQuery {
             val insertStatement = DogsTable.insert {
                 statementToDog(it, request)
-                // La BD exige created_by NOT NULL; usar un valor por defecto (ej. usuario 1) para pruebas
                 it[DogsTable.createdBy] = 1
             }
-            insertStatement.resultedValues?.singleOrNull()?.let(::toDogResponse)
+            insertStatement.resultedValues?.singleOrNull()
         }
-        return result ?: throw IllegalStateException("Error al crear el perro.")
+        return insertedRow?.let { toDogResponse(it) } ?: throw IllegalStateException("Error al crear el perro.")
     }
 
 
@@ -55,11 +64,10 @@ class DogService {
             DogsTable.update({ DogsTable.id eq id }) { statementToDog(it, request) }
         }
         return if (updated > 0) {
-            dbQuery {
-                DogsTable.select { DogsTable.id eq id }
-                    .map(::toDogResponse)
-                    .singleOrNull()
+            val updatedRow = dbQuery {
+                DogsTable.select { DogsTable.id eq id }.singleOrNull()
             }
+            updatedRow?.let { toDogResponse(it) }
         } else null
     }
 

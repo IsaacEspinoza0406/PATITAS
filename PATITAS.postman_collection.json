@@ -115,6 +115,51 @@
         "url": { "raw": "http://127.0.0.1:8080/adoptantes/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes", ":id"] },
         "description": "Eliminar adoptante por id (reemplazar :id)"
       }
+    },
+
+    {
+      "name": "Dog Photos - GET /dogs/:dogId/photos",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:dogId/photos", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":dogId", "photos"] },
+        "description": "Obtener todas las fotos de un perro"
+      }
+    },
+
+    {
+      "name": "Dog Photos - POST /dogs/:dogId/photos",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"photoUrl\": \"https://i.imgur.com/ejemplo123.jpg\",\n  \"description\": \"Foto de perfil del perro\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:dogId/photos", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":dogId", "photos"] },
+        "description": "Agregar foto a un perro (reemplazar :dogId por el ID del perro)"
+      }
+    },
+
+    {
+      "name": "Photos - GET /photos/:photoId",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/photos/:photoId", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["photos", ":photoId"] },
+        "description": "Obtener una foto específica por ID"
+      }
+    },
+
+    {
+      "name": "Photos - DELETE /photos/:photoId",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/photos/:photoId", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["photos", ":photoId"] },
+        "description": "Eliminar una foto por ID"
+      }
     }
 
   ]

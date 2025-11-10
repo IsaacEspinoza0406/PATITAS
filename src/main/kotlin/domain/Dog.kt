@@ -21,4 +21,19 @@ data class DogResponse(
     val history: String?,
     val sterilized: String?,
     val adopted: String?,
+    val photos: List<DogPhotoResponse> = emptyList()
+)
+
+@Serializable
+data class DogPhotoRequest(
+    val photoUrl: String,
+    val description: String?
+)
+
+@Serializable  
+data class DogPhotoResponse(
+    val id: Int,
+    val dogId: Int,
+    val photoUrl: String,
+    val description: String?
 )
