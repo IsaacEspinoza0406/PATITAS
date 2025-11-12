@@ -4,6 +4,7 @@ import { FormsComponent } from './pages/forms/forms';
 import { DonationsComponent } from './pages/donations/donations';
 import { Home } from './pages/home/home';
 import { DogCatalog } from './pages/dog-catalog/dog-catalog';
+import { CardCatalog } from './pages/card-catalog/card-catalog';
 
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
 import { CatalogComponent } from './pages/admin/catalog/catalog';
@@ -17,6 +18,8 @@ export const routes: Routes = [
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
   {path: 'catalog', component: DogCatalog },
+  {path: 'card-catalog', component: CardCatalog },
+
  
   // Rutas de administración agrupadas bajo /admin
   {
