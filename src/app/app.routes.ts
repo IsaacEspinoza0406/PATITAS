@@ -36,7 +36,13 @@ export const routes: Routes = [
 
   // Redirección por defecto y fallback
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: '**', redirectTo: '/inicio' }
+  { path: '**', redirectTo: '/inicio' },
   
+
+//Ruta para detalles de perro
+{ path: 'dog-details/:id', component: CardCatalog},
+{ path: '', redirectTo: '/catalog', pathMatch: 'full'}, //Si no hay ruta, redirige a /catalogo
+{ path: '**', redirectTo: '/catalog'},
 ];
 
+ 

@@ -1,5 +1,7 @@
-<div class="card-container">
+<div class="card-container" *ngIf="dog">
+ 
   <div class="image-section">
+    <img [src]="dog.imageUrl" [alt]="'Imagen de ' + dog.name" class="dog-image">
     <div class="dog-image-placeholder"></div>
   </div>
 
@@ -37,7 +39,7 @@
 
       <div class="vaccines-section">
         <label for="vaccines">Vacunas aplicadas:</label>
-        <input type="text" id="vaccines" name="vaccines" [(ngModel)]="dog.vaccines">
+        <input type="text" id="vaccines" name="vaccines" [(ngModel)]="dog.vaccinated>
       </div>
     </div>
   </div>
