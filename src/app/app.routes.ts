@@ -17,7 +17,7 @@ export const routes: Routes = [
   { path: 'home', component: Home },
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
-  {path: 'catalog', component: DogCatalog },
+  {path: 'dog-catalog', component: DogCatalog },
   {path: 'card-catalog', component: CardCatalog },
 
  
