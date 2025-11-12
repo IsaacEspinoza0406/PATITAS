@@ -1,27 +1,29 @@
 import { Routes } from '@angular/router';
 
+// --- Componentes Públicos ---
 import { FormsComponent } from './pages/forms/forms';
 import { DonationsComponent } from './pages/donations/donations';
 import { Home } from './pages/home/home';
 import { DogCatalog } from './pages/dog-catalog/dog-catalog';
 import { CardCatalog } from './pages/card-catalog/card-catalog';
 
+// --- Componentes de Admin ---
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
 import { CatalogComponent } from './pages/admin/catalog/catalog';
 import { LoginComponent } from './pages/admin/login/login';
 
 // Rutas de la aplicación
 export const routes: Routes = [
-  // Rutas públicas
   { path: 'inicio', component: Home },
-  { path: 'home', component: Home },
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
   {path: 'dog-catalog', component: DogCatalog },
   {path: 'card-catalog', component: CardCatalog },
 
- 
-  // Rutas de administración agrupadas bajo /admin
+  { path: 'inicia-sesion', component: LoginComponent },
+
+  
+  // --- Rutas de Admin (agrupadas) ---
   {
     path: 'admin',
     children: [
@@ -34,15 +36,6 @@ export const routes: Routes = [
     ]
   },
 
-  // Redirección por defecto y fallback
-  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
-  { path: '**', redirectTo: '/inicio' },
-  
-
-//Ruta para detalles de perro
-{ path: 'dog-details/:id', component: CardCatalog},
-{ path: '', redirectTo: '/catalog', pathMatch: 'full'}, //Si no hay ruta, redirige a /catalogo
-{ path: '**', redirectTo: '/catalog'},
+  { path: '', redirectTo: '/inicio', pathMatch: 'full' }, 
+  { path: '**', redirectTo: '/inicio' }, 
 ];
-
- 
