@@ -12,6 +12,6 @@ export class DogCatalog {
   constructor(private router: Router) { }
 
   verDetalles(dogId: number) {
-    this.router.navigate(['/dog-details', dogId]);
+    this.router.navigate(['/card-catalog', dogId]);
   }
 }

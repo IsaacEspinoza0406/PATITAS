@@ -18,7 +18,7 @@ export const routes: Routes = [
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
   {path: 'dog-catalog', component: DogCatalog },
-  {path: 'card-catalog', component: CardCatalog },
+  {path: 'card-catalog/:id', component: CardCatalog },
 
   { path: 'inicia-sesion', component: LoginComponent },
 
