@@ -1,9 +1,9 @@
 <div class="card-container" *ngIf="dog">
- 
+
   <div class="image-section">
     <img [src]="dog.imageUrl" [alt]="'Imagen de ' + dog.name" class="dog-image">
-    <div class="dog-image-placeholder"></div>
-  </div>
+    
+    </div>
 
   <div class="details-section">
     <div class="detail-item">
@@ -30,24 +30,25 @@
       <div class="checkbox-group">
         <span>Esterilización:</span>
         <label>
-          <input type="checkbox" name="sterilized" [(ngModel)]="dog.sterilized" [value]="true"> Sí
+          <input type="radio" name="sterilized" [(ngModel)]="dog.sterilized" [value]="true"> Sí
         </label>
         <label>
-          <input type="checkbox" name="sterilized" [(ngModel)]="dog.sterilized" [value]="false"> No
+          <input type="radio" name="sterilized" [(ngModel)]="dog.sterilized" [value]="false"> No
         </label>
       </div>
 
       <div class="vaccines-section">
         <label for="vaccines">Vacunas aplicadas:</label>
-        <input type="text" id="vaccines" name="vaccines" [(ngModel)]="dog.vaccinated>
+        <input type="text" id="vaccines" name="vaccines" [(ngModel)]="dog.vaccinated">
       </div>
     </div>
   </div>
 
   <div class="button-section">
-    <button class="adopt-button">Adoptar</button>
-    <button class="back-button">
+    <button class="adopt-button" (click)="onAdopt()">Adoptar</button>
+    <button class="back-button" (click)="onBack()">
       <img src="assets/icons/arrow-left.svg" alt="Volver"> Volver
     </button>
   </div>
+
 </div>
