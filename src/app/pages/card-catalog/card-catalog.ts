@@ -2,19 +2,20 @@ import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DogService, Dog } from '../../services/dog-service';
 import { CommonModule } from '@angular/common'; 
-import { FormsModule } from '@angular/forms'; 
-
+import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-card-catalog',
   standalone: true, 
-  imports: [CommonModule, FormsModule], 
+  imports: [
+  CommonModule, 
+  FormsModule
+  ], 
   templateUrl: './card-catalog.html',
   styleUrl: './card-catalog.css'
 })
 export class CardCatalog implements OnInit {
   dog: Dog | undefined;
 
-  
   private route = inject(ActivatedRoute);
   private router = inject(Router);
   private dogService = inject(DogService);
@@ -47,6 +48,6 @@ export class CardCatalog implements OnInit {
 
   onAdopt(): void {
     console.log('Iniciar proceso de adopción para el perro con ID:', this.dog?.id);
-    this.router.navigate(['/forms']); 
+    this.router.navigate(['/forms']);
   }
 }

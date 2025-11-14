@@ -1,52 +1,56 @@
 <div class="card-container" *ngIf="dog">
+ 
+  <div class="image-section">
+  	<img 
+      *ngIf="dog.photos && dog.photos.length > 0"
+      [src]="dog.photos[0]?.photoUrl" 
+      [alt]="'Imagen de ' + dog.name" 
+      class="dog-image">
+    
+    <img 
+      *ngIf="!dog.photos || dog.photos.length === 0"
+      src="https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto"
+      [alt]="'Imagen de ' + dog.name"
+      class="dog-image">
+  </div>
 
-  <div class="image-section">
-    <img [src]="dog.imageUrl" [alt]="'Imagen de ' + dog.name" class="dog-image">
-    <div class="dog-image-placeholder" *ngIf="!dog.imageUrl"></div>
-  </div>
+  <div class="details-section">
+  	<div class="detail-item">
+    	<label for="name">Nombre:</label>
+    	<input type="text" id="name" name="name" [(ngModel)]="dog.name">
+  	</div>
 
-  <div class="details-section">
-    <div class="detail-item">
-      <label for="name">Nombre:</label>
-      <input type="text" id="name" name="name" [(ngModel)]="dog.name">
-    </div>
+  	<div class="detail-item">
+    	<label for="age">Edad:</label>
+    	<input type="number" id="age" name="age" [(ngModel)]="dog.age">
+  	</div>
 
-    <div class="detail-item">
-      <label for="age">Edad:</label>
-      <input type="number" id="age" name="age" [(ngModel)]="dog.age">
-    </div>
+  	<div class="detail-item">
+    	<label for="breed">Raza:</label>
+    	<input type="text" id="breed" name="breed" [(ngModel)]="dog.breed">
+  	</div>
 
-    <div class="detail-item">
-      <label for="breed">Raza:</label>
-      <input type="text" id="breed" name="breed" [(ngModel)]="dog.breed">
-    </div> <div class="detail-item">
-      <label for="history">Historial:</label>
-      <textarea id="history" name="history" [(ngModel)]="dog.history"></textarea>
-    </div>
+  	<div class="detail-item">
+    	<label for="history">Historial:</label>
+    	<textarea id="history" name="history" [(ngModel)]="dog.history"></textarea>
+  	</div>
 
-    <div class="options-section">
-      <div class="checkbox-group">
-        <span>Esterilización:</span>
-        <label>
-          <input type="checkbox" name="sterilized_yes" [(ngModel)]="dog.sterilized" [value]="true"> Sí
-        </label>
-        <label>
-          <input type="checkbox" name="sterilized_no" [(ngModel)]="dog.sterilized" [value]="false"> No
-        </label>
-      </div>
+  	<div class="options-section">
+    	<div class="checkbox-group">
+      	<span>Esterilización:</span>
+      	<label>
+      	</label>
+    	</div>
 
-      <div class="vaccines-section">
-        <label for="vaccines">Vacunas aplicadas:</label>
-        <input type="text" id="vaccines" name="vaccines" [(ngModel)]="dog.vaccinated">
-      </div>
-    </div>
-  </div>
+  
+  	</div>
+  </div>
 
-  <div class="button-section">
-    <button class="adopt-button" (click)="onAdopt()">Adoptar</button>
-    <button class="back-button" (click)="onBack()">
-      <img src="assets/icons/arrow-left.svg" alt="Volver"> Volver
-    </button>
-  </div>
+  <div class="button-section">
+  	<button class="adopt-button" (click)="onAdopt()">Adoptar</button>
+  	<button class="back-button" (click)="onBack()">
+    	<img src="assets/icons/arrow-left.svg" alt="Volver"> Volver
+  	</button>
+  </div>
 
 </div>

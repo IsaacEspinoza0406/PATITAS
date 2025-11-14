@@ -9,7 +9,15 @@
     
     <div class="dog-card" *ngFor="let dog of dogs">
       
-      <img [src]="dog.imageUrl" [alt]="'Imagen de ' + dog.name">
+      <img 
+        *ngIf="dog.photos && dog.photos.length > 0" 
+        [src]="dog.photos[0]?.photoUrl" 
+        [alt]="'Imagen de ' + dog.name">
+      
+      <img 
+        *ngIf="!dog.photos || dog.photos.length === 0"
+        src="https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto"
+        [alt]="'Imagen de ' + dog.name">
       
       <div class="dog-info">
         <p><strong>Nombre(s):</strong> {{ dog.name }}</p>
@@ -21,7 +29,6 @@
         </div>
       </div>
     </div>
-
 
   </div>
 </div>
