@@ -7,185 +7,21 @@
 
   <div class="dogs-grid">
     
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
+    <div class="dog-card" *ngFor="let dog of dogs">
+      
+      <img [src]="dog.imageUrl" [alt]="'Imagen de ' + dog.name">
+      
       <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
+        <p><strong>Nombre(s):</strong> {{ dog.name }}</p>
+        <p><strong>Edad:</strong> {{ dog.age }} años</p>
+        
         <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(1)">Detalles</button>
+          <button class="btn-adoptar" (click)="irAAdoptar(dog.id)">Adoptar</button>
+          <button class="btn-detalles" (click)="verDetalles(dog.id)">Detalles</button>
         </div>
       </div>
     </div>
 
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(2)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(3)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(4)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(5)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(6)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(7)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(8)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(9)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(10)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(11)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(12)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(13)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(14)">Detalles</button>
-        </div>
-      </div>
-    </div>
-
-    <div class="dog-card">
-      <img src="https://placehold.co/600x400/cccccc/ffffff?text=Cargando..." alt="Imagen de perro - Cargando">
-      <div class="dog-info">
-        <p><strong>Nombre(s):</strong> [Nombre]</p>
-        <p><strong>Edad:</strong> [Edad]</p>
-        <div class="dog-actions">
-          <button class="btn-adoptar">Adoptar</button>
-          <button class="btn-detalles" (click)="verDetalles(15)">Detalles</button>
-        </div>
-      </div>
-    </div>
 
   </div>
 </div>
