@@ -1,7 +1,161 @@
+
+  :host {
+    font-family:'Montserrat', sans-serif;
+  }
+  
+.card-container {
+  width: 90%;
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+  gap: 40px;
+
+  background: #fff;
+  border: 3px solid #cfcfcf;
+  border-radius: 12px;
+}
+.image-section {
+  flex: 1;
+  display:flex;
+  justify-content:center;
+  align-items:flex-start;
+}
+
 .dog-image {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  border-radius: 8px;
+  width: 250px;
+  max-width: 400px;
+  border-radius: 10px;
   object-fit: cover;
+}
+
+.dog-image-placeholder {
+  width: 350px;
+  height: 350px;
+  background: #eeeeee;
+  border-radius: 10px;
+
+}
+.details-section {
+  flex: 1.2;
+  display:flex;
+  flex-direction:column;
+  gap: 18px;
+}
+
+.detail-item label {
+  font-weight:600;
+  font-size:20px;
+  color:#000;
+  display: block;
+  margin-bottom:5px;
+}
+
+.detail-item input,
+.detail-item textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 6px;
+  outline:none;
+  font-size: 18px;
+  background:#ffffff
+}
+
+.detail-item textarea {
+  height: 70px;
+  resize: none;
+}
+
+.options-section {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap:12px;
+}
+
+.checkbox-group {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.checkbox-group span{
+  font-size: 20px;
+  font-weight:600;
+}
+
+.checkbox-group input[type="checkbox"] {
+  width: 22px;
+  height: 22px;
+  border-radius:4px;
+  cursor: pointer;
+}
+
+.vaccines-section label{
+  font-size:20px;
+  font-weight:600;
+}
+
+.button-section{
+  width:100%;
+  display:flex;
+  justify-content:flex-start;
+  gap:20px;
+  margin-top:20px;
+}
+
+.adopt-button{
+  background: #000;
+  color: #fff;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.adopt-button:hover{
+  background:#333;
+}
+.back-button{
+  background: transparent;
+  border: 2px solid #000;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.back-button img{
+  width:20px;
+}
+.back-button:hover{
+  background:#f3f3f3;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+  .card-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .image-section,
+  .details-section {
+    width: 100%;
+  }
+
+  .dog-image {
+    max-width: 100%;
+  }
+
+  .button-section {
+    justify-content: center;
+  }
 }

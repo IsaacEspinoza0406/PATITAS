@@ -17,10 +17,8 @@ export const routes: Routes = [
   { path: 'inicio', component: Home },
   { path: 'donations', component: DonationsComponent },
   { path: 'forms', component: FormsComponent },
-  
-  { path: 'perros', component: DogCatalog }, 
-  
-  { path: 'dog-details/:id', component: CardCatalog},
+  {path: 'dog-catalog', component: DogCatalog },
+  {path: 'card-catalog/:id', component: CardCatalog },
 
   { path: 'inicia-sesion', component: LoginComponent },
 
@@ -31,7 +29,9 @@ export const routes: Routes = [
     children: [
       { path: 'catalog', component: CatalogComponent },
       { path: 'adoption-request', component: AdoptionRequestComponent },
-      { path: 'login', component: LoginComponent },
+      { path: 'inicia-sesion', component: LoginComponent },
+      
+      // Por defecto dentro de /admin redirige al catálogo
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]
   },
