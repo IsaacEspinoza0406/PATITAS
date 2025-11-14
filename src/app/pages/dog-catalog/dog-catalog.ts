@@ -8,7 +8,6 @@ import {Router} from '@angular/router';
   styleUrl: './dog-catalog.css'
 })
 export class DogCatalog {
-//  Inyecta el Router en el constructor
   constructor(private router: Router) { }
 
   verDetalles(dogId: number) {
