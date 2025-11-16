@@ -7,6 +7,7 @@ import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 import com.patitas_web.infrastructure.tables.AdoptantesTable
 import com.patitas_web.presentation.configureDogsRoutes
+import com.patitas_web.presentation.configureDonationRoutes
 import com.patitas_web.presentation.configureUsersRoutes
 
 
@@ -26,4 +27,5 @@ fun Application.module() {
     configureAdoptanteRoutes()
     configureUsersRoutes()
     configureDogsRoutes()
+    configureDonationRoutes()
 }

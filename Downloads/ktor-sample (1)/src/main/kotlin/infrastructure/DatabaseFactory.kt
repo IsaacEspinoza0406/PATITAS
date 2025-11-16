@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransacti
 object DatabaseFactory {
     fun init() {
         val driverClassName = "org.postgresql.Driver"
-        val jdbcUrl = "jdbc:postgresql://localhost:5432/perritos_web"
+        val jdbcUrl = "jdbc:postgresql://localhost:5432/perritos_app_web"
         val user = "postgres"
         val password = "galleta"
         val database = Database.connect(jdbcUrl, driverClassName, user, password)
