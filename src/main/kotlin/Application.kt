@@ -11,10 +11,8 @@ import com.patitas_web.presentation.configureDogRoutes
 import com.patitas_web.presentation.configureDogPhotoRoutes
 import com.patitas_web.presentation.configureAuthRoutes
 
-// --- IMPORTACIONES AÑADIDAS ---
-import io.ktor.server.plugins.cors.routing.* // <-- AÑADIDO
-import io.ktor.http.* // <-- AÑADIDO
-// ------------------------------
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.http.*
 
 import io.ktor.server.application.*
 import io.ktor.server.response.*
@@ -31,8 +29,7 @@ fun main(args: Array<String>) {
 fun Application.module() {
     DatabaseFactory.init()
 
-    // --- BLOQUE CORS AÑADIDO ---
-    install(CORS) { // <-- AÑADIDO
+    install(CORS) {
         allowMethod(HttpMethod.Options)
         allowMethod(HttpMethod.Get)
         allowMethod(HttpMethod.Post)
@@ -42,10 +39,8 @@ fun Application.module() {
         allowHeader(HttpHeaders.ContentType)
         allowHeader(HttpHeaders.Authorization)
 
-        // Esta es la línea clave que soluciona tu error:
-        allowHost("localhost:4200", schemes = listOf("http")) // <-- AÑADIDO
+        allowHost("localhost:4200", schemes = listOf("http"))
     }
-    // ---------------------------
 
     transaction {
         SchemaUtils.create(UsersTable, RolesTable, AdoptantesTable, DogsTable, DogPhotosTable)

@@ -13,7 +13,6 @@ fun Application.configureAuthRoutes() {
     routing {
         route("/api/auth") {
             
-            // POST /api/auth/register
             post("/register") {
                 try {
                     val request = call.receive<RegisterRequest>()
@@ -26,7 +25,6 @@ fun Application.configureAuthRoutes() {
                 }
             }
 
-            // POST /api/auth/login
             post("/login") {
                 try {
                     val request = call.receive<LoginRequest>()
@@ -39,7 +37,6 @@ fun Application.configureAuthRoutes() {
                 }
             }
             
-            // GET /api/auth/user/{id}
             get("/user/{id}") {
                 try {
                     val userId = call.parameters["id"]?.toIntOrNull()
