@@ -35,4 +35,11 @@ dependencies {
     implementation("org.postgresql:postgresql:42.6.0")
     // 4. metodo de pago
     implementation("com.stripe:stripe-java:25.10.0")
+    
+    // 5. JWT para autenticación
+    implementation("com.auth0:java-jwt:4.4.0")
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.auth.jwt)
+
+
 }

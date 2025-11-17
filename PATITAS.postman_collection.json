@@ -23,6 +23,64 @@
     },
 
     {
+      "name": "Auth - POST /api/auth/register",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Juan Pérez\",\n  \"email\": \"juan@example.com\",\n  \"password\": \"password123\",\n  \"roleId\": 1\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { 
+          "raw": "http://127.0.0.1:8080/api/auth/register", 
+          "protocol": "http", 
+          "host": ["127.0.0.1"], 
+          "port": "8080", 
+          "path": ["api", "auth", "register"] 
+        },
+        "description": "Registrar un nuevo usuario. roleId: 1=admin, 2=usuario, 3=adoptante"
+      }
+    },
+
+    {
+      "name": "Auth - POST /api/auth/login",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"juan@example.com\",\n  \"password\": \"password123\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { 
+          "raw": "http://127.0.0.1:8080/api/auth/login", 
+          "protocol": "http", 
+          "host": ["127.0.0.1"], 
+          "port": "8080", 
+          "path": ["api", "auth", "login"] 
+        },
+        "description": "Iniciar sesión. Retorna token JWT y datos del usuario"
+      }
+    },
+
+    {
+      "name": "Auth - GET /api/auth/user/:id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { 
+          "raw": "http://127.0.0.1:8080/api/auth/user/:id", 
+          "protocol": "http", 
+          "host": ["127.0.0.1"], 
+          "port": "8080", 
+          "path": ["api", "auth", "user", ":id"] 
+        },
+        "description": "Obtener usuario por ID (reemplazar :id)"
+      }
+    },
+
+    {
       "name": "Dogs - GET /dogs",
       "request": {
         "method": "GET",
