@@ -6,6 +6,7 @@ import { DonationsComponent } from './pages/donations/donations';
 import { Home } from './pages/home/home';
 import { DogCatalog } from './pages/dog-catalog/dog-catalog';
 import { CardCatalog } from './pages/card-catalog/card-catalog';
+import { LoginUser } from './pages/login-user/login-user';
 
 // --- Componentes de Admin ---
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
@@ -19,9 +20,8 @@ export const routes: Routes = [
   { path: 'forms', component: FormsComponent },
   {path: 'dog-catalog', component: DogCatalog },
   {path: 'card-catalog/:id', component: CardCatalog },
-
   { path: 'inicia-sesion', component: LoginComponent },
-
+  {path: 'login-user', component: LoginUser },
   
   // --- Rutas de Admin (agrupadas) ---
   {
