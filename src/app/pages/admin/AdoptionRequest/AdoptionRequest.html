@@ -1,52 +1,121 @@
-<div class="dashboard-layout">
-
+<div class="admin-container">
+  
+  <!-- Izquierda. === -->
   <aside class="sidebar">
-    <div class="sidebar__menu-icon">
-      <span></span>
-      <span></span>
-      <span></span>
+    <div class="sidebar-header">
+      <div class="profile-icon"></div>
+      <span>Admin</span>
     </div>
-
-    <div class="sidebar__profile">
-      <div class="profile-icon">
-      </div>
-    </div>
-
-    <nav class="sidebar__nav">
+    <nav class="sidebar-nav">
       <ul>
-        <li class="active"><a href="#">Solicitudes de Adopción</a></li>
-        <li><a href="#">Catálogo</a></li>
-        <li><a href="#">Publicaciones</a></li>
+        <li>
+          <a routerLink="/admin/adoption-request" routerLinkActive="active-link">
+            Solicitudes de Adopción
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/catalog" routerLinkActive="active-link">
+            Catálogo
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/publicaciones" routerLinkActive="active-link">
+            Publicaciones
+          </a>
+        </li>
       </ul>
     </nav>
   </aside>
 
-  <main class="main-content">
+  <!-- === Centro.=== -->
+  <main class="request-list">
+    <h2>Solicitudes de adopción</h2>
 
-    <header class="main-header">
-      <h1>Solicitudes de adopción</h1>
-    </header>
+    <!-- Mensaje de Carga. -->
+    <div *ngIf="isLoading" class="loading-message">
+      Cargando solicitudes...
+    </div>
 
-    <section class="card-grid">
+    <!-- Mensaje de Error. -->
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
 
-      <article class="card" *ngFor="let request of requests">
-
-        <h3 class="card__title">{{ request.name }}</h3>
-
-        <div class="card__actions">
-          <button class="btn btn--view" (click)="viewRequest(request.id)">
-            Ver
-          </button>
-          <button class="btn btn--delete" (click)="deleteRequest(request.id)">
-            Eliminar
-          </button>
+    <!-- La Lista de Tarjetas. -->
+    <div class="list-grid" *ngIf="!isLoading && !error">
+      
+      <div class="request-card" *ngFor="let req of requests" [class.selected]="req.id === selectedRequest?.id">
+        <div class="card-header">
+          <div class="card-profile-icon"></div>
+          <span>{{ req.nombreCompleto }}</span>
         </div>
-      </article>
-
-      <div *ngIf="requests.length === 0">
-        <p>No hay solicitudes de adopción pendientes.</p>
+        <div class="card-actions">
+          <button class="btn-ver" (click)="viewRequest(req)">Ver</button>
+          <button class="btn-eliminar" (click)="deleteRequest(req.id)">Eliminar</button>
+        </div>
       </div>
 
-    </section>
+    </div>
   </main>
+
+  <!-- === Derecha. === -->
+  <aside class="request-detail">
+    
+    <div *ngIf="!selectedRequest" class="detail-placeholder">
+      <p>Selecciona una solicitud para ver los detalles.</p>
+    </div>
+
+    <div *ngIf="selectedRequest" class="detail-content">
+      <h3>CUESTIONARIO COMPLETADO</h3>
+      <p class="detail-name">Respondido por: <strong>{{ selectedRequest.nombreCompleto }}</strong></p>
+
+      <div class="detail-item">
+        <label>¿Cuál es su nombre?</label>
+        <div class="answer-box">{{ selectedRequest.nombreCompleto }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Cuál es su número telefónico?</label>
+        <div class="answer-box">{{ selectedRequest.telefono }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿A qué se dedica?</label>
+        <div class="answer-box">{{ selectedRequest.ocupacion }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Cuánto gana mensualmente?</label>
+        <div class="answer-box">{{ selectedRequest.ingresoMensual }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Tiene patio?</label>
+        <div class="answer-box">{{ selectedRequest.tienePatio }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Niños en casa?</label>
+        <div class="answer-box">{{ selectedRequest.ninosEnCasa }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Tipo de vivienda?</label>
+        <div class="answer-box">{{ selectedRequest.tipoVivienda }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Mascotas anteriores?</label>
+        <div class="answer-box">{{ selectedRequest.mascotasAnteriores }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Sigue cuidando de ellas?</label>
+        <div class="answer-box">{{ selectedRequest.aunConservaMascotas }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Opinión de esterilización?</label>
+        <div class="answer-box">{{ selectedRequest.opinionEsterilizacion }}</div>
+      </div>
+
+      <div class="detail-actions">
+        <button class="btn-rechazar" (click)="deleteRequest(selectedRequest.id)">Rechazar</button>
+        <button class="btn-aceptar" (click)="acceptRequest(selectedRequest.id)">Aceptar</button>
+      </div>
+    </div>
+
+  </aside>
+
 </div>
