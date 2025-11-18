@@ -12,6 +12,7 @@ import { LoginUser } from './pages/login-user/login-user';
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
 import { CatalogComponent } from './pages/admin/catalog/catalog';
 import { LoginComponent } from './pages/admin/login/login';
+import { AdoptionRequestForm } from './pages/admin/adoption-request-form/adoption-request-form';  
 
 // Rutas de la aplicación
 export const routes: Routes = [
@@ -23,6 +24,7 @@ export const routes: Routes = [
   { path: 'inicia-sesion', component: LoginComponent },
   {path: 'login-user', component: LoginUser },
   
+
   // --- Rutas de Admin (agrupadas) ---
   {
     path: 'admin',
@@ -30,7 +32,8 @@ export const routes: Routes = [
       { path: 'catalog', component: CatalogComponent },
       { path: 'adoption-request', component: AdoptionRequestComponent },
       { path: 'inicia-sesion', component: LoginComponent },
-      
+      {path: 'adoption-request-form', component: AdoptionRequestForm },
+
       // Por defecto dentro de /admin redirige al catálogo
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]

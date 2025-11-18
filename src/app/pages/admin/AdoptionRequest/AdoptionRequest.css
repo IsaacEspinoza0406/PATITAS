@@ -161,16 +161,16 @@ body {
   gap: 32px;
 }
 
-/* Card */
+
 .card {
-  background-color: var(--bg-card); /* CORREGIDO */
+  background-color: var(--bg-card); 
   border: 1px solid var(--border-card);
-  border-radius: 6px; /* Borde redondeado sutil */
+  border-radius: 6px; 
   padding: 24px;
   display: flex;
   flex-direction: column;
-  /* ELIMINADO aspect-ratio: 1 / 1; */
-  min-height: 200px; /* AÑADIDO: Da altura a las tarjetas */
+  
+  min-height: 200px; 
 }
 
 .card__title {
@@ -191,11 +191,11 @@ body {
 }
 
 .btn {
-  /* Hacemos los botones un poco más grandes */
+ 
   padding: 12px;
-  border-radius: 4px; /* Un poco más redondeado */
+  border-radius: 4px; 
   cursor: pointer;
-  /* Agregamos border-color a la transición */
+  
   transition: all 0.2s ease-in-out;
   font-size: 14px;
   font-weight: 500;

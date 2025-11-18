@@ -1,0 +1,77 @@
+<div class="page-container">
+  
+  <aside class="sidebar">
+    <div class="menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="profile-icon-wrapper">
+      <div class="profile-icon">
+        </div>
+    </div>
+
+    <nav class="main-nav">
+      <ul>
+        <li><a href="#" class="active">Solicitudes de Adopción</a></li>
+        <li><a href="#">Catálogo</a></li>
+        <li><a href="#">Publicaciones</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <div class="content-box" *ngIf="solicitud; else noData">
+  
+  <header class="content-header">
+    <h2>CUESTIONARIO COMPLETADO</h2>
+  </header>
+
+  <div class="responder-info">
+    <span>Respondido por: </span>
+    <strong>{{ solicitud.nombre }}</strong>
+  </div>
+
+  <section class="question-list">
+    
+    <div class="question-block">
+      <p class="question-text">¿Cuál es su nombre?</p>
+      <div class="answer-area">
+        <span class="answer-label">Respuesta:</span>
+        <span class="answer-value">{{ solicitud.nombre }}</span>
+      </div>
+    </div>
+    
+    <div class="question-block">
+      <p class="question-text">¿Cuál es su número telefónico?</p>
+      <div class="answer-area">
+        <span class="answer-label">Respuesta:</span>
+        <span class="answer-value">{{ solicitud.telefono }}</span>
+      </div>
+    </div>
+    
+    <div class="question-block">
+      <p class="question-text">¿A qué se dedica?</p>
+      <div class="answer-area">
+        <span class="answer-label">Respuesta:</span>
+        <span class="answer-value">{{ solicitud.ocupacion }}</span>
+      </div>
+    </div>
+    
+    <div class="question-block">
+      <p class="question-text">¿Aproximadamente, cuánto gana mensualmente?</p>
+      <div class="answer-area">
+        <span class="answer-label">Respuesta:</span>
+        <span class="answer-value">{{ solicitud.ingresosMensuales }}</span>
+      </div>
+    </div>
+    
+  </section>
+  
+</div>
+
+  <ng-template #noData>
+    <div class="no-data-message">
+      <p>No hay datos de la solicitud disponibles.</p>
+    </div>
+  </ng-template>
