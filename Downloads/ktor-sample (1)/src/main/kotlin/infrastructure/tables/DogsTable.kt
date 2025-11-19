@@ -10,7 +10,7 @@ object DogsTable : Table("dogs") {
     val history = text("history").nullable()
     val sterilized = text("sterilized").nullable()
     val adopted = text("adopted").nullable()
-    val created_by = integer("created_by")
+    val createdBy = integer("created_by")
 
     override val primaryKey = PrimaryKey(DogsTable.id)
 }

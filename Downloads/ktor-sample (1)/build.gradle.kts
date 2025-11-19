@@ -30,6 +30,7 @@ dependencies {
     implementation("org.jetbrains.exposed:exposed-core:0.41.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
+    implementation("io.ktor:ktor-server-cors:3.3.2")
 
     // 2. Dependencia para manejar fechas y horas con Exposed
     implementation("org.jetbrains.exposed:exposed-java-time:0.41.1")

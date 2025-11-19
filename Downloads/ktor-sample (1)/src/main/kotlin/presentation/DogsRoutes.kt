@@ -3,60 +3,69 @@ package com.patitas_web.presentation
 import com.patitas_web.application.DogsService
 import com.patitas_web.domain.DogsRequest
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.application.Application
 import io.ktor.server.request.receive
-import io.ktor.server.response.*
 import io.ktor.server.routing.*
-
+import io.ktor.server.application.*
+import io.ktor.server.response.*
 
 fun Application.configureDogsRoutes() {
     val service = DogsService()
 
     routing {
-        route("/dogs"){
+        route("/dogs") {
             get {
-                val dogs = service.findAll()
-                call.respond(dogs)
+                call.respond(service.findAll())
             }
 
-             post {
-                try{
-                    val request = call.receive<DogsRequest>()
-                    val newDog = service.create(request)
-                    call.respond(HttpStatusCode.Created,newDog)
-                }catch(e:Exception){
-                    call.respond(HttpStatusCode.BadRequest, "error al añadir un perro ${e.message}")
+            post {
+                val request = call.receive<DogsRequest>()
+                val dog = service.create(request)
+                call.respond(HttpStatusCode.Created, dog)
+            }
+
+            put("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de perro invalido.")
+                    return@put
+                }
+                val request = call.receive<DogsRequest>()
+                val updateDog = service.update(id, request)
+                if (updateDog != null) {
+                    call.respond(HttpStatusCode.OK, updateDog)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
                 }
             }
 
-            delete {
-                try{
-                    val request = call.receive<DogsRequest>()
-                    val deleteDog = service.delete(request)
-                    call.respond(HttpStatusCode.OK,deleteDog)
-                }catch(e:Exception){
-                    call.respond(HttpStatusCode.BadRequest, "Error al eliminar un perro ${e.message}")
+            delete("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de perro invalido")
+                    return@delete
+                }
+                val deleted = service.delete(id)
+                if (deleted) {
+                    call.respond(HttpStatusCode.OK, "Perro eliminado exitosamente")
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
                 }
             }
 
-        }
+            get("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID inválido.")
+                    return@get
+                }
 
-        route("/dogs/{id}") {
-            get {
-                call.parameters["id"]?.toIntOrNull()?.let { id ->
-                    try {
-                        val dog = service.getById(id)
-                        if (dog != null) {
-                            call.respond(HttpStatusCode.OK, dog)
-                        } else {
-                            call.respond(HttpStatusCode.NotFound, "El ID del perro no existe")
-                        }
-                    } catch (e: Exception) {
-                        call.respond(HttpStatusCode.InternalServerError, "Error al procesar la solicitud: ${e.message}")
-                    }
-                } ?: run { call.respond(HttpStatusCode.NotFound, "El ID del perro no existe") }
+                val dog = service.getById(id)
+                if (dog != null) {
+                    call.respond(HttpStatusCode.OK, dog)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado.")
+                }
             }
         }
-
     }
 }

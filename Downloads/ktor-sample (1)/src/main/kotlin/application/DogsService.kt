@@ -1,72 +1,87 @@
 package com.patitas_web.application
 
-import com.patitas_web.domain.DogsFullResponse
 import com.patitas_web.domain.DogsRequest
+import com.patitas_web.domain.DogsResponse
 import com.patitas_web.infrastructure.DatabaseFactory.dbQuery
 import com.patitas_web.infrastructure.tables.DogsTable
-import org.jetbrains.exposed.sql.ResultRow
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
-import org.jetbrains.exposed.sql.deleteWhere
-import org.jetbrains.exposed.sql.insert
-import org.jetbrains.exposed.sql.select
-import org.jetbrains.exposed.sql.selectAll
-import kotlin.collections.firstOrNull
-
+import org.jetbrains.exposed.sql.statements.UpdateBuilder
 
 class DogsService {
-    private fun toDogsFullResponse(row: ResultRow): DogsFullResponse = DogsFullResponse(
-        id = row[DogsTable.id],
-        name = row[DogsTable.name],
-        age = row[DogsTable.age],
-        breed = row[DogsTable.breed],
-        history = row[DogsTable.history],
-        sterilized = row[DogsTable.sterilized],
-        adopted = row[DogsTable.adopted],
-        created_by = row[DogsTable.created_by]
-    )
 
-    suspend fun findAll(): List<DogsFullResponse> = dbQuery {
-        DogsTable.selectAll().map(::toDogsFullResponse)
+    private val photoService = DogsPhotoService()
+
+    private suspend fun toDogResponse(row: ResultRow): DogsResponse {
+        val dogId = row[DogsTable.id]
+        val photos = photoService.findByDogId(dogId)
+
+        return DogsResponse(
+            id = row[DogsTable.id],
+            name = row[DogsTable.name],
+            age = row[DogsTable.age],
+            breed = row[DogsTable.breed],
+            history = row[DogsTable.history],
+            sterilized = row[DogsTable.sterilized],
+            adopted = row[DogsTable.adopted],
+            photos = photos
+        )
     }
 
-    suspend fun create(request: DogsRequest): DogsFullResponse {
-        val result = dbQuery {
-            val insertStatement = DogsTable.insert { table ->
-                table[DogsTable.id] = request.id
-                table[DogsTable.name] = request.name
-                table[DogsTable.age] = request.age
-                table[DogsTable.breed] = request.breed
-                table[DogsTable.history] = request.history
-                table[DogsTable.sterilized] = request.sterilized
-                table[DogsTable.adopted] = request.adopted
-                table[DogsTable.created_by] = request.created_by
+
+    private fun statementToDog(statement: UpdateBuilder<Int>, dog: DogsRequest) {
+        statement[DogsTable.name] = dog.name
+        dog.age?.let { statement[DogsTable.age] = it }
+        dog.breed?.let { statement[DogsTable.breed] = it }
+        dog.history?.let { statement[DogsTable.history] = it }
+        dog.sterilized?.let { statement[DogsTable.sterilized] = it }
+        dog.adopted?.let { statement[DogsTable.adopted] = it }
+    }
+
+
+    suspend fun findAll(): List<DogsResponse> {
+        val dogs = dbQuery {
+            DogsTable.selectAll().toList()
+        }
+        return dogs.map { row -> toDogResponse(row) }
+    }
+
+
+    suspend fun create(request: DogsRequest): DogsResponse {
+        val insertedRow = dbQuery {
+            val insertStatement = DogsTable.insert {
+                statementToDog(it, request)
+                it[DogsTable.createdBy] = 1
             }
-            insertStatement.resultedValues?.singleOrNull()?.let(::toDogsFullResponse)
+            insertStatement.resultedValues?.singleOrNull()
         }
-        return result ?: throw IllegalStateException("Error al guardar al perro en la base de datos.")
+        return insertedRow?.let { toDogResponse(it) } ?: throw IllegalStateException("Error al crear el perro.")
     }
 
-    suspend fun delete(request: DogsRequest) {
-        val result = dbQuery {
-            val insertStatement = DogsTable.deleteWhere { DogsTable.id eq request.id }
+
+    suspend fun update(id: Int, request: DogsRequest): DogsResponse? {
+        val updated = dbQuery {
+            DogsTable.update({ DogsTable.id eq id }) { statementToDog(it, request) }
         }
-        return result ?: throw IllegalStateException("Error al eliminar el perro de la base de datos")
+        return if (updated > 0) {
+            val updatedRow = dbQuery {
+                DogsTable.select { DogsTable.id eq id }.singleOrNull()
+            }
+            updatedRow?.let { toDogResponse(it) }
+        } else null
     }
 
-    suspend fun getById(id: Int): DogsFullResponse? {
+
+    suspend fun delete(id: Int): Boolean {
         return dbQuery {
-            DogsTable.select { DogsTable.id eq id }
-                .map { toDogsFullResponse(it) }
-                .firstOrNull()
+            DogsTable.deleteWhere { DogsTable.id eq id } > 0
         }
     }
 
-//    suspend fun update(request: DogsRequest){
-//        val result = dbQuery {
-//            val insertStatement = DogsTable.update({ DogsTable.id eq request.id }) {
-//
-//            }
-//        }
-//    }
-
+    suspend fun getById(id: Int): DogsResponse? {
+        val row = dbQuery {
+            DogsTable.select { DogsTable.id eq id }.singleOrNull()
+        }
+        return row?.let { toDogResponse(it) }
+    }
 }
