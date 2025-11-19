@@ -10,15 +10,13 @@ import com.patitas_web.presentation.configureAdoptanteRoutes
 import com.patitas_web.presentation.configureDogRoutes
 import com.patitas_web.presentation.configureDogPhotoRoutes
 import com.patitas_web.presentation.configureAuthRoutes
-
-import io.ktor.server.plugins.cors.routing.*
 import io.ktor.http.*
-
+import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.cors.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
-import io.ktor.serialization.kotlinx.json.*
-import io.ktor.server.plugins.contentnegotiation.*
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
 

@@ -19,27 +19,17 @@ dependencies {
     implementation(libs.ktor.server.netty)
     implementation(libs.logback.classic)
     implementation(libs.ktor.server.config.yaml)
+    implementation(libs.ktor.server.cors)
+    implementation(libs.ktor.server.auth)
+    implementation(libs.ktor.server.auth.jwt)
     testImplementation(libs.ktor.server.test.host)
     testImplementation(libs.kotlin.test.junit)
 
-
-    // 1. Dependencias de Exposed
     implementation("org.jetbrains.exposed:exposed-core:0.41.1")
     implementation("org.jetbrains.exposed:exposed-dao:0.41.1")
     implementation("org.jetbrains.exposed:exposed-jdbc:0.41.1")
-
-    // 2. Dependencia para manejar fechas y horas con Exposed
     implementation("org.jetbrains.exposed:exposed-java-time:0.41.1")
-
-    // 3. Driver de PostgreSQL
     implementation("org.postgresql:postgresql:42.6.0")
-    // 4. metodo de pago
     implementation("com.stripe:stripe-java:25.10.0")
-    
-    // 5. JWT para autenticación
     implementation("com.auth0:java-jwt:4.4.0")
-    implementation(libs.ktor.server.auth)
-    implementation(libs.ktor.server.auth.jwt)
-
-
 }
