@@ -5,6 +5,16 @@
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "version": "1.0.0"
   },
+  "variable": [
+    { "key": "baseUrl", "value": "http://127.0.0.1:8080" },
+    { "key": "token", "value": "" }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      { "key": "token", "value": "{{token}}", "type": "string" }
+    ]
+  },
   "item": [
     {
       "name": "Health - GET /",
@@ -54,14 +64,27 @@
           "options": { "raw": { "language": "json" } }
         },
         "url": { 
-          "raw": "http://127.0.0.1:8080/api/auth/login", 
+          "raw": "{{baseUrl}}/api/auth/login", 
           "protocol": "http", 
           "host": ["127.0.0.1"], 
           "port": "8080", 
           "path": ["api", "auth", "login"] 
         },
         "description": "Iniciar sesión. Retorna token JWT y datos del usuario"
-      }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "let json = null;",
+              "try { json = pm.response.json(); } catch(e) {}",
+              "if (json && json.token) { pm.collectionVariables.set('token', json.token); }"
+            ]
+          }
+        }
+      ]
     },
 
     {
