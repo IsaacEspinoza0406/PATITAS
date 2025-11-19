@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forms',
@@ -11,6 +12,8 @@ import { FormsModule } from '@angular/forms';
 })
 export class FormsComponent {
   step = 1;
+
+  constructor(private router: Router) {}
 
   // Cree este objeto para almacenar los datos del formulario.
   public formData: any = {
@@ -46,25 +49,8 @@ export class FormsComponent {
   onSubmit() {
     console.log('Datos del formulario:', this.formData);
     
-    alert('¡Respuestas enviadas con éxito!');
-    // Aquí se limpia el formulario después de darle enviar y te regresa al primer paso.
-    this.formData = {
-      nombre: '',
-      telefono: '',
-      edad: null,
-      ocupacion: '',
-      ingreso: null,
-      horas: null,
-      espacio: '',
-      habitantes: '',
-      vivienda: '',
-      personas: null,
-      mascotas: '',
-      cuidado: '',
-      responsabilidades: '',
-      esterilizacion: ''
-    };
-    this.step = 1;
+    // Redirigir a la página de confirmación
+    this.router.navigate(['/adoption-confirmation']);
   }
 
   }
