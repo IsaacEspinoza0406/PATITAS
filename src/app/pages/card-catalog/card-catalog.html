@@ -1,13 +1,13 @@
 <div class="card-container" *ngIf="dog">
  
   <div class="image-section">
-  	<img 
+  	<img
       *ngIf="dog.photos && dog.photos.length > 0"
-      [src]="dog.photos[0]?.photoUrl" 
-      [alt]="'Imagen de ' + dog.name" 
+      [src]="dog.photos[0]?.photoUrl"
+      [alt]="'Imagen de ' + dog.name"
       class="dog-image">
-    
-    <img 
+
+    <img
       *ngIf="!dog.photos || dog.photos.length === 0"
       src="https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto"
       [alt]="'Imagen de ' + dog.name"
@@ -42,14 +42,14 @@
       	</label>
     	</div>
 
-  
+
   	</div>
   </div>
 
   <div class="button-section">
   	<button class="adopt-button" (click)="onAdopt()">Adoptar</button>
   	<button class="back-button" (click)="onBack()">
-    	<img src="assets/icons/arrow-left.svg" alt="Volver"> Volver
+    	<img src="assets/img/Arrow-left-circle.png" alt="Volver"> Volver
   	</button>
   </div>
 

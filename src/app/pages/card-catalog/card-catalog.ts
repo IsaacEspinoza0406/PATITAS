@@ -1,15 +1,15 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { DogService, Dog } from '../../services/dog-service';
-import { CommonModule } from '@angular/common'; 
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-card-catalog',
-  standalone: true, 
+  standalone: true,
   imports: [
-  CommonModule, 
+  CommonModule,
   FormsModule
-  ], 
+  ],
   templateUrl: './card-catalog.html',
   styleUrl: './card-catalog.css'
 })
@@ -25,8 +25,8 @@ export class CardCatalog implements OnInit {
 
     if (!idFromRoute) {
       console.error('ID de perro no proporcionado en la ruta');
-      this.router.navigate(['/perros']); 
-      return; 
+      this.router.navigate(['/perros']);
+      return;
     }
 
     const dogId = +idFromRoute;
@@ -37,13 +37,13 @@ export class CardCatalog implements OnInit {
       },
       error: (err) => {
         console.error(`Perro con ID ${dogId} no encontrado.`, err);
-        this.router.navigate(['/perros']); 
+        this.router.navigate(['/dog-catalog']);
       }
     });
   }
 
   onBack(): void {
-    this.router.navigate(['/perros']);
+    this.router.navigate(['/dog-catalog']);
   }
 
   onAdopt(): void {
