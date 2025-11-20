@@ -33,7 +33,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto 30px;
-  background: linear-gradient(135deg, #00b894, #00cec9);
+  background: linear-gradient(135deg, #74b9ff, #0984e3);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -107,26 +107,21 @@
   text-align: center;
 }
 
-.info-box ul {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.info-box li {
+.info-item {
   color: #636e72;
   font-size: 15px;
   padding: 10px 0;
   padding-left: 30px;
   position: relative;
   line-height: 1.5;
+  margin: 0;
 }
 
-.info-box li::before {
+.info-item::before {
   content: "✓";
   position: absolute;
   left: 0;
-  color: #00b894;
+  color: #0984e3;
   font-weight: bold;
   font-size: 18px;
 }
@@ -205,7 +200,7 @@
     font-size: 18px;
   }
 
-  .info-box li {
+  .info-item {
     font-size: 14px;
   }
 
