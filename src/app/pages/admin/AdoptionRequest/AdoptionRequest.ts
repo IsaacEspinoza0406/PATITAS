@@ -1,56 +1,66 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; // Importante para *ngFor
-import { Router } from '@angular/router';
-
-interface AdoptionRequest {
-  id: number;
-  name: string;
-}
+import { Component, OnInit, inject } from '@angular/core';
+import { CommonModule } from '@angular/common'; 
+import { RouterLink } from '@angular/router'; 
+import { AdoptanteService, Adoptante } from '../../../services/adoptante'; 
 
 @Component({
   selector: 'app-adoption-request',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink], 
   templateUrl: './AdoptionRequest.html',
-  styleUrl: './AdoptionRequest.css'
+  styleUrls: ['./AdoptionRequest.css']
 })
 export class AdoptionRequestComponent implements OnInit {
 
-  requests: AdoptionRequest[] = [];
-
-  constructor(private router: Router) { }
+  private adoptanteService = inject(AdoptanteService);
+  public requests: Adoptante[] = [];
+  public selectedRequest: Adoptante | null = null; 
+  public isLoading = true;
+  public error: string | null = null;
 
   ngOnInit(): void {
-    this.loadMockData();
+    this.loadRequests();
   }
 
-  loadMockData(): void {
-    this.requests = [
-      { id: 101, name: 'Paula Jiménez' },
-      { id: 102, name: 'Paulina Mendoza' },
-      { id: 103, name: 'Roberto Pinto' },
-      { id: 104, name: 'Octavio Cruz' },
-      { id: 105, name: 'David Molina' },
-      { id: 106, name: 'Daniela Vázquez' },
-    ];
+  loadRequests(): void {
+    this.isLoading = true;
+    this.error = null;
+    this.adoptanteService.getAdoptantes().subscribe({
+      next: (data) => {
+        this.requests = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error al jalar solicitudes:', err);
+        this.error = 'No se pudieron cargar las solicitudes. Revisa la API.';
+        this.isLoading = false;
+      }
+    });
   }
 
-  // --- LÓGICA DE LOS BOTONES ---
-
-  /**
-   * Punto 1: Redirige a la vista de detalle de la solicitud.
-   */
-  viewRequest(id: number): void {
-    console.log('Navegando al detalle de la solicitud:', id);
-
-    // Usamos el router para navegar a una nueva ruta.
-    this.router.navigate(['/solicitud', id]);
-
+  viewRequest(request: Adoptante): void {
+    this.selectedRequest = request;
   }
 
   deleteRequest(id: number): void {
-    console.log('Eliminando solicitud:', id);
-    this.requests = this.requests.filter(request => request.id !== id);
+    if (confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
+      this.adoptanteService.deleteAdoptante(id).subscribe({
+        next: () => {
+          alert('Solicitud eliminada.');
+          this.requests = this.requests.filter(req => req.id !== id);
+          if (this.selectedRequest?.id === id) {
+            this.selectedRequest = null;
+          }
+        },
+        error: (err) => {
+          console.error('Error al eliminar:', err);
+          alert('No se pudo eliminar la solicitud.');
+        }
+      });
+    }
+  }
 
+  acceptRequest(id: number): void {
+    alert('Función "Aceptar" todavía no implementada.');
   }
 }
