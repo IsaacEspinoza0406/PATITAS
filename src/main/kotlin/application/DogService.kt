@@ -24,6 +24,7 @@ class DogService {
             history = row[DogsTable.history],
             sterilized = row[DogsTable.sterilized],
             adopted = row[DogsTable.adopted],
+            vaccines = row[DogsTable.vaccines],
             photos = photos
         )
     }
@@ -36,6 +37,7 @@ class DogService {
         dog.history?.let { statement[DogsTable.history] = it }
         dog.sterilized?.let { statement[DogsTable.sterilized] = it }
         dog.adopted?.let { statement[DogsTable.adopted] = it }
+        dog.vaccines?.let { statement[DogsTable.vaccines] = it }
     }
 
 
@@ -44,6 +46,13 @@ class DogService {
             DogsTable.selectAll().toList()
         }
         return dogs.map { row -> toDogResponse(row) }
+    }
+
+    suspend fun findById(id: Int): DogResponse? {
+        val row = dbQuery {
+            DogsTable.select { DogsTable.id eq id }.singleOrNull()
+        }
+        return row?.let { toDogResponse(it) }
     }
 
 

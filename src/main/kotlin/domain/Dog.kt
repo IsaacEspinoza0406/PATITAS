@@ -9,7 +9,7 @@ data class DogRequest(
     val history: String?,
     val sterilized: String?,
     val adopted: String?,
-
+    val vaccines: String? = null
 )
 
 @Serializable
@@ -21,6 +21,7 @@ data class DogResponse(
     val history: String?,
     val sterilized: String?,
     val adopted: String?,
+    val vaccines: String? = null,
     val photos: List<DogPhotoResponse> = emptyList()
 )
 

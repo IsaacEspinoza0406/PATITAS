@@ -17,6 +17,20 @@ fun Application.configureDogRoutes() {
                 call.respond(service.findAll())
             }
 
+            get("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de perro invalido.")
+                    return@get
+                }
+                val dog = service.findById(id)
+                if (dog != null) {
+                    call.respond(dog)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
+                }
+            }
+
             post {
                 val request = call.receive<DogRequest>()
                 val dog = service.create(request)

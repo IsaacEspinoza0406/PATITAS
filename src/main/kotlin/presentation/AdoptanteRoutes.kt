@@ -45,6 +45,20 @@ fun Application.configureAdoptanteRoutes() {
                 }
             }
 
+            put("/{id}") {
+                val id = call.parameters["id"]?.toIntOrNull()
+                if (id == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de adoptante inválido.")
+                    return@put
+                }
+                val request = call.receive<AdoptanteRequest>()
+                val updated = service.update(id, request)
+                if (updated != null) {
+                    call.respond(HttpStatusCode.OK, updated)
+                } else {
+                    call.respond(HttpStatusCode.NotFound, "Adoptante no encontrado.")
+                }
+            }
 
             delete("/{id}") {
                 val id = call.parameters["id"]?.toIntOrNull()

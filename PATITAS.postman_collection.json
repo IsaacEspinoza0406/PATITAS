@@ -64,7 +64,7 @@
           "options": { "raw": { "language": "json" } }
         },
         "url": { 
-          "raw": "{{baseUrl}}/api/auth/login", 
+          "raw": "http://127.0.0.1:8080/api/auth/login", 
           "protocol": "http", 
           "host": ["127.0.0.1"], 
           "port": "8080", 
@@ -144,6 +144,16 @@
     },
 
     {
+      "name": "Dogs - GET /dogs/:id",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":id"] },
+        "description": "Obtener perro por id (reemplazar :id)"
+      }
+    },
+
+    {
       "name": "Dogs - DELETE /dogs/:id",
       "request": {
         "method": "DELETE",
@@ -199,6 +209,71 @@
     },
 
     {
+      "name": "Adoptantes - PUT /adoptantes/:id",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nombreCompleto\": \"María Pérez\",\n  \"telefono\": \"555-5678\",\n  \"edad\": \"31\",\n  \"ocupacion\": \"Ingeniera\",\n  \"ingresoMensual\": \"1600\",\n  \"horasDeTrabajo\": \"8\",\n  \"tienePatio\": \"sí\",\n  \"ninosEnCasa\": \"no\",\n  \"tipoVivienda\": \"departamento\",\n  \"convivientes\": \"1\",\n  \"mascotasAnteriores\": \"sí\",\n  \"aunConservaMascotas\": \"no\",\n  \"responsabilidadesMascota\": \"alimentación, paseo\",\n  \"opinionEsterilizacion\": \"a favor\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/adoptantes/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptantes", ":id"] },
+        "description": "Actualizar adoptante por id (reemplazar :id)"
+      }
+    },
+
+    {
+      "name": "Donations - POST /donations",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 1,\n  \"amount\": 50.00,\n  \"methodName\": \"PayPal\",\n  \"transactionId\": \"TXN123456789\",\n  \"payerEmail\": \"donor@example.com\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/donations", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["donations"] },
+        "description": "Registrar una donación"
+      }
+    },
+
+    {
+      "name": "Adoptions - GET /adoptions",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/adoptions", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptions"] },
+        "description": "Listar solicitudes de adopción"
+      }
+    },
+
+    {
+      "name": "Adoptions - POST /adoptions",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"userId\": 1,\n  \"dogId\": 1\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/adoptions", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptions"] },
+        "description": "Crear solicitud de adopción"
+      }
+    },
+
+    {
+      "name": "Adoptions - DELETE /adoptions/:id",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": { "raw": "http://127.0.0.1:8080/adoptions/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["adoptions", ":id"] },
+        "description": "Eliminar solicitud de adopción"
+      }
+    },
+
+    {
       "name": "Dog Photos - GET /dogs/:dogId/photos",
       "request": {
         "method": "GET",
@@ -240,6 +315,34 @@
         "header": [],
         "url": { "raw": "http://127.0.0.1:8080/photos/:photoId", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["photos", ":photoId"] },
         "description": "Eliminar una foto por ID"
+      }
+    },
+    {
+      "name": "Dogs - POST /dogs (With Vaccines)",
+      "request": {
+        "method": "POST",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Firulais\",\n  \"age\": 3,\n  \"breed\": \"Labrador\",\n  \"history\": \"Encontrado en la calle, amigable\",\n  \"sterilized\": \"sí\",\n  \"adopted\": \"no\",\n  \"vaccines\": \"Rabia, Parvovirus\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/dogs", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs"] },
+        "description": "Crear un perro con vacunas"
+      }
+    },
+    {
+      "name": "Dogs - PUT /dogs/:id (With Vaccines)",
+      "request": {
+        "method": "PUT",
+        "header": [ { "key": "Content-Type", "value": "application/json" } ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Firulais\",\n  \"age\": 4,\n  \"breed\": \"Labrador\",\n  \"history\": \"Adoptado temporalmente\",\n  \"sterilized\": \"sí\",\n  \"adopted\": \"sí\",\n  \"vaccines\": \"Rabia, Parvovirus, Moquillo\"\n}",
+          "options": { "raw": { "language": "json" } }
+        },
+        "url": { "raw": "http://127.0.0.1:8080/dogs/:id", "protocol": "http", "host": ["127.0.0.1"], "port": "8080", "path": ["dogs", ":id"] },
+        "description": "Actualizar perro con vacunas"
       }
     }
 

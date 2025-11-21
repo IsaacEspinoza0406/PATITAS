@@ -4,13 +4,20 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class DonationRequest(
-    val paymentMethodToken: String,
-    val amount: Long,
-    val currency: String,
+    val userId: Int,
+    val amount: Double,
+    val methodName: String, // "PayPal", "Card", etc.
+    val transactionId: String?,
+    val payerEmail: String?
 )
+
 @Serializable
 data class DonationResponse(
-    val status: String,
-    val transactionId: String,
-    val message: String,
+    val id: Int,
+    val userId: Int,
+    val amount: Double,
+    val methodName: String,
+    val transactionId: String?,
+    val payerEmail: String?,
+    val status: String?
 )

@@ -54,6 +54,28 @@ class AdoptanteService {
         return result ?: throw IllegalStateException("Error al guardar el adoptante en la base de datos.")
     }
 
+    suspend fun update(id: Int, request: AdoptanteRequest): AdoptanteFullResponse? {
+        val updated = dbQuery {
+            AdoptantesTable.update({ AdoptantesTable.id eq id }) { table ->
+                table[nombreCompleto] = request.nombreCompleto
+                table[telefono] = request.telefono
+                table[edad] = request.edad
+                table[ocupacion] = request.ocupacion
+                table[ingresoMensual] = request.ingresoMensual
+                table[horasDeTrabajo] = request.horasDeTrabajo
+                table[tienePatio] = request.tienePatio
+                table[ninosEnCasa] = request.ninosEnCasa
+                table[tipoVivienda] = request.tipoVivienda
+                table[convivientes] = request.convivientes
+                table[mascotasAnteriores] = request.mascotasAnteriores
+                table[aunConservaMascotas] = request.aunConservaMascotas
+                table[responsabilidadesMascota] = request.responsabilidadesMascota
+                table[opinionEsterilizacion] = request.opinionEsterilizacion
+            }
+        }
+        return if (updated > 0) findById(id) else null
+    }
+
 
     suspend fun findById(id: Int): AdoptanteFullResponse? {
         return dbQuery {
