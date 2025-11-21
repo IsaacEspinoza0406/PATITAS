@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-forms',
@@ -71,10 +72,10 @@ export class FormsComponent {
     this.step = 1;
   }
 
-      error: (error) => {
-        console.error('Error al enviar la solicitud:', error);
-        alert('Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.');
-      }
-    });
-  }
+    //  /*error: (error) => {
+     //   console.error('Error al enviar la solicitud:', error);
+       // alert('Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.');
+      //}
+   // });
+  //}
   }
