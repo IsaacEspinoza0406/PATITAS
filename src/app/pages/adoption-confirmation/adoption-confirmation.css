@@ -1,9 +1,14 @@
+:host{
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 .confirmation-container {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+  background: linear-gradient( #F5F2BF);
   padding: 20px;
 }
 
@@ -133,43 +138,25 @@
   margin-top: 30px;
 }
 
-.btn-primary,
+
 .btn-secondary {
   border: none;
   padding: 15px 30px;
   font-size: 16px;
   font-weight: 600;
-  border-radius: 30px;
+  border-radius: 10px;
   cursor: pointer;
-  transition: all 0.3s ease;
   flex: 1;
   max-width: 200px;
 }
 
-.btn-primary {
-  background: linear-gradient(135deg, #74b9ff, #0984e3);
-  color: white;
-  box-shadow: 0 4px 15px rgba(9, 132, 227, 0.3);
-}
-
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(9, 132, 227, 0.4);
-}
 
 .btn-secondary {
-  background: white;
-  color: #0984e3;
-  border: 2px solid #0984e3;
+  background: rgb(16, 16, 16);
+  color: #ffffff;
+  border: none;
 }
 
-.btn-secondary:hover {
-  background: #0984e3;
-  color: white;
-  transform: translateY(-2px);
-}
-
-.btn-primary:active,
 .btn-secondary:active {
   transform: translateY(0);
 }
@@ -209,7 +196,7 @@
     gap: 10px;
   }
 
-  .btn-primary,
+  
   .btn-secondary {
     max-width: 100%;
   }
