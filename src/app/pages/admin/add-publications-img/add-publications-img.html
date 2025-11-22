@@ -5,7 +5,7 @@
       type="file" 
       id="fileInput" 
       accept="image/*" 
-      (change)="onImageSelected($event)"
+      (change)="onImgSelected($event)"
       style="display: none;">
     
     <div *ngIf="!imagenUrl" class="placeholder">
@@ -98,42 +98,60 @@
       </div>
     </div>
 
-    
     <div class="form-group">
       <label>Vacunas Aplicadas</label>
       <div class="checkbox-grid">
         <label class="checkbox-label">
           <input 
             type="checkbox" 
-            [(ngModel)]="vacunas.vacuna1" 
+            [(ngModel)]="vacunas['vacuna1']" 
             name="vacuna1">
-          <span class="checkbox-text"></span>
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna1']"
+            name="vacuna1Text"
+            placeholder="">
         </label>
         <label class="checkbox-label">
           <input 
             type="checkbox" 
-            [(ngModel)]="vacunas.vacuna2" 
+            [(ngModel)]="vacunas['vacuna2']" 
             name="vacuna2">
-          <span class="checkbox-text"></span>
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna2']"
+            name="vacuna2Text"
+            placeholder="">
         </label>
         <label class="checkbox-label">
           <input 
             type="checkbox" 
-            [(ngModel)]="vacunas.vacuna3" 
+            [(ngModel)]="vacunas['vacuna3']" 
             name="vacuna3">
-          <span class="checkbox-text"></span>
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna3']"
+            name="vacuna3Text"
+            placeholder="">
         </label>
         <label class="checkbox-label">
           <input 
             type="checkbox" 
-            [(ngModel)]="vacunas.vacuna4" 
+            [(ngModel)]="vacunas['vacuna4']" 
             name="vacuna4">
-          <span class="checkbox-text"></span>
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna4']"
+            name="vacuna4Text"
+            placeholder="">
         </label>
       </div>
     </div>
-
- 
+    
     <button type="button" class="btn-publicar" (click)="publicar()">
       Publicar
     </button>

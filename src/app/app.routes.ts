@@ -37,6 +37,7 @@ export const routes: Routes = [
       { path: 'inicia-sesion', component: LoginComponent },
       {path: 'add-publications', component: AddPublications },
       {path: 'add-publications-img', component: AddPublicationsImg },
+     
       // Por defecto dentro de /admin redirige al catálogo
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]

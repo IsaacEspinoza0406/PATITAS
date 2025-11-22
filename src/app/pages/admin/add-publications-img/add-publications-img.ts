@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-add-publications-img',
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './add-publications-img.html',
-  styleUrl: './add-publications-img.css'
+  styleUrls: ['./add-publications-img.css']
 })
 
 export class AddPublicationsImg {
@@ -24,6 +26,13 @@ export class AddPublicationsImg {
     vacuna3: false,
     vacuna4: false
   }
+   
+  vacunasTexto: { [key: string]: string } = {
+    vacuna1: '',
+    vacuna2: '',
+    vacuna3: '',
+    vacuna4: ''
+  };
 
   onImgSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
@@ -54,7 +63,11 @@ export class AddPublicationsImg {
       vacunas: this.vacunas
     });
     }
-  }
+
+ 
+}
+
+ 
 
     
   
