@@ -13,6 +13,7 @@ import { CatalogComponent } from './pages/admin/catalog/catalog';
 import { LoginComponent } from './pages/admin/login/login';
 import { AdoptionRequestForm } from './pages/admin/adoption-request-form/adoption-request-form';  
 import { AddPublications } from './pages/admin/add-publications/add-publications';
+import { AddPublicationsImg } from './pages/admin/add-publications-img/add-publications-img';
 
 // Rutas de la aplicación.
 export const routes: Routes = [
@@ -35,7 +36,7 @@ export const routes: Routes = [
       { path: 'adoption-request', component: AdoptionRequestComponent },
       { path: 'inicia-sesion', component: LoginComponent },
       {path: 'add-publications', component: AddPublications },
-     
+      {path: 'add-publications-img', component: AddPublicationsImg },
       // Por defecto dentro de /admin redirige al catálogo
       { path: '', redirectTo: 'catalog', pathMatch: 'full' }
     ]
