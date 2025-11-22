@@ -15,7 +15,7 @@ export class AdoptionConfirmationComponent {
     this.router.navigate(['/inicio']);
   }
 
-  goToDogCatalog() {
-    this.router.navigate(['/dog-catalog']);
+  goToFormsComponent() {
+    this.router.navigate(['/forms']);
   }
 }
