@@ -4,12 +4,14 @@ import com.patitas_web.infrastructure.DatabaseFactory
 import com.patitas_web.infrastructure.tables.AdoptantesTable
 import com.patitas_web.infrastructure.tables.DogsTable
 import com.patitas_web.infrastructure.tables.DogPhotosTable
+import com.patitas_web.infrastructure.tables.DonationTable
 import com.patitas_web.infrastructure.tables.UsersTable
 import com.patitas_web.infrastructure.tables.RolesTable
 import com.patitas_web.presentation.configureAdoptanteRoutes
 import com.patitas_web.presentation.configureDogRoutes
 import com.patitas_web.presentation.configureDogPhotoRoutes
 import com.patitas_web.presentation.configureAuthRoutes
+import com.patitas_web.presentation.configureDonationRoutes
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
@@ -41,7 +43,7 @@ fun Application.module() {
     }
 
     transaction {
-        SchemaUtils.create(UsersTable, RolesTable, AdoptantesTable, DogsTable, DogPhotosTable)
+        SchemaUtils.create(UsersTable, RolesTable, AdoptantesTable, DogsTable, DogPhotosTable, DonationTable)
     }
 
     configureSerialization()
@@ -54,4 +56,5 @@ fun Application.module() {
     configureAdoptanteRoutes()
     configureDogRoutes()
     configureDogPhotoRoutes()
+    configureDonationRoutes()
 }
