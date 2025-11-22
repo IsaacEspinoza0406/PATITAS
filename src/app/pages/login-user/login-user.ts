@@ -13,7 +13,7 @@ import {CommonModule} from '@angular/common';
     FormsModule
   ],
   templateUrl: './login-user.html',
-  styleUrl: './login-user.css'
+  styleUrls: ['./login-user.css']
 })
 export class LoginUser {
 constructor() { }
