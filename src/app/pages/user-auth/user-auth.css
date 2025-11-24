@@ -1,0 +1,111 @@
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 90vh;
+  background-color: #f0f4f8; 
+  padding: 2rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+.auth-layout {
+  display: flex;
+  flex-direction: row;
+  background-color: #ffffff; 
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-width: 800px;
+  width: 100%;
+}
+
+.auth-image {
+  flex: 1;
+  background-color: #3b5998; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+.auth-image img {
+  max-width: 80%;
+  height: auto;
+}
+
+.auth-card {
+  flex: 1;
+  padding: 2rem;
+  color: #333; 
+}
+
+.form-wrapper h2 {
+  text-align: left;
+  margin-top: 0;
+  margin-bottom: 2rem;
+  font-weight: 600;
+  color: #000;
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #555;
+  text-transform: uppercase;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px 0;
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ccc; 
+  color: #333; 
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.2s ease;
+}
+.form-group input:focus {
+  outline: none;
+  border-bottom-color: #3b5998; 
+}
+
+.auth-button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 8px;
+  background-color: #111;
+  color: #ffffff; 
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1.5rem;
+  text-transform: uppercase;
+}
+.auth-button:hover {
+  background-color: #333;
+}
+.auth-button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.toggle-link {
+  text-align: center;
+  margin-top: 1.5rem;
+  font-size: 0.9rem;
+  color: #777;
+}
+.toggle-link a {
+  color: #3b5998; 
+  font-weight: bold;
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router'; 
 
 @Component({
   selector: 'app-auth-selection',
-  imports: [],
+  standalone: true,
+  imports: [RouterLink], 
   templateUrl: './auth-selection.html',
-  styleUrl: './auth-selection.css'
+  styleUrls: ['./auth-selection.css']
 })
-export class AuthSelection {
-
+export class AuthSelectionComponent {
 }

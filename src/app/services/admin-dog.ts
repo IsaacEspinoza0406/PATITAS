@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http'; 
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Photo {
@@ -26,29 +26,28 @@ export interface Dog {
 export class DogService {
 
   private http = inject(HttpClient);
-  private apiUrl = 'http://127.0.0.1:8080/dogs';
+  
+  private baseUrl = 'http://127.0.0.1:8080'; 
 
   constructor() {}
 
   getDogs(): Observable<Dog[]> {
-    return this.http.get<Dog[]>(this.apiUrl);
+    return this.http.get<Dog[]>(`${this.baseUrl}/dogs`);
   }
 
   getDogById(id: number): Observable<Dog> {
-    return this.http.get<Dog>(`${this.apiUrl}/${id}`);
+    return this.http.get<Dog>(`${this.baseUrl}/dogs/${id}`);
   }
 
-  addDog(dogData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(this.apiUrl, dogData, { headers });
+  addDog(dogData: any): Observable<Dog> {
+    return this.http.post<Dog>(`${this.baseUrl}/dogs`, dogData);
   }
 
   addPhoto(dogId: number, photoData: any): Observable<any> {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    return this.http.post(`${this.apiUrl}/${dogId}/photos`, photoData, { headers });
+    return this.http.post(`${this.baseUrl}/dogs/${dogId}/photos`, photoData);
   }
 
   deleteDog(id: number): Observable<any> {
-    return this.http.delete(`${this.apiUrl}/${id}`);
+    return this.http.delete(`${this.baseUrl}/dogs/${id}`);
   }
 }

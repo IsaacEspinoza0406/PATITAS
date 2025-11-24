@@ -1,11 +1,81 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms'; 
+import { RouterLink, Router } from '@angular/router'; 
+import { AuthService } from '../../services/auth';
 
 @Component({
   selector: 'app-user-auth',
-  imports: [],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink], 
   templateUrl: './user-auth.html',
-  styleUrl: './user-auth.css'
+  styleUrls: ['./user-auth.css']
 })
-export class UserAuth {
+export class UserAuthComponent {
+  
+  private authService = inject(AuthService); 
+  private router = inject(Router);
 
+  isRegisterMode = false;
+
+  loginData = {
+    email: '',
+    password: ''
+  };
+
+  registerData = {
+    userName: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  };
+
+  toggleMode() {
+    this.isRegisterMode = !this.isRegisterMode;
+  }
+
+  // Login.
+  onLogin() {
+    console.log('Enviando login...', this.loginData);
+    
+    this.authService.login(this.loginData).subscribe({
+      next: (response) => {
+        console.log('Login exitoso:', response);
+        alert('¡Bienvenido!');
+        this.router.navigate(['/inicio']);
+      },
+      error: (error) => {
+        console.error('Error login:', error);
+        alert('Credenciales incorrectas o error en el servidor.');
+      }
+    });
+  }
+
+  // Registro.
+  onRegister() {
+    if (this.registerData.password !== this.registerData.confirmPassword) {
+      alert('Las contraseñas no coinciden.');
+      return;
+    }
+
+    const newUser = {
+      username: this.registerData.userName,
+      email: this.registerData.email,
+      password: this.registerData.password
+    };
+
+    console.log('Enviando registro...', newUser);
+
+    this.authService.register(newUser).subscribe({
+      next: (response) => {
+        console.log('Registro exitoso:', response);
+        alert('¡Cuenta creada con éxito! Ahora inicia sesión.');
+        this.isRegisterMode = false; 
+      },
+      error: (error) => {
+        console.error('Error registro:', error);
+        alert('No se pudo crear la cuenta. Intenta con otro correo.');
+      }
+    });
+  }
 }

@@ -27,25 +27,12 @@ export class LoginComponent {
     confirmPassword: ''
   };
 
-  // Función para cambiar entre modo Login y Registro.
-  toggleMode() {
-    this.isRegisterMode = !this.isRegisterMode;
-  }
+  
 
   // Iniciar sesión.
   onLogin() {
     console.log('Intentando iniciar sesión con:', this.loginData);
     alert('¡Iniciando sesión!');
-  }
-
-  // Registrarse.
-  onRegister() {
-    console.log('Intentando registrar con:', this.registerData);
-    if (this.registerData.password !== this.registerData.confirmPassword) {
-      alert('Las contraseñas no coinciden.');
-      return;
-    }
-    alert('¡Registrado con éxito!');
   }
 }
 
