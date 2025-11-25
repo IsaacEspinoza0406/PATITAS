@@ -1,0 +1,169 @@
+{
+  "info": {
+    "name": "Patitas API",
+    "description": "Colección para probar endpoints principales de la API Patitas desplegada en EC2. Usa la variable baseUrl (ej: http://98.80.18.39:8080). Después de /api/auth/login coloca el token en la variable authToken si decides proteger futuros endpoints.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "version": {"major": 1, "minor": 0, "patch": 0}
+  },
+  "item": [
+    {
+      "name": "Health Root /",
+      "request": {"method": "GET","url": "{{baseUrl}}/"}
+    },
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test1@example.com\",\n  \"password\": \"123456\",\n  \"roleId\": 1\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/register"
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"test1@example.com\",\n  \"password\": \"123456\"\n}"
+        },
+        "url": "{{baseUrl}}/api/auth/login"
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Guarda token si response tiene campo token",
+              "var json = {}; try { json = pm.response.json(); } catch(e){}; if(json.token){ pm.environment.set('authToken', json.token); }"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Get User By ID",
+      "request": {"method": "GET","url": "{{baseUrl}}/api/auth/user/1"}
+    },
+    {
+      "name": "Dogs - List",
+      "request": {"method": "GET","url": "{{baseUrl}}/dogs"}
+    },
+    {
+      "name": "Dogs - Create",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Firulais\",\n  \"breed\": \"Mestizo\",\n  \"age\": 3,\n  \"description\": \"Perro amigable\"\n}"
+        },
+        "url": "{{baseUrl}}/dogs"
+      }
+    },
+    {
+      "name": "Dogs - Get By ID",
+      "request": {"method": "GET","url": "{{baseUrl}}/dogs/1"}
+    },
+    {
+      "name": "Dogs - Update",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"name\": \"Firulais Editado\",\n  \"breed\": \"Mestizo\",\n  \"age\": 4,\n  \"description\": \"Perro muy amigable\"\n}"},
+        "url": "{{baseUrl}}/dogs/1"
+      }
+    },
+    {
+      "name": "Dogs - Delete",
+      "request": {"method": "DELETE","url": "{{baseUrl}}/dogs/1"}
+    },
+    {
+      "name": "Adoptantes - List",
+      "request": {"method": "GET","url": "{{baseUrl}}/adoptantes"}
+    },
+    {
+      "name": "Adoptantes - Create",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"nombre\": \"Juan Perez\",\n  \"direccion\": \"Calle 123\",\n  \"telefono\": \"555-1234\"\n}"},
+        "url": "{{baseUrl}}/adoptantes"
+      }
+    },
+    {
+      "name": "Adoptantes - Get By ID",
+      "request": {"method": "GET","url": "{{baseUrl}}/adoptantes/1"}
+    },
+    {
+      "name": "Adoptantes - Update",
+      "request": {
+        "method": "PUT",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"nombre\": \"Juan Actualizado\",\n  \"direccion\": \"Calle 456\",\n  \"telefono\": \"555-5678\"\n}"},
+        "url": "{{baseUrl}}/adoptantes/1"
+      }
+    },
+    {
+      "name": "Adoptantes - Delete",
+      "request": {"method": "DELETE","url": "{{baseUrl}}/adoptantes/1"}
+    },
+    {
+      "name": "Dog Photos - List By Dog",
+      "request": {"method": "GET","url": "{{baseUrl}}/dogs/1/photos"}
+    },
+    {
+      "name": "Dog Photos - Add To Dog",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"url\": \"https://example.com/foto1.jpg\",\n  \"description\": \"Foto inicial\"\n}"},
+        "url": "{{baseUrl}}/dogs/1/photos"
+      }
+    },
+    {
+      "name": "Dog Photos - Get By Photo ID",
+      "request": {"method": "GET","url": "{{baseUrl}}/photos/1"}
+    },
+    {
+      "name": "Dog Photos - Delete Photo",
+      "request": {"method": "DELETE","url": "{{baseUrl}}/photos/1"}
+    },
+    {
+      "name": "Donations - Create",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"donorName\": \"Carlos\",\n  \"amount\": 100.5,\n  \"method\": \"CARD\"\n}"},
+        "url": "{{baseUrl}}/donations"
+      }
+    },
+    {
+      "name": "Adoptions - List",
+      "request": {"method": "GET","url": "{{baseUrl}}/adoptions"}
+    },
+    {
+      "name": "Adoptions - Create",
+      "request": {
+        "method": "POST",
+        "header": [{"key": "Content-Type", "value": "application/json"}],
+        "body": {"mode": "raw", "raw": "{\n  \"dogId\": 1,\n  \"adoptanteId\": 1\n}"},
+        "url": "{{baseUrl}}/adoptions"
+      }
+    },
+    {
+      "name": "Adoptions - Delete",
+      "request": {"method": "DELETE","url": "{{baseUrl}}/adoptions/1"}
+    }
+  ],
+  "event": [],
+  "variable": [
+    {"key": "baseUrl", "value": "http://98.80.18.39:8080"},
+    {"key": "authToken", "value": ""}
+  ]
+}

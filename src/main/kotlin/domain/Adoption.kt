@@ -4,13 +4,13 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class AdoptionRequest(
-    val userId: Int,
+    val adoptanteId: Int,
     val dogId: Int
 )
 
 @Serializable
 data class AdoptionResponse(
     val id: Int,
-    val userId: Int,
+    val adoptanteId: Int,
     val dogId: Int
 )

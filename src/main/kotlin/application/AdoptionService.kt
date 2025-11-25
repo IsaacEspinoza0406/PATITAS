@@ -11,7 +11,7 @@ class AdoptionService {
 
     private fun toAdoptionResponse(row: ResultRow): AdoptionResponse = AdoptionResponse(
         id = row[AdoptionQuestionnairesTable.id],
-        userId = row[AdoptionQuestionnairesTable.userId],
+        adoptanteId = row[AdoptionQuestionnairesTable.adoptanteId],
         dogId = row[AdoptionQuestionnairesTable.dogId]
     )
 
@@ -22,7 +22,7 @@ class AdoptionService {
     suspend fun create(request: AdoptionRequest): AdoptionResponse {
         val result = dbQuery {
             val insertStatement = AdoptionQuestionnairesTable.insert {
-                it[userId] = request.userId
+                it[adoptanteId] = request.adoptanteId
                 it[dogId] = request.dogId
             }
             insertStatement.resultedValues?.singleOrNull()?.let(::toAdoptionResponse)

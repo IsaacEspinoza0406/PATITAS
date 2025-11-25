@@ -7,6 +7,8 @@ import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
+import io.ktor.http.content.*
+import java.io.File
 
 fun Application.configureDogPhotoRoutes() {
     val service = DogPhotoService()
@@ -38,6 +40,38 @@ fun Application.configureDogPhotoRoutes() {
                     call.respond(HttpStatusCode.Created, photo)
                 } catch (e: Exception) {
                     call.respond(HttpStatusCode.BadRequest, "Error en los datos: ${e.message}")
+                }
+            }
+
+            post("/upload-photo") {
+                val dogId = call.parameters["dogId"]?.toIntOrNull()
+                if (dogId == null) {
+                    call.respond(HttpStatusCode.BadRequest, "ID de perro inválido")
+                    return@post
+                }
+
+                var photoUrl = ""
+                var description = ""
+
+                val multipart = call.receiveMultipart()
+                multipart.forEachPart { part ->
+                    if (part is PartData.FileItem) {
+                        val fileName = "${System.currentTimeMillis()}_${part.originalFileName as String}"
+                        val fileBytes = part.streamProvider().readBytes()
+                        val file = File("uploads/$fileName")
+                        if (!file.parentFile.exists()) file.parentFile.mkdirs()
+                        file.writeBytes(fileBytes)
+                        photoUrl = "http://localhost:8080/uploads/$fileName"
+                    }
+                    part.dispose()
+                }
+
+                if (photoUrl.isNotEmpty()) {
+                    val request = DogPhotoRequest(photoUrl, description)
+                    val photo = service.create(dogId, request)
+                    call.respond(HttpStatusCode.Created, photo)
+                } else {
+                    call.respond(HttpStatusCode.BadRequest, "No se subió ninguna imagen")
                 }
             }
         }

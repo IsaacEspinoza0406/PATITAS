@@ -1,0 +1,184 @@
+<div class="donation-container">
+
+ <!--Vista 1, tipo landing.-->
+  <div *ngIf="step === 'landing'" class="landing-view">
+    <section class="hero-section">
+      <div class="hero-content">
+        <h1>¡TU APOYO ES DE GRAN AYUDA!</h1>
+        <p>En Patitas Desamparadas estamos dedicados a darle el mejor cuidado a los perritos. Un pequeño gesto tuyo, es una gran diferencia para ellos.</p>
+        <div class="hero-buttons">
+          <a href="#form-card" class="btn-hero-donate">Donar</a>
+          <button type="button" class="btn-hero-read">Leer más</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="invite-section">
+      <div class="invite-text">
+        <h1>Tu generosidad permite que más vidas sean salvadas y transformadas con dignidad.</h1>
+        <p>Con tu aportación nos dedicamos a proporcionarles a los perritos una buena calidad de estancia.</p>
+        <div class="icon-text">
+          <img src="assets/img/logo.png" alt="Icono" class="inline-icon">
+          <p>Recursos como el alimento y medicación son esenciales para su cuidado, se podrán salvar vidas para ir a su nuevo hogar.</p>
+        </div>
+      </div>
+      <div class="invite-image">
+        <img src="../../../assets/img/perritosFeli.jpg" alt="Perritos esperando donación">
+      </div>
+    </section>
+    <section class="amount-section" id="form-card">
+      
+      <form class="donation-form-card" (ngSubmit)="goToPayment()" #amountForm="ngForm">
+        <h2>¡Dona ahora y haz un cambio!</h2>
+        
+        <label for="customAmount">Cantidad a donar:</label>
+        <input 
+          type="number" 
+          id="customAmount"
+          name="customAmount"
+          placeholder="Ingresa una cantidad"
+          [(ngModel)]="donationAmount"
+          min="1"
+          required>
+        
+        <div class="preset-buttons">
+          <button type="button" (click)="setPresetAmount(5)" [class.active]="donationAmount === 5">$5</button>
+          <button type="button" (click)="setPresetAmount(10)" [class.active]="donationAmount === 10">$10</button>
+          <button type="button" (click)="setPresetAmount(20)" [class.active]="donationAmount === 20">$20</button>
+          <button type="button" (click)="setPresetAmount(50)" [class.active]="donationAmount === 50">$50</button>
+        </div>
+        
+        <p class="payment-method">Método de pago: <br>PayPal</p>
+        
+        <button type="submit" class="btn-primary" [disabled]="!amountForm.valid || !donationAmount || donationAmount <= 0">
+          Siguiente
+        </button>
+      </form>
+    </section>
+  </div>
+
+  
+  <!-- Aquí empieza la vista 2, procesar el pago, por paypal.-->
+  <div *ngIf="step === 'payment'" class="payment-view">
+    <form class="payment-card" (ngSubmit)="simulatePayment()" #paymentForm="ngForm">
+      
+      <div *ngIf="isProcessing" class="loading-overlay">
+        <div class="spinner"></div>
+        <p>Procesando tu donación de <strong>${{donationAmount}}</strong>...</p>
+      </div>
+
+      <fieldset [disabled]="isProcessing">
+        
+        <label for="cardNumber">Número de tarjeta</label>
+        <input 
+          type="text" 
+          id="cardNumber"
+          name="cardNumber"
+          placeholder="1234 1234 1234 1234"
+          [(ngModel)]="paymentData.cardNumber"
+          required
+          pattern="[0-9]{16}"
+          maxlength="16"
+          #cardNumber="ngModel">
+        <div *ngIf="cardNumber.invalid && (cardNumber.dirty || cardNumber.touched)" class="error-message">
+          <span *ngIf="cardNumber.errors?.['required']">Nro. de tarjeta es requerido.</span>
+          <span *ngIf="cardNumber.errors?.['pattern']">Debe ser un número de 16 dígitos.</span>
+        </div>
+
+        <label for="cardName">Nombre del titular de la tarjeta</label>
+        <input 
+          type="text" 
+          id="cardName"
+          name="cardName"
+          placeholder="Ingrese su nombre"
+          [(ngModel)]="paymentData.cardName"
+          required
+          #cardName="ngModel">
+        <div *ngIf="cardName.invalid && (cardName.dirty || cardName.touched)" class="error-message">
+          <span>Nombre es requerido.</span>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="cvv">CVV</label>
+            <input 
+              type="text" 
+              id="cvv"
+              name="cvv"
+              placeholder="MM / AA" 
+              [(ngModel)]="paymentData.cvv"
+              required
+              pattern="[0-9]{3,4}"
+              maxlength="4"
+              #cvv="ngModel">
+              <div *ngIf="cvv.invalid && (cvv.dirty || cvv.touched)" class="error-message">
+                <span *ngIf="cvv.errors?.['required']">CVV requerido.</span>
+                <span *ngIf="cvv.errors?.['pattern']">Debe ser de 3 o 4 dígitos.</span>
+              </div>
+          </div>
+          <div class="form-group">
+            <label for="expiry">Fecha de expiración</label>
+            <input 
+              type="text" 
+              id="expiry"
+              name="expiry"
+              placeholder="1234" 
+              [(ngModel)]="paymentData.expiry"
+              required
+              pattern="(0[1-9]|1[0-2])\/[0-9]{2}"
+              #expiry="ngModel">
+            <div *ngIf="expiry.invalid && (expiry.dirty || expiry.touched)" class="error-message">
+              
+              <span>Fecha requerida (ej. 12/28).</span>
+            </div>
+          </div>
+        </div>
+
+        <label for="email">Email</label>
+        <input 
+          type="email" 
+          id="email"
+          name="email"
+          placeholder="abcde@hotmail.com"
+          [(ngModel)]="paymentData.email"
+          required
+          email
+          #email="ngModel">
+        <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error-message">
+          <span>Email inválido.</span>
+        </div>
+
+        <label>Método de pago</label>
+        <div class="paypal-info">
+          <span>Donativo asegurado mediante PayPal</span>
+          <img src="https://www.paypalobjects.com/webstatic/mktg/Logo/pp-logo-100px.png" alt="PayPal" height="20">
+        </div>
+        
+        <div class="buttons-container">
+          <button type="button" class="btn-secondary" (click)="goToStart()">Cancelar</button>
+          <button type="submit" class="btn-primary" [disabled]="!paymentForm.valid || isProcessing">
+            Siguiente
+          </button>
+        </div>
+      </fieldset>
+    </form>
+  </div>
+
+    <!-- Aquí empieza la vista 3, que es la de agradecimiento. -->
+
+  <div *ngIf="step === 'thanks'" class="thanks-view">
+    <div class="thanks-card">
+      <img src="../../../assets/img/perritoAgrade.png" alt="Perrito Feliz" class="thanks-dog-img">
+      <h1>¡Muchas gracias!</h1>
+      <p>
+        En Patitas Desamparadas nos sentimos profundamente
+        agradecidos por tu apoyo, gestos sinceros como el tuyo
+        nos siguen impulsando a darle el mejor cuidado a los perritos.
+      </p>
+      <button type="button" class="btn-primary" (click)="goToStart()">
+        Volver al inicio
+      </button>
+    </div>
+  </div>
+</div>
+

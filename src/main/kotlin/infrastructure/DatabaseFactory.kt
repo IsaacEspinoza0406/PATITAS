@@ -8,31 +8,39 @@ object DatabaseFactory {
     fun init() {
         val driverClassName = "org.postgresql.Driver"
 
+        // Prioritize AWS/Env vars, fallback to local defaults
         val dbHost = System.getenv("DB_HOST") ?: "localhost"
         val dbPort = System.getenv("DB_PORT") ?: "5432"
         val dbName = System.getenv("DB_NAME") ?: "perritos_web"
-        val jdbcUrl = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
         val user = System.getenv("DB_USER") ?: "postgres"
         val password = System.getenv("DB_PASSWORD") ?: "emico3110"
 
-        println("Conectando a: $jdbcUrl con usuario: $user")
+        // Construct JDBC URL
+        val jdbcUrl = "jdbc:postgresql://$dbHost:$dbPort/$dbName"
+
+        println("Intentando conectar a la base de datos...")
+        println("URL: jdbc:postgresql://$dbHost:$dbPort/****")
+        println("Usuario: $user")
 
         try {
-            if (System.getenv("DATABASE_URL") != null) {
+            // Check for full DATABASE_URL (common in some PaaS)
+            if (!System.getenv("DATABASE_URL").isNullOrBlank()) {
                 val dbUrlFromEnv = System.getenv("DATABASE_URL")
                 val jdbcUrlFromEnv = dbUrlFromEnv.replaceFirst("postgres://", "jdbc:postgresql://")
                     .replaceFirst("postgresql://", "jdbc:postgresql://")
-                println("Conectando usando DATABASE_URL...")
-                Database.connect(jdbcUrlFromEnv)
+                println("Usando DATABASE_URL de entorno.")
+                Database.connect(jdbcUrlFromEnv, driver = driverClassName)
             } else {
-                println("Conectando usando variables separadas...")
+                println("Usando configuración estándar (Host/Port).")
                 Database.connect(jdbcUrl, driverClassName, user, password)
             }
-            println("Conexión a BD configurada.")
+            println("✅ Conexión a BD establecida exitosamente.")
         } catch (e: Exception) {
-            println("ERROR AL CONECTAR A LA BD: ${e.message}")
+            println("❌ CRITICAL ERROR: Falló la conexión a la base de datos.")
+            println("Detalles: ${e.message}")
             e.printStackTrace()
-            throw e
+            // Optional: Rethrow if you want the app to crash on start failure (recommended for production)
+            // throw e 
         }
     }
 

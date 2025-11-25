@@ -1,0 +1,78 @@
+<div class="add-dog-container">
+  <form (ngSubmit)="onSubmit()" #dogForm="ngForm" class="dog-form">
+    
+    <div class="image-upload-area" (click)="fileInput.click()">
+      <input 
+        #fileInput 
+        type="file" 
+        (change)="onFileSelected($event)" 
+        style="display: none" 
+        accept="image/*">
+      
+      <div *ngIf="!imagePreview" class="upload-placeholder">
+        <p>Haz clic o arrastra una imagen aquí.</p>
+        <button type="button" class="btn-upload">Subir imagen</button>
+      </div>
+
+      <img *ngIf="imagePreview" [src]="imagePreview" class="image-preview">
+    </div>
+
+    <div class="form-group">
+      <label>Nombre</label>
+      <input type="text" name="name" [(ngModel)]="newDog.name" required>
+    </div>
+
+    <div class="form-group">
+      <label>Edad</label>
+      <input type="number" name="age" [(ngModel)]="newDog.age" required>
+    </div>
+
+    <div class="form-group">
+      <label>Raza</label>
+      <input type="text" name="breed" [(ngModel)]="newDog.breed" required>
+    </div>
+
+    <div class="form-group">
+      <label>Historia</label>
+      <textarea name="history" [(ngModel)]="newDog.history" rows="4" required></textarea>
+    </div>
+
+    <div class="row-group">
+      
+      <div class="checkbox-group">
+        <label>Esterilización</label>
+        <div class="checks">
+          <label>
+            <input type="radio" name="sterilized" [(ngModel)]="newDog.sterilized" [value]="true"> Sí
+          </label>
+          <label>
+            <input type="radio" name="sterilized" [(ngModel)]="newDog.sterilized" [value]="false"> No
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group health-group">
+        <label>Salud:</label>
+        <input type="text" name="health" [(ngModel)]="newDog.health">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Vacunas Aplicadas</label>
+      <div class="vaccines-checks">
+        <label>
+          <input type="checkbox" name="vac_rabies" [(ngModel)]="newDog.vaccinated.rabies"> Rabia
+        </label>
+        <label>
+          <input type="checkbox" name="vac_distemper" [(ngModel)]="newDog.vaccinated.distemper"> Moquillo
+        </label>
+        <label>
+          <input type="checkbox" name="vac_parvo" [(ngModel)]="newDog.vaccinated.parvo"> Parvovirus
+        </label>
+      </div>
+    </div>
+
+    <button type="submit" class="btn-publish" [disabled]="!dogForm.valid">Publicar</button>
+
+  </form>
+</div>

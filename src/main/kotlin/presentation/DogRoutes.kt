@@ -32,9 +32,18 @@ fun Application.configureDogRoutes() {
             }
 
             post {
-                val request = call.receive<DogRequest>()
-                val dog = service.create(request)
-                call.respond(HttpStatusCode.Created, dog)
+                println("--- POST /dogs REQUEST RECEIVED ---")
+                try {
+                    val request = call.receive<DogRequest>()
+                    println("Payload received: $request")
+                    val dog = service.create(request)
+                    println("Dog created: $dog")
+                    call.respond(HttpStatusCode.Created, dog)
+                } catch (e: Exception) {
+                    println("ERROR in POST /dogs: ${e.message}")
+                    e.printStackTrace()
+                    throw e
+                }
             }
 
             put("/{id}") {
