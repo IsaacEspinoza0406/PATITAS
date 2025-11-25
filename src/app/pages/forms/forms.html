@@ -1,0 +1,141 @@
+<div class="form-container">
+ 
+
+  <div class="steps">
+    <div class="step" [class.active]="step === 1">1</div>
+    <div class="step" [class.active]="step === 2">2</div>
+    <div class="step" [class.active]="step === 3">3</div>
+  </div>
+
+  <!-- CONTENEDOR 1. -->
+  <form *ngIf="step === 1" (ngSubmit)="nextStep()" #form1="ngForm">
+   <h2>Información General del Adoptante</h2>
+    <label>¿Cuál es su nombre?</label>
+    <input type="text" name="nombre" [(ngModel)]="formData.nombre" required #nombre="ngModel">
+    <div *ngIf="nombre.invalid && (nombre.dirty || nombre.touched)" class="error-message">
+      <span *ngIf="nombre.errors?.['required']">
+        Este campo es obligatorio.
+      </span>
+    </div>
+
+    <label>¿Cuál es su número telefónico?</label>
+    <input type="tel" name="telefono" [(ngModel)]="formData.telefono" required #telefono="ngModel" pattern="[0-9]{10}">
+    <div *ngIf="telefono.invalid && (telefono.dirty || telefono.touched)" class="error-message">
+      <span *ngIf="telefono.errors?.['required']">El teléfono es obligatorio.</span>
+      <span *ngIf="telefono.errors?.['pattern']">Debe ser un número de 10 dígitos (sin espacios).</span>
+    </div>
+
+    <label>¿Cuántos años tiene?</label>
+    <input type="number" name="edad" [(ngModel)]="formData.edad" required #edad="ngModel" min="18">
+    <div *ngIf="edad.invalid && (edad.dirty || edad.touched)" class="error-message">
+      <span *ngIf="edad.errors?.['required']">La edad es obligatoria.</span>
+      <span *ngIf="edad.errors?.['min']">Debes ser mayor de 18 años para adoptar.</span>
+    </div>
+
+    <label>¿A qué se dedica?</label>
+    <input type="text" name="ocupacion" [(ngModel)]="formData.ocupacion" required #ocupacion="ngModel">
+    <div *ngIf="ocupacion.invalid && (ocupacion.dirty || ocupacion.touched)" class="error-message">
+      <span *ngIf="ocupacion.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>Aproximadamente, ¿cuánto gana mensualmente?</label>
+    <input type="number" name="ingreso" [(ngModel)]="formData.ingreso" required #ingreso="ngModel" min="1">
+    <div *ngIf="ingreso.invalid && (ingreso.dirty || ingreso.touched)" class="error-message">
+      <span *ngIf="ingreso.errors?.['required']">Este campo es obligatorio.</span>
+      <span *ngIf="ingreso.errors?.['min']">El ingreso debe ser mayor a 0.</span>
+    </div>
+
+    <label>¿Cuántas horas trabaja en el día?</label>
+    <input type="number" name="horas" [(ngModel)]="formData.horas" required #horas="ngModel" min="1" max="24">
+    <div *ngIf="horas.invalid && (horas.dirty || horas.touched)" class="error-message">
+      <span *ngIf="horas.errors?.['required']">Este campo es obligatorio.</span>
+      <span *ngIf="horas.errors?.['min'] || horas.errors?.['max']">Debe ser un valor entre 1 y 24.</span>
+    </div>
+
+    <div class="buttons-container">
+      <button type="submit" class="button-enviar" [disabled]="!form1.valid">Siguiente</button>
+    </div>
+  </form>
+
+  <!-- CONTENEDOR 2.-->
+  <form *ngIf="step === 2" (ngSubmit)="nextStep()" #form2="ngForm">
+    <h2>Condiciones del hogar.</h2>
+
+    <label>¿Su casa tiene patio, terraza o jardín?</label>
+    <input type="text" name="espacio" [(ngModel)]="formData.espacio" required #espacio="ngModel">
+    <div *ngIf="espacio.invalid && (espacio.dirty || espacio.touched)" class="error-message">
+      <span *ngIf="espacio.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>¿Hay niños en el hogar?</label>
+    <input type="text" name="habitantes" [(ngModel)]="formData.habitantes" required #habitantes="ngModel">
+    <div *ngIf="habitantes.invalid && (habitantes.dirty || habitantes.touched)" class="error-message">
+      <span *ngIf="habitantes.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>Si lo es, ¿de qué edades?</label>
+    <input type="text" name="edades" [(ngModel)]="formData.edades" required #edades="ngModel">
+    <div *ngIf="edades.invalid && (edades.dirty || edades.touched)" class="error-message">
+      <span *ngIf="edades.errors?.['required']">Este campo es obligatorio.</span>
+
+    </div>
+
+    <label>¿Vive en casa propia o rentada?</label>
+    <input type="text" name="vivienda" [(ngModel)]="formData.vivienda" required #vivienda="ngModel">
+    <div *ngIf="vivienda.invalid && (vivienda.dirty || vivienda.touched)" class="error-message">
+      <span *ngIf="vivienda.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>¿Cuántas personas viven con usted?</label>
+    <input type="number" name="personas" [(ngModel)]="formData.personas" required #personas="ngModel" min="1">
+    <div *ngIf="personas.invalid && (personas.dirty || personas.touched)" class="error-message">
+      <span *ngIf="personas.errors?.['required']">Este campo es obligatorio.</span>
+      <span *ngIf="personas.errors?.['min']">Debe vivir al menos 1 persona.</span>
+    </div>
+
+    <div class="buttons-container">
+      <button type="button" class="button-atras" (click)="prevStep()">Atrás</button>
+      <button type="submit" class="button-enviar" [disabled]="!form2.valid">Siguiente</button>
+    </div>
+  </form>
+
+  <!-- CONTENEDOR 3. -->
+  <form *ngIf="step === 3" (ngSubmit)="onSubmit()" #form3="ngForm">
+    <h2>Responsabilidad con el animal</h2>
+
+    <label>¿Qúe tipo de mascotas ha tenido?</label>
+    <input type="text" name="mascotas" [(ngModel)]="formData.mascotas" required #mascotas="ngModel">
+    <div *ngIf="mascotas.invalid && (mascotas.dirty || mascotas.touched)" class="error-message">
+      <span *ngIf="mascotas.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>¿Ha tenido alguna mascota?</label>
+    <input type="text" name="cuidado" [(ngModel)]="formData.cuidado" required #cuidado="ngModel">
+    <div *ngIf="cuidado.invalid && (cuidado.dirty || cuidado.touched)" class="error-message">
+      <span *ngIf="cuidado.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>Si su respuesta es sí, ¿sigue cuidando de ella?</label>
+    <input type="text" name="sigueCuidando" [(ngModel)]="formData.sigueCuidando" required #sigueCuidando="ngModel">
+    <div *ngIf="sigueCuidando.invalid && (sigueCuidando.dirty || sigueCuidando.touched)" class="error-message">
+      <span *ngIf="sigueCuidando.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>De sus propias palabras,¿cuáles son las responsabilidades que se deben tener para cuidar de una mascota?</label>
+    <input type="text" name="responsabilidades" [(ngModel)]="formData.responsabilidades" required #responsabilidades="ngModel">
+    <div *ngIf="responsabilidades.invalid && (responsabilidades.dirty || responsabilidades.touched)" class="error-message">
+      <span *ngIf="responsabilidades.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+
+    <label>¿Qúe opina acerca de esterilización canina?</label>
+    <input type="text" name="esterilizacion" [(ngModel)]="formData.esterilizacion" required #esterilizacion="ngModel">
+    <div *ngIf="esterilizacion.invalid && (esterilizacion.dirty || esterilizacion.touched)" class="error-message">
+      <span *ngIf="esterilizacion.errors?.['required']">Este campo es obligatorio.</span>
+    </div>
+  
+    <div class="buttons-container">
+      <button type="button" class="button-atras" (click)="prevStep()">Atrás</button>
+      <button type="submit" class="button-enviar" [disabled]="!form3.valid">Enviar</button>
+    </div>
+  </form>
+</div>

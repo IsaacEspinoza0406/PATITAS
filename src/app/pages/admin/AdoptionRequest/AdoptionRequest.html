@@ -1,0 +1,52 @@
+<div class="dashboard-layout">
+
+  <aside class="sidebar">
+    <div class="sidebar__menu-icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="sidebar__profile">
+      <div class="profile-icon">
+      </div>
+    </div>
+
+    <nav class="sidebar__nav">
+      <ul>
+        <li class="active"><a href="#">Solicitudes de Adopción</a></li>
+        <li><a href="#">Catálogo</a></li>
+        <li><a href="#">Publicaciones</a></li>
+      </ul>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+
+    <header class="main-header">
+      <h1>Solicitudes de adopción</h1>
+    </header>
+
+    <section class="card-grid">
+
+      <article class="card" *ngFor="let request of requests">
+
+        <h3 class="card__title">{{ request.name }}</h3>
+
+        <div class="card__actions">
+          <button class="btn btn--view" (click)="viewRequest(request.id)">
+            Ver
+          </button>
+          <button class="btn btn--delete" (click)="deleteRequest(request.id)">
+            Eliminar
+          </button>
+        </div>
+      </article>
+
+      <div *ngIf="requests.length === 0">
+        <p>No hay solicitudes de adopción pendientes.</p>
+      </div>
+
+    </section>
+  </main>
+</div>
