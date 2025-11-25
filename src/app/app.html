@@ -1,6 +1,6 @@
-<header class="main-header">
+<header class="main-header" *ngIf="showNavbar">
   <div class="header-content">
-    
+
     <div class="logo-container">
       <a routerLink="/">
         <img src="assets/img/logo.png" alt="Patitas Desamparadas Logo" class="logo-img">
@@ -25,4 +25,3 @@
   <router-outlet></router-outlet>
 
 </main>
-

@@ -289,3 +289,92 @@ justify-content: center;
     grid-template-columns: 1fr;
   }
 }
+
+/* Estilos para el botón de Login Flotante */
+.home-login-container {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    z-index: 100;
+}
+
+.btn-login-floating {
+    background-color: rgba(255, 255, 255, 0.95);
+    color: #880e4f;
+    padding: 10px 25px;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    display: inline-block;
+}
+
+.btn-login-floating:hover {
+    background-color: #880e4f;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(136, 14, 79, 0.2);
+}
+
+.user-welcome-floating {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 8px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.user-welcome-floating span {
+    color: #880e4f;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+.btn-logout-floating {
+    background: transparent;
+    border: 1px solid #880e4f;
+    color: #880e4f;
+    padding: 5px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.2s;
+}
+
+.btn-logout-floating:hover {
+    background: #880e4f;
+    color: white;
+}
+
+.no-dogs-message {
+    text-align: center;
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+
+.btn-donate-now {
+    background-color: white;
+    color: #880e4f;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: bold;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.btn-donate-now:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
