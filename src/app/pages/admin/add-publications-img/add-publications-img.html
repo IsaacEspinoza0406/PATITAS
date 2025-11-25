@@ -1,0 +1,159 @@
+<div class="form-container">
+
+  <div class="image-upload-area" (click)="triggerFileInput()">
+    <input 
+      type="file" 
+      id="fileInput" 
+      accept="image/*" 
+      (change)="onImgSelected($event)"
+      style="display: none;">
+    
+    <div *ngIf="!imagenUrl" class="placeholder">
+       <img src="assets/img/galeria.png" alt="Icono" class="icon">
+      <p>Haz clic o arrastra una imagen aquí.</p>
+      <button type="button" class="upload-btn">Subir imagen</button>
+    </div>
+    
+    <img *ngIf="imagenUrl" [src]="imagenUrl" alt="Preview" class="preview-image">
+  </div>
+
+  
+  <form>
+  
+    <div class="form-group">
+      <label for="nombre">Nombre</label>
+      <input 
+        type="text" 
+        id="nombre" 
+        [(ngModel)]="nombre" 
+        name="nombre"
+        class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+      <label for="edad">Edad</label>
+      <input 
+        type="text" 
+        id="edad" 
+        [(ngModel)]="edad" 
+        name="edad"
+        class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+      <label for="raza">Raza</label>
+      <input 
+        type="text" 
+        id="raza" 
+        [(ngModel)]="raza" 
+        name="raza"
+        class="form-control">
+    </div>
+
+    
+    <div class="form-group">
+      <label for="historia">Historia</label>
+      <input 
+        type="text" 
+        id="historia" 
+        [(ngModel)]="historia" 
+        name="historia"
+        class="form-control">
+    </div>
+
+   
+    <div class="form-row">
+      <div class="form-group-inline">
+        <label>Esterilización</label>
+        <div class="radio-group">
+          <label class="radio-label">
+            <input 
+              type="radio" 
+              name="esterilizacion" 
+              value="si" 
+              [(ngModel)]="esterilizacion">
+            <span>Sí</span>
+          </label>
+          <label class="radio-label">
+            <input 
+              type="radio" 
+              name="esterilizacion" 
+              value="no" 
+              [(ngModel)]="esterilizacion">
+            <span>No</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group-inline salud">
+        <label for="salud">Salud:</label>
+        <input 
+          type="text" 
+          id="salud" 
+          [(ngModel)]="salud" 
+          name="salud"
+          class="form-control">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Vacunas Aplicadas</label>
+      <div class="checkbox-grid">
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="vacunas['vacuna1']" 
+            name="vacuna1">
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna1']"
+            name="vacuna1Text"
+            placeholder="">
+        </label>
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="vacunas['vacuna2']" 
+            name="vacuna2">
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna2']"
+            name="vacuna2Text"
+            placeholder="">
+        </label>
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="vacunas['vacuna3']" 
+            name="vacuna3">
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna3']"
+            name="vacuna3Text"
+            placeholder="">
+        </label>
+        <label class="checkbox-label">
+          <input 
+            type="checkbox" 
+            [(ngModel)]="vacunas['vacuna4']" 
+            name="vacuna4">
+          <input 
+            type="text" 
+            class="vacuna-input" 
+            [(ngModel)]="vacunasTexto['vacuna4']"
+            name="vacuna4Text"
+            placeholder="">
+        </label>
+      </div>
+    </div>
+    
+    <button type="button" class="btn-publicar" (click)="publicar()">
+      Publicar
+    </button>
+  </form>
+</div>

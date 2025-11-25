@@ -1,0 +1,114 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+.contenedor-registro {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+}
+
+
+.seccion-marca {
+  flex: 1;
+  background-color: #58879A; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.logo-marca {
+  width: 55%;
+  max-width: 380px;
+}
+
+
+.seccion-formulario {
+  flex: 1;
+  padding: 60px 80px;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.seccion-formulario h1 {
+  font-size: 28px;
+  letter-spacing: 6px;
+  font-weight: 700;
+  color: #000;
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.seccion-formulario form {
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.grupo-form {
+  margin-bottom: 35px;
+  display: flex;
+  flex-direction: column;
+}
+
+.grupo-form label {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.grupo-form input {
+  border: none;
+  border-bottom: 1px solid #717171;
+  padding: 8px 4px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.grupo-form input:focus {
+  border-bottom: 2px solid #000;
+}
+
+
+.btn-submit {
+  width: 60%;
+  padding: 12px 0;
+  background-color: #000;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 15px;
+  margin: 20px auto 0 auto;
+}
+
+.btn-submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.enlace-secundario {
+  margin-top: 25px;
+  font-size: 15px;
+  color: #000;
+  text-align: center;
+}
+
+.enlace-secundario a {
+  color: #58879A;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.enlace-secundario a:hover {
+  text-decoration: underline;
+}

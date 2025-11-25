@@ -1,47 +1,52 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms'; 
+import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-forms',
-  standalone: true,
-  imports: [CommonModule, FormsModule], 
-  templateUrl: './forms.html',
-  styleUrls: ['./forms.css']
+  selector: 'app-forms',
+  standalone: true,
+  imports: [CommonModule, FormsModule], 
+  templateUrl: './forms.html',
+  styleUrls: ['./forms.css']
 })
 export class FormsComponent {
   step = 1;
 
-  // Cree este objeto para almacenar los datos del formulario.
-  public formData: any = {
-    // Campos del contenedor 1.
-    nombre: '',
-    telefono: '',
-    edad: null,
-    ocupacion: '',
-    ingreso: null,
-    horas: null,
+  private http = inject(HttpClient);
+  private apiUrl = 'http://127.0.0.1:8080/adoptantes';
 
-    // Campos del contenedor 2.
-    espacio: '',
-    habitantes: '',
-    vivienda: '',
-    personas: null,
+  public formData: any = {
+    // Campos del contenedor 1.
+    nombre: '',
+    telefono: '',
+    edad: null,
+    ocupacion: '',
+    ingreso: null,
+    horas: null,
 
-    // Campos del contenedor 3.
-    mascotas: '',
-    cuidado: '',
-    responsabilidades: '',
-    esterilizacion: ''
-  };
+    // Campos del contenedor 2.
+    espacio: '',
+    habitantes: '',
+    edades: '', 
+    vivienda: '',
+    personas: null,
 
-  nextStep() {
-    if (this.step < 3) this.step++;
-  }
+    // Campos del contenedor 3.
+    mascotas: '',
+    cuidado: '',
+    sigueCuidando: '', 
+    responsabilidades: '',
+    esterilizacion: ''
+  };
 
-  prevStep() {
-    if (this.step > 1) this.step--;
-  }
+  nextStep() {
+    if (this.step < 3) this.step++;
+  }
+
+  prevStep() {
+    if (this.step > 1) this.step--;
+  }
 
   onSubmit() {
     console.log('Datos del formulario:', this.formData);
@@ -67,4 +72,10 @@ export class FormsComponent {
     this.step = 1;
   }
 
-  }
+    //  /*error: (error) => {
+     //   console.error('Error al enviar la solicitud:', error);
+       // alert('Hubo un error al enviar tu solicitud. Por favor, inténtalo de nuevo.');
+      //}
+   // });
+  //}
+  }

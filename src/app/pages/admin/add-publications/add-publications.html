@@ -1,0 +1,36 @@
+<main class="dashboard-layout">
+
+  <aside class="sidebar">
+    <div class="user-section">
+      <img src="assets/img/login.png" class="user-avatar" alt="Usuario">
+    </div>
+
+    <nav class="menu">
+      <a routerLink="/adoption-requests" class="menu-item">Solicitudes de Adopción</a>
+      <a routerLink="/dog-catalog" class="menu-item">Catálogo</a>
+      <a routerLink="/publications" class="menu-item active">Publicaciones</a>
+    </nav>
+  </aside>
+
+
+  <section class="content-area">
+
+    <div class="image-upload-area">
+
+      <a 
+        class="add-image-link"
+        [routerLink]="['/admin/add-publications-img']"
+        aria-label="Agregar una nueva imagen para publicación">
+        <img src="assets/img/plus_admin.png" class="icon-image" alt="icono agregar">
+      </a>
+
+      <p class="description-text">
+        Agrega una imagen que transmita toda la ternura 🐾
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+

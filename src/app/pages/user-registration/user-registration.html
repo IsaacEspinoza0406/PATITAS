@@ -1,0 +1,58 @@
+<div class="contenedor-registro">
+  
+  <div class="seccion-marca">
+    
+    <img src="assets/img/logo.png" alt="Logo de Patitas Desamparadas" class="logo-marca">
+  </div>
+
+  <div class="seccion-formulario">
+    
+    <h1>REGÍSTRATE</h1>
+
+    <form (ngSubmit)="Registrarse(loginForm)" #loginForm="ngForm" novalidate>
+
+      <div class="grupo-form">
+        <label for="nombre">Nombre</label>
+        <input 
+          type="text" 
+          id="nombre" 
+          name="nombre"
+          ngModel
+          required
+          #nombre="ngModel"
+          placeholder="Escribe tu nombre completo"> </div>
+      <div class="grupo-form">
+        <label for="email">Correo electrónico</label>
+        <input 
+          type="email" 
+          id="email" 
+          name="email"
+          ngModel
+          required
+          email
+          #email="ngModel"
+          placeholder="ejemplo@dominio.com">
+      </div>
+      <div class="grupo-form">
+        <label for="password">Contraseña</label>
+        <input 
+          type="password" 
+          id="password" 
+          name="password"
+          ngModel
+          required
+          #password="ngModel"
+          minlength="8"  placeholder="Mínimo 8 caracteres">
+      </div>
+      <button type="submit" class="btn-submit" [disabled]="!loginForm.valid">
+        Registrarse
+      </button>
+
+      <p class="enlace-secundario">
+        ¿Ya tienes una cuenta? <a href="/login-user">Inicia sesión aquí</a>
+      </p>
+
+    </form>
+  </div>
+
+</div>

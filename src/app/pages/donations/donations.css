@@ -104,12 +104,13 @@ input.ng-invalid.ng-touched {
 .hero-buttons {
   display: flex;
   gap: 1rem;
+ 
 }
 
 .btn-hero-donate, .btn-hero-read {
   padding: 10px 24px;
   font-weight: bold;
-  border-radius: 20px; 
+  border-radius: 10px; 
   text-decoration: none;
   font-size: 0.9rem;
   cursor: pointer;
