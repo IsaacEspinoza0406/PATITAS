@@ -1,11 +1,26 @@
 <main>
   <section class="hero-home">
+    <!-- Botón de Iniciar Sesión / Usuario (Estilo adaptado) -->
+    <div class="home-login-container">
+      <ng-container *ngIf="!isLoggedIn; else userMenu">
+        <a routerLink="/inicia-sesion" class="btn-login-floating">
+          Iniciar Sesión
+        </a>
+      </ng-container>
+      <ng-template #userMenu>
+        <div class="user-welcome-floating">
+          <span>Hola, {{ userName }}</span>
+          <button (click)="logout()" class="btn-logout-floating">Salir</button>
+        </div>
+      </ng-template>
+    </div>
+
     <div class="container hero-content">
       <div class="hero-text">
         <h2>Dale un hogar a un amigo fiel</h2>
         <p>Conoce a perros listos para adoptar. Todos han sido vacunados, esterilizados y están llenos de amor.</p>
         <div class="hero-buttons">
-          <button class="btn btn adopt">Adoptar</button>
+          <button class="btn btn adopt" (click)="onAdopt()">Adoptar</button>
           <button class="btn btn donate" routerLink="/donations">Cómo ayudar</button>
         </div>
       </div>
@@ -21,38 +36,22 @@
         <span class="paw-icon">🐾</span>Perros Disponibles
       </h2>
       <div class="dogs-grid">
-        <div class="dog-card">
-          <img src="assets/img/perro1.jpg" alt="Nombre del perro" class="dog-image">
-          <h3>Canelo</h3>
+
+        <div class="dog-card" *ngFor="let dog of dogs">
+          <img [src]="dog.photos && dog.photos.length > 0 ? dog.photos[0].photoUrl : 'assets/img/perro1.jpg'"
+            [alt]="dog.name" class="dog-image">
+          <h3>{{ dog.name }}</h3>
           <div class="card-buttons">
-            <button class="btn btn-details">Adoptar</button>
-            <button class="btn btn-adopt">Detalles</button>
+            <button class="btn btn-details" (click)="onAdopt()">Adoptar</button>
+            <button class="btn btn-adopt" [routerLink]="['/dog-details', dog.id]">Detalles</button>
           </div>
         </div>
-        <div class="dog-card">
-          <img src="assets/img/perrito2.jpg" alt="Nombre del perro2" class="dog-image">
-          <h3>Chupitos</h3>
-          <div class="card-buttons">
-            <button class="btn btn-details">Adoptar</button>
-            <button class="btn btn-adopt">Detalles</button>
-          </div>
-        </div>
-        <div class="dog-card">
-          <img src="assets/img/perro3.jpg" alt="Nombre del perro3" class="dog-image">
-          <h3>Lobita</h3>
-          <div class="card-buttons">
-            <button class="btn btn-details">Adoptar</button>
-            <button class="btn btn-adopt">Detalles</button>
-          </div>
-        </div>
-        <div class="dog-card">
-          <img src="assets/img/perro4.jpg" alt="Nombre del perro4" class="dog-image">
-          <h3>Beba</h3>
-          <div class="card-buttons">
-            <button class="btn btn-details">Adoptar</button>
-            <button class="btn btn-adopt">Detalles</button>
-          </div>
-        </div>
+
+      </div>
+
+      <!-- Mensaje si no hay perros -->
+      <div *ngIf="dogs.length === 0" class="no-dogs-message">
+        <p>Cargando amiguitos...</p>
       </div>
     </div>
   </section>
@@ -93,25 +92,25 @@
             <span class="step-number">4</span>
             <div class="step-text">
               <h3>Sé paciente</h3>
-              <p>¡Y listo! Al recibir la aprobación del cuestionario, tendrás lista una vida llena de amor a tu perrito...</p>
+              <p>¡Y listo! Al recibir la aprobación del cuestionario, tendrás lista una vida llena de amor a tu
+                perrito...</p>
             </div>
           </div>
 
         </div>
         <div class="donate-card">
           <h3>¿Quieres Donar?</h3>
-          <p>Tu colaboración nos permite darles un mejor estilo de vida en el refugio. ¡Agradeceríamos mucho tu apoyo en esta causa!</p>
+          <p>Tu colaboración nos permite darles un mejor estilo de vida en el refugio. ¡Agradeceríamos mucho tu apoyo en
+            esta causa!</p>
         </div>
       </div>
     </div>
   </section>
 
-<footer class="footer">
-  <div class="container footer-content">
-    <p>&copy; 2025 Refugio Local - Todos los derechos reservados</p>
-  </div>
-</footer>
+  <footer class="footer">
+    <div class="container footer-content">
+      <p>&copy; 2025 Refugio Local - Todos los derechos reservados</p>
+    </div>
+  </footer>
 
 </main>
-
-

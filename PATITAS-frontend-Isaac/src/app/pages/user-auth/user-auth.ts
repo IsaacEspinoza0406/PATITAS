@@ -42,7 +42,7 @@ export class UserAuthComponent {
       next: (response: any) => {
         console.log('Login exitoso:', response);
         alert('¡Bienvenido!');
-        this.router.navigate(['/inicio']);
+        this.router.navigate(['/perros']);
       },
       error: (error: any) => {
         console.error('Error login:', error);
