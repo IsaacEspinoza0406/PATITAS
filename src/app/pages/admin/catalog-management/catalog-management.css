@@ -1,0 +1,219 @@
+/* Contenido principal. */
+.admin-container {
+  display: flex;
+  height: 100vh;
+  background-color: #121212;
+  color: #e0e0e0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  overflow: hidden; 
+}
+
+.sidebar {
+  width: 260px;
+  background-color: #0a0a0a; 
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid #333;
+}
+
+.sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 3rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #222;
+}
+
+.profile-icon {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid #333;
+  background-color: #333; 
+}
+
+.profile-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-name {
+  font-weight: bold;
+  font-size: 1rem;
+  color: #fff;
+}
+
+.admin-role {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar-nav li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+  text-decoration: none;
+  color: #aaa;
+  font-size: 1rem;
+  display: block;
+  padding: 12px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav a:hover {
+  background-color: #222;
+  color: #fff;
+}
+
+.sidebar-nav a.active-link {
+  background-color: #333;
+  color: #fff;
+  font-weight: 600;
+  border-left: 4px solid #e0e0e0;
+}
+
+/*Contenido de la dercha.*/
+.content {
+  flex: 1;
+  padding: 2rem;
+  overflow-y: auto; 
+}
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+  border-bottom: 1px solid #333;
+  padding-bottom: 1rem;
+}
+
+.content-header h2 {
+  margin: 0;
+  font-weight: 600;
+}
+
+.btn-add-new {
+  background-color: #e0e0e0;
+  color: #000;
+  padding: 10px 20px;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.2s;
+}
+.btn-add-new:hover {
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+.loading {
+  text-align: center;
+  color: #777;
+  margin-top: 2rem;
+}
+
+/* Tarjetas. */
+.catalog-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.dog-card-admin {
+  background-color: #1e1e1e; 
+  border: 1px solid #333;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.dog-card-admin:hover {
+  transform: translateY(-2px);
+  border-color: #555;
+}
+
+.card-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: #000;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.dog-name {
+  font-size: 1.1rem;
+  margin: 0 0 5px 0;
+  color: #fff;
+}
+
+.dog-age, .dog-breed {
+  font-size: 0.9rem;
+  color: #aaa;
+  margin: 0 0 3px 0;
+}
+
+.dog-age span, .dog-breed span {
+  color: #ddd;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.btn-edit, .btn-delete {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid #444;
+  background: transparent;
+  color: #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: all 0.2s;
+}
+
+.btn-edit:hover {
+  background-color: #333;
+  color: #fff;
+  border-color: #666;
+}
+
+.btn-delete:hover {
+  background-color: #3a0000;
+  border-color: #ff4444;
+  color: #ff4444;
+}
