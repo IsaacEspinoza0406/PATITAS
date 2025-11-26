@@ -1,6 +1,5 @@
 <main>
   <section class="hero-home">
-    <!-- Botón de Iniciar Sesión / Usuario (Estilo adaptado) -->
     <div class="home-login-container">
       <ng-container *ngIf="!isLoggedIn; else userMenu">
         <a routerLink="/inicia-sesion" class="btn-login-floating">
@@ -9,7 +8,7 @@
       </ng-container>
       <ng-template #userMenu>
         <div class="user-welcome-floating">
-          <span>Hola, {{ userName }}</span>
+          <span>Bienvenido, {{ userName }}</span>
           <button (click)="logout()" class="btn-logout-floating">Salir</button>
         </div>
       </ng-template>
@@ -33,7 +32,7 @@
   <section class="available-dogs-section">
     <div class="container available-dogs-content">
       <h2 class="section-title">
-        <span class="paw-icon">🐾</span>Perros Disponibles
+        <span class="paw-icon"></span>Perros Disponibles
       </h2>
       <div class="dogs-grid">
 
@@ -49,9 +48,8 @@
 
       </div>
 
-      <!-- Mensaje si no hay perros -->
       <div *ngIf="dogs.length === 0" class="no-dogs-message">
-        <p>Cargando amiguitos...</p>
+        <p>No hay perros disponibles.</p>
       </div>
     </div>
   </section>
@@ -59,7 +57,7 @@
   <section class="adopt-steps-section">
     <div class="container adopt-steps-content">
       <h2 class="section-title">
-        <span class="paw-icon">🐾</span>Adopta a un Amigo
+        <span class="paw-icon"></span>Adopta a un Amigo
       </h2>
       <div class="adopt-contend-grid">
         <div class="steps-container">

@@ -62,7 +62,7 @@ export class UserAuthComponent {
       name: this.registerData.userName,
       email: this.registerData.email,
       password: this.registerData.password,
-      roleId: 2 // Default to User role
+      roleId: 2
     };
 
     console.log('Enviando registro...', newUser);
