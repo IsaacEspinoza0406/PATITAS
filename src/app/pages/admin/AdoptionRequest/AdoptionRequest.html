@@ -47,7 +47,10 @@
       <div class="request-card" *ngFor="let req of requests" [class.selected]="req.id === selectedRequest?.id">
         <div class="card-header">
           <div class="card-profile-icon"></div>
-          <span>{{ req.nombreCompleto }}</span>
+          <div class="header-text">
+            <span>{{ req.nombreCompleto }}</span>
+            <span class="dog-interest">Interesado en: {{ req.dogName || 'N/A' }}</span>
+          </div>
         </div>
         <div class="card-actions">
           <button class="btn-ver" (click)="viewRequest(req)">Ver</button>
@@ -68,6 +71,7 @@
     <div *ngIf="selectedRequest" class="detail-content">
       <h3>CUESTIONARIO COMPLETADO</h3>
       <p class="detail-name">Respondido por: <strong>{{ selectedRequest.nombreCompleto }}</strong></p>
+      <p class="detail-dog">Interesado en: <strong>{{ selectedRequest.dogName || 'N/A' }}</strong></p>
 
       <div class="detail-item">
         <label>¿Cuál es su nombre?</label>

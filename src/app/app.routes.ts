@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { authGuard } from './guards/auth.guard';
 
 //Componentes Públicos.
 import { FormsComponent } from './pages/forms/forms';
@@ -12,7 +13,6 @@ import { AuthSelectionComponent } from './pages/auth-selection/auth-selection';
 import { UserAuthComponent } from './pages/user-auth/user-auth';
 
 // Componentes de Admin.
-// Componentes de Admin.
 import { AdoptionRequestComponent } from './pages/admin/AdoptionRequest/AdoptionRequest';
 import { LoginComponent } from './pages/admin/login/login';
 import { CatalogManagementComponent } from './pages/admin/catalog-management/catalog-management';
@@ -22,7 +22,7 @@ export const routes: Routes = [
   //  Rutas Públicas.
   { path: 'inicio', component: Home },
   { path: 'donations', component: DonationsComponent },
-  { path: 'forms', component: FormsComponent },
+  { path: 'forms', component: FormsComponent, canActivate: [authGuard] },
   { path: 'perros', component: DogCatalogComponent },
   { path: 'dog-details/:id', component: CardCatalog },
 
@@ -35,10 +35,10 @@ export const routes: Routes = [
     children: [
       { path: 'login', component: LoginComponent },
 
-      { path: 'catalog', component: CatalogManagementComponent },
-      { path: 'add-dog', component: AddDogComponent },
-      { path: 'edit-dog/:id', component: AddDogComponent },
-      { path: 'adoption-request', component: AdoptionRequestComponent },
+      { path: 'catalog', component: CatalogManagementComponent, canActivate: [authGuard] },
+      { path: 'add-dog', component: AddDogComponent, canActivate: [authGuard] },
+      { path: 'edit-dog/:id', component: AddDogComponent, canActivate: [authGuard] },
+      { path: 'adoption-request', component: AdoptionRequestComponent, canActivate: [authGuard] },
 
       { path: '', redirectTo: 'login', pathMatch: 'full' }
     ]

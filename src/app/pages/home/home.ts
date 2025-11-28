@@ -44,10 +44,14 @@ export class Home implements OnInit {
     return user ? user.name : '';
   }
 
-  onAdopt() {
+  onAdopt(dogId?: number) {
     if (this.isLoggedIn) {
       // Si ya inició sesión, ir al cuestionario
-      this.router.navigate(['/forms']);
+      if (dogId) {
+        this.router.navigate(['/forms'], { queryParams: { dogId: dogId } });
+      } else {
+        this.router.navigate(['/forms']);
+      }
     } else {
       // Si no, ir a iniciar sesión
       this.router.navigate(['/inicia-sesion']);

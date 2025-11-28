@@ -101,15 +101,19 @@ export interface AdoptionResponse {
     id: number;
     adoptanteId: number;
     dogId: number;
-    // Fields required by the template (likely joined from Adoptante)
+    dogName?: string;
     nombreCompleto?: string;
     telefono?: string;
+    edad?: string;
     ocupacion?: string;
     ingresoMensual?: string;
+    horasDeTrabajo?: string;
     tienePatio?: string;
     ninosEnCasa?: string;
     tipoVivienda?: string;
+    convivientes?: string;
     mascotasAnteriores?: string;
     aunConservaMascotas?: string;
+    responsabilidadesMascota?: string;
     opinionEsterilizacion?: string;
 }
