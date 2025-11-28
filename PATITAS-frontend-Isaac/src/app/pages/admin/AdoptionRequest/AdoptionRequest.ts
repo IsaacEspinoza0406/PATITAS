@@ -1,8 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
-import { AdoptanteService } from '../../../services/adoptante';
-import { AdoptanteFullResponse } from '../../../interfaces/models';
+import { AdoptionService } from '../../../services/adoption.service';
+import { AdoptionResponse } from '../../../interfaces/models';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -15,9 +15,9 @@ import { of } from 'rxjs';
 })
 export class AdoptionRequestComponent implements OnInit {
 
-  private adoptanteService = inject(AdoptanteService);
-  public requests: AdoptanteFullResponse[] = [];
-  public selectedRequest: AdoptanteFullResponse | null = null;
+  private adoptionService = inject(AdoptionService);
+  public requests: AdoptionResponse[] = [];
+  public selectedRequest: AdoptionResponse | null = null;
   public isLoading = true;
   public error: string | null = null;
 
@@ -28,7 +28,7 @@ export class AdoptionRequestComponent implements OnInit {
   loadRequests(): void {
     this.isLoading = true;
     this.error = null;
-    this.adoptanteService.getAdoptantes()
+    this.adoptionService.getAdoptions()
       .pipe(
         catchError((err: any) => {
           console.error('Error al jalar solicitudes:', err);
@@ -37,19 +37,19 @@ export class AdoptionRequestComponent implements OnInit {
           return of([]);
         })
       )
-      .subscribe((data: AdoptanteFullResponse[]) => {
+      .subscribe((data: AdoptionResponse[]) => {
         this.requests = data;
         this.isLoading = false;
       });
   }
 
-  viewRequest(request: AdoptanteFullResponse): void {
+  viewRequest(request: AdoptionResponse): void {
     this.selectedRequest = request;
   }
 
   deleteRequest(id: number): void {
     if (confirm('¿Estás seguro de que quieres eliminar esta solicitud?')) {
-      this.adoptanteService.deleteAdoptante(id).subscribe({
+      this.adoptionService.deleteAdoption(id).subscribe({
         next: () => {
           alert('Solicitud eliminada.');
           this.requests = this.requests.filter(req => req.id !== id);

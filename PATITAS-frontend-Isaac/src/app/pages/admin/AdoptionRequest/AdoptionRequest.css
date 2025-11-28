@@ -134,6 +134,13 @@
   color: #e0e0e0;
 }
 
+.dog-interest {
+  font-size: 0.85rem;
+  color: #aaa;
+  margin-top: 4px;
+  display: block;
+}
+
 .card-actions {
   display: flex;
   gap: 10px;
@@ -197,6 +204,13 @@
   color: #ccc;
   border-bottom: 1px solid #444;
   padding-bottom: 1rem;
+}
+
+.detail-dog {
+  color: #ccc;
+  margin-top: 0.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #444;
 }
 
 .detail-item {

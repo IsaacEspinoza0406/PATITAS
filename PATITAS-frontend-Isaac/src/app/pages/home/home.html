@@ -41,7 +41,7 @@
             [alt]="dog.name" class="dog-image">
           <h3>{{ dog.name }}</h3>
           <div class="card-buttons">
-            <button class="btn btn-details" (click)="onAdopt()">Adoptar</button>
+            <button class="btn btn-details" (click)="onAdopt(dog.id)">Adoptar</button>
             <button class="btn btn-adopt" [routerLink]="['/dog-details', dog.id]">Detalles</button>
           </div>
         </div>

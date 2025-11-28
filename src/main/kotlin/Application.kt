@@ -34,6 +34,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
+    println("--- 🚀 BACKEND STARTING: PERSISTENCE FIX IS ACTIVE 🚀 ---")
     DatabaseFactory.init()
 
     install(CORS) {
@@ -51,41 +52,13 @@ fun Application.module() {
         // Allow localhost for Angular Dev Server
         allowHost("localhost:4200", schemes = listOf("http", "https"))
         
-        // Allow production domain (PLACEHOLDER - UPDATE BEFORE DEPLOYMENT)
-        // allowHost("patitas-frontend-production.com", schemes = listOf("https"))
-        
         allowNonSimpleContentTypes = true
         allowCredentials = true
     }
 
     transaction {
-        // --- FACTORY RESET: DROP LEGACY/GHOST TABLES ---
-        // These tables might exist from previous versions and block dropping UsersTable/DogsTable
-        // We use CASCADE to ensure all dependencies are removed.
-        exec("DROP TABLE IF EXISTS dog_vaccines CASCADE;") { }
-        exec("DROP TABLE IF EXISTS vaccines CASCADE;") { }
-        exec("DROP TABLE IF EXISTS questionnaire_answers CASCADE;") { }
-        exec("DROP TABLE IF EXISTS questionnaire_questions CASCADE;") { }
-        exec("DROP TABLE IF EXISTS messages CASCADE;") { }
-        exec("DROP TABLE IF EXISTS questionnaires CASCADE;") { }
-        exec("DROP TABLE IF EXISTS payments CASCADE;") { }
-        exec("DROP TABLE IF EXISTS adoption_questionnaires CASCADE;") { }
-        exec("DROP TABLE IF EXISTS dog_photos CASCADE;") { }
-        exec("DROP TABLE IF EXISTS donations CASCADE;") { }
-
-        // --- FACTORY RESET: DROP CURRENT TABLES ---
-        SchemaUtils.drop(
-            DonationsTable,
-            PaymentMethodsTable,
-            DogPhotosTable,
-            DogsTable,
-            AdoptantesTable,
-            UsersTable, 
-            RolesTable,
-            AdoptionQuestionnairesTable // This now points to 'adoption_requests' table
-        )
-
         // --- CREATE TABLES ---
+        // Creates tables if they don't exist. Does NOT drop them.
         SchemaUtils.create(
             RolesTable, 
             UsersTable, 
