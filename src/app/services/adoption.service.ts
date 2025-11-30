@@ -20,11 +20,11 @@ export class AdoptionService {
         return this.http.post<AdoptionResponse>(this.apiUrl, adoption);
     }
 
-    deleteAdoption(id: number): Observable<void> {
-        return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    deleteAdoption(id: number): Observable<any> {
+        return this.http.delete(`${this.apiUrl}/${id}`, { responseType: 'text' });
     }
 
-    acceptAdoption(id: number): Observable<void> {
-        return this.http.put<void>(`${this.apiUrl}/${id}/accept`, {});
+    acceptAdoption(id: number): Observable<any> {
+        return this.http.put(`${this.apiUrl}/${id}/accept`, {}, { responseType: 'text' });
     }
 }
