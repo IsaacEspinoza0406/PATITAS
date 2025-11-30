@@ -16,5 +16,11 @@
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"
+    },
+    "/adoptions": {
+        "target": "http://44.210.168.90:8080",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
     }
 }

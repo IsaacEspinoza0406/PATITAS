@@ -66,6 +66,20 @@ export class AdoptionRequestComponent implements OnInit {
   }
 
   acceptRequest(id: number): void {
-    alert('Función "Aceptar" todavía no implementada.');
+    if (confirm('¿Aceptar solicitud? Esto marcará al perro como adoptado.')) {
+      this.adoptionService.acceptAdoption(id).subscribe({
+        next: () => {
+          alert('Solicitud aceptada. El perro ha sido marcado como adoptado.');
+          this.requests = this.requests.filter(req => req.id !== id);
+          if (this.selectedRequest?.id === id) {
+            this.selectedRequest = null;
+          }
+        },
+        error: (err: any) => {
+          console.error('Error al aceptar:', err);
+          alert('No se pudo aceptar la solicitud.');
+        }
+      });
+    }
   }
 }

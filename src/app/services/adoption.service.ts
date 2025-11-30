@@ -23,4 +23,8 @@ export class AdoptionService {
     deleteAdoption(id: number): Observable<void> {
         return this.http.delete<void>(`${this.apiUrl}/${id}`);
     }
+
+    acceptAdoption(id: number): Observable<void> {
+        return this.http.put<void>(`${this.apiUrl}/${id}/accept`, {});
+    }
 }
