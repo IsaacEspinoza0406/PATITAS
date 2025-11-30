@@ -57,7 +57,7 @@
 
   <!-- Aquí empieza la vista 2, procesar el pago, por paypal.-->
   <div *ngIf="step === 'payment'" class="payment-view">
-    <form class="payment-card" (ngSubmit)="simulatePayment()" #paymentForm="ngForm">
+    <form class="payment-card" (ngSubmit)="processPayment()" #paymentForm="ngForm">
 
       <div *ngIf="isProcessing" class="loading-overlay">
         <div class="spinner"></div>
@@ -126,7 +126,6 @@
   </div>
 
   <!-- Aquí empieza la vista 3, que es la de agradecimiento. -->
-
   <div *ngIf="step === 'thanks'" class="thanks-view">
     <div class="thanks-card">
       <img src="../../../assets/img/perritoAgrade.png" alt="Perrito Feliz" class="thanks-dog-img">

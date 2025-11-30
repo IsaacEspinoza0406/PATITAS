@@ -16,7 +16,7 @@ export interface Adoption {
 export class AdoptionsService {
 
     private http = inject(HttpClient);
-    private apiUrl = 'http://127.0.0.1:8080/adoptions';
+    private apiUrl = 'http://44.210.168.90:8080/adoptions';
 
     constructor() { }
 

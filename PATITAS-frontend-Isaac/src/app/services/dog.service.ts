@@ -8,7 +8,7 @@ import { DogRequest, DogResponse } from '../interfaces/models';
     providedIn: 'root'
 })
 export class DogService {
-    private apiUrl = `${environment.apiUrl}/dogs`;
+    private apiUrl = 'http://44.210.168.90:8080/dogs';
 
     constructor(private http: HttpClient) { }
 
