@@ -58,10 +58,11 @@ fun Application.configureDogPhotoRoutes() {
                     if (part is PartData.FileItem) {
                         val fileName = "${System.currentTimeMillis()}_${part.originalFileName as String}"
                         val fileBytes = part.streamProvider().readBytes()
-                        val file = File("uploads/$fileName")
+                        val file = File("/opt/apps/backend/uploads/$fileName")
                         if (!file.parentFile.exists()) file.parentFile.mkdirs()
                         file.writeBytes(fileBytes)
-                        photoUrl = "http://localhost:8080/uploads/$fileName"
+                        val baseUrl = System.getenv("BASE_URL") ?: "http://localhost:8080"
+                        photoUrl = "$baseUrl/uploads/$fileName"
                     }
                     part.dispose()
                 }

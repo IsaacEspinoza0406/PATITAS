@@ -1,0 +1,19 @@
+[Unit]
+Description=My Java APP
+After=network.target
+
+[Service]
+User=git_deploy
+Group=deployers
+WorkingDirectory=/opt/apps/backend
+Environment="BASE_URL=http://44.210.168.90:8080"
+# Usa authbind (ruta corregida a /usr/local/bin)
+ExecStart=/bin/bash -c '/usr/local/bin/authbind --deep /usr/bin/java -jar $(ls /opt/apps/backend/app*.jar | head -n 1)'
+SuccessExitStatus=143
+StandardOutput=journal
+StandardError=journal
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target
