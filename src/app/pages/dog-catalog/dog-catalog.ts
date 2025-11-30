@@ -14,7 +14,7 @@ import { Router } from '@angular/router';
 export class DogCatalogComponent implements OnInit {
   private dogService = inject(DogService);
   private router = inject(Router);
-  
+
   dogs: DogResponse[] = []; // Template uses 'dogs' array
 
   ngOnInit(): void {
@@ -30,7 +30,7 @@ export class DogCatalogComponent implements OnInit {
     // Navigate to adoption form or details
     console.log('Adoptar', id);
     // For now, maybe navigate to a contact form or details
-    this.router.navigate(['/forms']); 
+    this.router.navigate(['/forms'], { queryParams: { dogId: id } });
   }
 
   verDetalles(id: number) {

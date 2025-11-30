@@ -52,8 +52,9 @@ export class AdoptionRequestComponent implements OnInit {
       this.adoptionService.deleteAdoption(id).subscribe({
         next: () => {
           alert('Solicitud eliminada.');
-          this.requests = this.requests.filter(req => req.id !== id);
-          if (this.selectedRequest?.id === id) {
+          console.log('Eliminando solicitud con ID:', id);
+          this.requests = this.requests.filter(req => req.id != id);
+          if (this.selectedRequest?.id == id) {
             this.selectedRequest = null;
           }
         },
@@ -70,8 +71,9 @@ export class AdoptionRequestComponent implements OnInit {
       this.adoptionService.acceptAdoption(id).subscribe({
         next: () => {
           alert('Solicitud aceptada. El perro ha sido marcado como adoptado.');
-          this.requests = this.requests.filter(req => req.id !== id);
-          if (this.selectedRequest?.id === id) {
+          console.log('Aceptando solicitud con ID:', id);
+          this.requests = this.requests.filter(req => req.id != id);
+          if (this.selectedRequest?.id == id) {
             this.selectedRequest = null;
           }
         },
