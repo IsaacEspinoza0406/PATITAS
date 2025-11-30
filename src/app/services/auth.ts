@@ -9,7 +9,7 @@ export class AuthService {
 
   private http = inject(HttpClient);
   
-  private apiUrl = 'http://127.0.0.1:8080/auth';
+  private apiUrl = 'http://127.0.0.1:8080/api/auth';
 
   constructor() {}
 

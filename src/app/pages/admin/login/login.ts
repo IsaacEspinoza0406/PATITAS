@@ -14,7 +14,7 @@ export class LoginComponent {
   // Con esta variable controlamos si estamos en modo Login o Registro.
   isRegisterMode = false;
 
-  // Datos del formulario
+  // Datos del formulario.
   loginData = {
     email: '',
     password: ''
