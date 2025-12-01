@@ -19,8 +19,8 @@ export class App implements OnInit {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
-      // Ocultar navbar si estamos en la ruta '/inicio'
-      this.showNavbar = event.url !== '/inicio' && event.url !== '/';
+      // Ocultar navbar si estamos en la ruta '/inicio', '/' o cualquier ruta de '/admin'
+      this.showNavbar = event.url !== '/inicio' && event.url !== '/' && !event.url.startsWith('/admin');
     });
   }
 }
