@@ -2,7 +2,8 @@ import { Component, OnInit, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { AdoptionService } from '../../../services/adoption.service';
-import { AdoptionResponse } from '../../../interfaces/models';
+import { DogService } from '../../../services/dog.service';
+import { AdoptionResponse, DogResponse } from '../../../interfaces/models';
 import { catchError } from 'rxjs/operators';
 import { of } from 'rxjs';
 
@@ -16,7 +17,9 @@ import { of } from 'rxjs';
 export class AdoptionRequestComponent implements OnInit {
 
   private adoptionService = inject(AdoptionService);
+  private dogService = inject(DogService);
   public requests: AdoptionResponse[] = [];
+  public dogs: DogResponse[] = [];
   public selectedRequest: AdoptionResponse | null = null;
   public isLoading = true;
   public error: string | null = null;
@@ -39,8 +42,29 @@ export class AdoptionRequestComponent implements OnInit {
       )
       .subscribe((data: AdoptionResponse[]) => {
         this.requests = data;
-        this.isLoading = false;
+        this.loadDogs();
       });
+  }
+
+  loadDogs(): void {
+    this.dogService.getDogs().subscribe({
+      next: (data) => {
+        this.dogs = data;
+        this.isLoading = false;
+      },
+      error: (err) => {
+        console.error('Error fetching dogs', err);
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getDogImage(dogId: number): string {
+    const dog = this.dogs.find(d => d.id === dogId);
+    if (dog && dog.photos && dog.photos.length > 0) {
+      return dog.photos[0].photoUrl;
+    }
+    return 'https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto';
   }
 
   viewRequest(request: AdoptionResponse): void {

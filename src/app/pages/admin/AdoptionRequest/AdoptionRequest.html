@@ -41,7 +41,7 @@
 
       <div class="request-card" *ngFor="let req of requests" [class.selected]="req.id === selectedRequest?.id">
         <div class="card-header">
-          <div class="card-profile-icon"></div>
+          <img [src]="getDogImage(req.dogId)" alt="Foto del perro" class="card-profile-icon" style="object-fit: cover;">
           <div class="header-text">
             <span>{{ req.nombreCompleto }}</span>
             <span class="dog-interest">Interesado en: {{ req.dogName || 'N/A' }}</span>
