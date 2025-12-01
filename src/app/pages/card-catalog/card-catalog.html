@@ -37,15 +37,14 @@
         <span class="label">Esterilización:</span>
         <div class="checkbox-display">
           <div class="check-item">
-            <span class="box"
-              [class.checked]="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === true">
-              <span *ngIf="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === true">✓</span>
+            <span class="box" [class.checked]="dog.sterilized === 'Si' || dog.sterilized === 'Sí'">
+              <span *ngIf="dog.sterilized === 'Si' || dog.sterilized === 'Sí'">✓</span>
             </span>
             <span>Si</span>
           </div>
           <div class="check-item">
-            <span class="box" [class.checked]="dog.sterilized === 'No' || dog.sterilized === false">
-              <span *ngIf="dog.sterilized === 'No' || dog.sterilized === false">✓</span>
+            <span class="box" [class.checked]="dog.sterilized === 'No'">
+              <span *ngIf="dog.sterilized === 'No'">✓</span>
             </span>
             <span>No</span>
           </div>
