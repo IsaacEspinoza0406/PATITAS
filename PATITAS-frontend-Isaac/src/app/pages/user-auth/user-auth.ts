@@ -7,7 +7,7 @@ import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-user-auth',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './user-auth.html',
   styleUrls: ['./user-auth.css']
 })
@@ -24,7 +24,7 @@ export class UserAuthComponent {
   };
 
   registerData = {
-    userName: '',
+    userName: '', // En el formulario usamos este nombre
     email: '',
     password: '',
     confirmPassword: ''
@@ -34,48 +34,61 @@ export class UserAuthComponent {
     this.isRegisterMode = !this.isRegisterMode;
   }
 
-  // Login.
+  // --- LOGIN ---
   onLogin() {
     console.log('Enviando login...', this.loginData);
 
     this.authService.login(this.loginData).subscribe({
-      next: (response: any) => {
+      next: (response) => {
         console.log('Login exitoso:', response);
+        // Guardamos el token si viene en la respuesta
+        // (El servicio ya lo hace, pero por si acaso)
         alert('¡Bienvenido!');
-        this.router.navigate(['/perros']);
+        this.router.navigate(['/inicio']);
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error('Error login:', error);
-        alert('Credenciales incorrectas o error en el servidor.');
+        // Checa si el status es 0 (CORS) o 401 (Credenciales)
+        if (error.status === 0) {
+          alert('Error de conexión (Posiblemente CORS). Revisa que el servidor permita localhost:4200');
+        } else {
+          alert('Usuario o contraseña incorrectos.');
+        }
       }
     });
   }
 
-  // Registro.
+  // --- REGISTRO ---
   onRegister() {
     if (this.registerData.password !== this.registerData.confirmPassword) {
       alert('Las contraseñas no coinciden.');
       return;
     }
 
+    // --- CORRECCIÓN AQUÍ ---
+    // Tu API (Postman) espera "name", no "username".
     const newUser = {
       name: this.registerData.userName,
       email: this.registerData.email,
       password: this.registerData.password,
-      roleId: 2
+      roleId: 2 // Opcional: Si tu API pide rol por defecto
     };
 
     console.log('Enviando registro...', newUser);
 
     this.authService.register(newUser).subscribe({
-      next: (response: any) => {
+      next: (response) => {
         console.log('Registro exitoso:', response);
         alert('¡Cuenta creada con éxito! Ahora inicia sesión.');
         this.isRegisterMode = false;
       },
-      error: (error: any) => {
+      error: (error) => {
         console.error('Error registro:', error);
-        alert('No se pudo crear la cuenta. Intenta con otro correo.');
+        if (error.status === 0) {
+          alert('Error de conexión con el servidor (CORS).');
+        } else {
+          alert('No se pudo crear la cuenta. Intenta con otro correo.');
+        }
       }
     });
   }
