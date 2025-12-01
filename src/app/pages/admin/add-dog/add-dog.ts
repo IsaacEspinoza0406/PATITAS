@@ -35,19 +35,29 @@ export class AddDogComponent implements OnInit {
     }
   };
 
+  imagePreview: string | ArrayBuffer | null = null;
+  selectedFile: File | null = null;
+
   ngOnInit() {
-    this.route.queryParams.subscribe(params => {
+    console.log('AddDogComponent: Initialized');
+    this.route.params.subscribe(params => {
+      console.log('AddDogComponent: Route params:', params);
       if (params['id']) {
         this.isEditMode = true;
         this.dogId = +params['id'];
+        console.log('AddDogComponent: Edit mode detected, ID:', this.dogId);
         this.loadDogData(this.dogId);
+      } else {
+        console.log('AddDogComponent: No ID in params, Create mode');
       }
     });
   }
 
   loadDogData(id: number) {
+    console.log('AddDogComponent: Loading dog data for ID:', id);
     this.dogService.getDogById(id).subscribe({
       next: (dog) => {
+        console.log('AddDogComponent: Dog data received:', dog);
         this.newDog = {
           name: dog.name,
           age: dog.age,
@@ -55,7 +65,7 @@ export class AddDogComponent implements OnInit {
           history: dog.history,
           sterilized: dog.sterilized || 'No',
           adopted: dog.adopted || 'No',
-          health: '', // Not in response?
+          health: '',
           vaccinated: {
             rabies: dog.vaccines?.includes('Rabia'),
             distemper: dog.vaccines?.includes('Moquillo'),
@@ -66,12 +76,9 @@ export class AddDogComponent implements OnInit {
           this.imagePreview = dog.photos[0].photoUrl;
         }
       },
-      error: (err) => console.error('Error loading dog', err)
+      error: (err) => console.error('AddDogComponent: Error loading dog', err)
     });
   }
-
-  imagePreview: string | ArrayBuffer | null = null;
-  selectedFile: File | null = null;
 
   onFileSelected(event: Event) {
     const file = (event.target as HTMLInputElement).files?.[0];
