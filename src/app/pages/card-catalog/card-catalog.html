@@ -1,56 +1,73 @@
 <div class="card-container" *ngIf="dog">
- 
-  <div class="image-section">
-  	<img 
-      *ngIf="dog.photos && dog.photos.length > 0"
-      [src]="dog.photos[0]?.photoUrl" 
-      [alt]="'Imagen de ' + dog.name" 
-      class="dog-image">
-    
-    <img 
-      *ngIf="!dog.photos || dog.photos.length === 0"
-      src="https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto"
-      [alt]="'Imagen de ' + dog.name"
-      class="dog-image">
-  </div>
 
-  <div class="details-section">
-  	<div class="detail-item">
-    	<label for="name">Nombre:</label>
-    	<input type="text" id="name" name="name" [(ngModel)]="dog.name">
-  	</div>
+  <div class="content-wrapper">
+    <!-- Sección Izquierda: Imagen -->
+    <div class="image-section">
+      <img *ngIf="dog.photos && dog.photos.length > 0" [src]="dog.photos[0]?.photoUrl" [alt]="'Imagen de ' + dog.name"
+        class="dog-image">
 
-  	<div class="detail-item">
-    	<label for="age">Edad:</label>
-    	<input type="number" id="age" name="age" [(ngModel)]="dog.age">
-  	</div>
+      <img *ngIf="!dog.photos || dog.photos.length === 0" src="https://placehold.co/600x400/E0E0E0/B0B0B0?text=Sin+Foto"
+        [alt]="'Imagen de ' + dog.name" class="dog-image">
+    </div>
 
-  	<div class="detail-item">
-    	<label for="breed">Raza:</label>
-    	<input type="text" id="breed" name="breed" [(ngModel)]="dog.breed">
-  	</div>
+    <!-- Sección Derecha: Detalles -->
+    <div class="details-section">
 
-  	<div class="detail-item">
-    	<label for="history">Historial:</label>
-    	<textarea id="history" name="history" [(ngModel)]="dog.history"></textarea>
-  	</div>
+      <div class="detail-group">
+        <span class="label">Nombre:</span>
+        <h3 class="value-name">{{ dog.name }}.</h3>
+      </div>
 
-  	<div class="options-section">
-    	<div class="checkbox-group">
-      	<span>Esterilización:</span>
-      	<label>
-      	</label>
-    	</div>
+      <div class="detail-group">
+        <span class="label">Edad:</span>
+        <p class="value-highlight">{{ dog.age }} año{{ dog.age !== 1 ? 's' : '' }}.</p>
+      </div>
 
-  
-  	</div>
-  </div>
+      <div class="detail-group">
+        <span class="label">Raza:</span>
+        <p class="value-text">{{ dog.breed }}</p>
+      </div>
 
-  <div class="button-section">
-  	<button class="adopt-button" (click)="onAdopt()">Adoptar</button>
-  	<button class="back-button" (click)="onBack()">
-    	<img src="assets/icons/arrow-left.svg" alt="Volver"> Volver
-  	</button>
-  </div>
+      <div class="detail-group">
+        <span class="label">Historial:</span>
+        <p class="value-text history-text">{{ dog.history }}</p>
+      </div>
+
+      <div class="detail-group sterilization-group">
+        <span class="label">Esterilización:</span>
+        <div class="checkbox-display">
+          <div class="check-item">
+            <span class="box"
+              [class.checked]="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === true">
+              <span *ngIf="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === true">✓</span>
+            </span>
+            <span>Si</span>
+          </div>
+          <div class="check-item">
+            <span class="box" [class.checked]="dog.sterilized === 'No' || dog.sterilized === false">
+              <span *ngIf="dog.sterilized === 'No' || dog.sterilized === false">✓</span>
+            </span>
+            <span>No</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="detail-group">
+        <span class="label">Vacunas aplicadas:</span>
+        <ul class="vaccines-list">
+          <li *ngIf="!dog.vaccines || dog.vaccines.length === 0">Indefinido</li>
+          <li *ngFor="let vaccine of dog.vaccines">{{ vaccine }}</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="button-section">
+    <button class="adopt-button" (click)="onAdopt()">Adoptar</button>
+    <button class="back-button" (click)="onBack()">
+      <span class="arrow-icon">←</span> Volver
+    </button>
+  </div>
 
 </div>
