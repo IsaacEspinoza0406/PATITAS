@@ -37,14 +37,16 @@
         <span class="label">Esterilización:</span>
         <div class="checkbox-display">
           <div class="check-item">
-            <span class="box" [class.checked]="dog.sterilized === 'Si' || dog.sterilized === 'Sí'">
-              <span *ngIf="dog.sterilized === 'Si' || dog.sterilized === 'Sí'">✓</span>
+            <span class="box"
+              [class.checked]="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === 'true'">
+              <span *ngIf="dog.sterilized === 'Si' || dog.sterilized === 'Sí' || dog.sterilized === 'true'">✓</span>
             </span>
             <span>Si</span>
           </div>
           <div class="check-item">
-            <span class="box" [class.checked]="dog.sterilized === 'No'">
-              <span *ngIf="dog.sterilized === 'No'">✓</span>
+            <span class="box"
+              [class.checked]="dog.sterilized === 'No' || dog.sterilized === 'false' || !dog.sterilized">
+              <span *ngIf="dog.sterilized === 'No' || dog.sterilized === 'false' || !dog.sterilized">✓</span>
             </span>
             <span>No</span>
           </div>
@@ -53,10 +55,8 @@
 
       <div class="detail-group">
         <span class="label">Vacunas aplicadas:</span>
-        <ul class="vaccines-list">
-          <li *ngIf="!dog.vaccines || dog.vaccines.length === 0">Indefinido</li>
-          <li *ngFor="let vaccine of dog.vaccines">{{ vaccine }}</li>
-        </ul>
+        <p class="value-text" *ngIf="dog.vaccines">{{ dog.vaccines }}</p>
+        <p class="value-text" *ngIf="!dog.vaccines">Indefinido</p>
       </div>
 
     </div>
