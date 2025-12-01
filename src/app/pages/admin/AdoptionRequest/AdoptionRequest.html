@@ -3,90 +3,118 @@
   <!-- Izquierda. === -->
   <aside class="sidebar">
     <div class="sidebar-header">
-      <!-- Mensaje de Error. -->
-      <div *ngIf="error" class="error-message">
-        {{ error }}
+      <div class="profile-icon"></div>
+      <span>Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li>
+          <a routerLink="/admin/adoption-request" routerLinkActive="active-link">
+            Solicitudes de Adopción
+          </a>
+        </li>
+        <li>
+          <a routerLink="/admin/catalog" routerLinkActive="active-link">
+            Catálogo
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- === Centro.=== -->
+  <main class="request-list">
+    <h2>Solicitudes de adopción</h2>
+
+    <!-- Mensaje de Carga. -->
+    <div *ngIf="isLoading" class="loading-message">
+      Cargando solicitudes...
+    </div>
+
+    <!-- Mensaje de Error. -->
+    <div *ngIf="error" class="error-message">
+      {{ error }}
+    </div>
+
+    <!-- La Lista de Tarjetas. -->
+    <div class="list-grid" *ngIf="!isLoading && !error">
+
+      <div class="request-card" *ngFor="let req of requests" [class.selected]="req.id === selectedRequest?.id">
+        <div class="card-header">
+          <div class="card-profile-icon"></div>
+          <div class="header-text">
+            <span>{{ req.nombreCompleto }}</span>
+            <span class="dog-interest">Interesado en: {{ req.dogName || 'N/A' }}</span>
+          </div>
+        </div>
+        <div class="card-actions">
+          <button class="btn-ver" (click)="viewRequest(req)">Ver</button>
+          <button class="btn-eliminar" (click)="deleteRequest(req.id)">Eliminar</button>
+        </div>
       </div>
-
-      <!-- La Lista de Tarjetas. -->
-      <div class="list-grid" *ngIf="!isLoading && !error">
-
-        <div class="request-card" *ngFor="let req of requests" [class.selected]="req.id === selectedRequest?.id">
-          <div class="card-header">
-            <div class="card-profile-icon"></div>
-            <div class="header-text">
-              <span>{{ req.nombreCompleto }}</span>
-              <span class="dog-interest">Interesado en: {{ req.dogName || 'N/A' }}</span>
-            </div>
-          </div>
-          <div class="card-actions">
-            <button class="btn-ver" (click)="viewRequest(req)">Ver</button>
-            <button class="btn-eliminar" (click)="deleteRequest(req.id)">Eliminar</button>
-          </div>
-        </div>
-
-      </div>
-      </main>
-
-      <!-- === Derecha. === -->
-      <aside class="request-detail">
-
-        <div *ngIf="!selectedRequest" class="detail-placeholder">
-          <p>Selecciona una solicitud para ver los detalles.</p>
-        </div>
-
-        <div *ngIf="selectedRequest" class="detail-content">
-          <h3>CUESTIONARIO COMPLETADO</h3>
-          <p class="detail-name">Respondido por: <strong>{{ selectedRequest.nombreCompleto }}</strong></p>
-          <p class="detail-dog">Interesado en: <strong>{{ selectedRequest.dogName || 'N/A' }}</strong></p>
-
-          <div class="detail-item">
-            <label>¿Cuál es su nombre?</label>
-            <div class="answer-box">{{ selectedRequest.nombreCompleto }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Cuál es su número telefónico?</label>
-            <div class="answer-box">{{ selectedRequest.telefono }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿A qué se dedica?</label>
-            <div class="answer-box">{{ selectedRequest.ocupacion }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Cuánto gana mensualmente?</label>
-            <div class="answer-box">{{ selectedRequest.ingresoMensual }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Tiene patio?</label>
-            <div class="answer-box">{{ selectedRequest.tienePatio }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Niños en casa?</label>
-            <div class="answer-box">{{ selectedRequest.ninosEnCasa }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Tipo de vivienda?</label>
-            <div class="answer-box">{{ selectedRequest.tipoVivienda }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Mascotas anteriores?</label>
-            <div class="answer-box">{{ selectedRequest.mascotasAnteriores }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Sigue cuidando de ellas?</label>
-            <div class="answer-box">{{ selectedRequest.aunConservaMascotas }}</div>
-          </div>
-          <div class="detail-item">
-            <label>¿Opinión de esterilización?</label>
-            <div class="answer-box">{{ selectedRequest.opinionEsterilizacion }}</div>
-          </div>
-
-          <div class="detail-actions">
-            <button class="btn-rechazar" (click)="deleteRequest(selectedRequest.id)">Rechazar</button>
-            <button class="btn-aceptar" (click)="acceptRequest(selectedRequest.id)">Aceptar</button>
-          </div>
-        </div>
-
-      </aside>
 
     </div>
+  </main>
+
+  <!-- === Derecha. === -->
+  <aside class="request-detail">
+
+    <div *ngIf="!selectedRequest" class="detail-placeholder">
+      <p>Selecciona una solicitud para ver los detalles.</p>
+    </div>
+
+    <div *ngIf="selectedRequest" class="detail-content">
+      <h3>CUESTIONARIO COMPLETADO</h3>
+      <p class="detail-name">Respondido por: <strong>{{ selectedRequest.nombreCompleto }}</strong></p>
+      <p class="detail-dog">Interesado en: <strong>{{ selectedRequest.dogName || 'N/A' }}</strong></p>
+
+      <div class="detail-item">
+        <label>¿Cuál es su nombre?</label>
+        <div class="answer-box">{{ selectedRequest.nombreCompleto }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Cuál es su número telefónico?</label>
+        <div class="answer-box">{{ selectedRequest.telefono }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿A qué se dedica?</label>
+        <div class="answer-box">{{ selectedRequest.ocupacion }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Cuánto gana mensualmente?</label>
+        <div class="answer-box">{{ selectedRequest.ingresoMensual }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Tiene patio?</label>
+        <div class="answer-box">{{ selectedRequest.tienePatio }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Niños en casa?</label>
+        <div class="answer-box">{{ selectedRequest.ninosEnCasa }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Tipo de vivienda?</label>
+        <div class="answer-box">{{ selectedRequest.tipoVivienda }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Mascotas anteriores?</label>
+        <div class="answer-box">{{ selectedRequest.mascotasAnteriores }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Sigue cuidando de ellas?</label>
+        <div class="answer-box">{{ selectedRequest.aunConservaMascotas }}</div>
+      </div>
+      <div class="detail-item">
+        <label>¿Opinión de esterilización?</label>
+        <div class="answer-box">{{ selectedRequest.opinionEsterilizacion }}</div>
+      </div>
+
+      <div class="detail-actions">
+        <button class="btn-rechazar" (click)="deleteRequest(selectedRequest.id)">Rechazar</button>
+        <button class="btn-aceptar" (click)="acceptRequest(selectedRequest.id)">Aceptar</button>
+      </div>
+    </div>
+
+  </aside>
+
+</div>
