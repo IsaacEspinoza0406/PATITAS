@@ -26,6 +26,7 @@ fun Application.module() {
         allowMethod(HttpMethod.Delete)
         allowMethod(HttpMethod.Patch)
     }
+    install(IgnoreTrailingSlash)
     install(ContentNegotiation) {
         json()
     }
