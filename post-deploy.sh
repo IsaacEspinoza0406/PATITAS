@@ -4,6 +4,7 @@ SERVICE_NAME="myapp.service"
 
 echo ">>> [POST-DEPLOY] INICIANDO"
 
+sudo cp /opt/apps/backend/myapp.service /etc/systemd/system/myapp.service
 sudo systemctl daemon-reload
 echo "Reiniciando $SERVICE_NAME..."
 sudo systemctl start $SERVICE_NAME

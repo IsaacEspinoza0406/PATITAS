@@ -65,7 +65,7 @@ jobs:
                 host: ${{secrets.EC2_HOST}}
                 username: ${{secrets.EC2_USER}}
                 key: ${{secrets.EC2_SSH_PRIVATE_KEY}}
-                source: "${{ steps.move_jar.outputs.moved_jar_filename }}"
+                source: "${{ steps.move_jar.outputs.moved_jar_filename }},myapp.service"
                 target: "/opt/apps/backend/"
 
             - name: Execute post-deployment script on EC2 (Restart app and configure systemd)
