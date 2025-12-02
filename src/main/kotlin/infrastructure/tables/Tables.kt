@@ -41,8 +41,8 @@ object DonationsTable : Table("donations") {
     val userId = integer("user_id")
     val amount = decimal("amount", 10, 2)
     val methodId = integer("method_id") references PaymentMethodsTable.id
-    val transactionId = varchar("transaction_id", 255)
-    val payerEmail = varchar("payer_email", 255)
+    val transactionId = varchar("transaction_id", 255).nullable()
+    val payerEmail = varchar("payer_email", 255).nullable()
     val status = varchar("status", 50).nullable()
 
     override val primaryKey = PrimaryKey(id)
