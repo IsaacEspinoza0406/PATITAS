@@ -40,9 +40,40 @@ object DatabaseFactory {
                 AdoptionQuestionnairesTable,
                 DogPhotosTable
             )
+            
+            // Seed initial data
+            seed()
         }
     }
 
     suspend fun <T> dbQuery(block: suspend () -> T): T =
         newSuspendedTransaction(Dispatchers.IO) { block() }
+
+    private fun seed() {
+        transaction {
+            // 1. Seed Roles
+            if (RolesTable.selectAll().count() == 0L) {
+                RolesTable.insert {
+                    it[id] = 1
+                    it[name] = "Admin"
+                }
+                RolesTable.insert {
+                    it[id] = 2
+                    it[name] = "Adoptante"
+                }
+            }
+
+            // 2. Seed Admin User
+            val adminEmail = "admin@patitas.com"
+            if (UsersTable.select { UsersTable.email eq adminEmail }.count() == 0L) {
+                val hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw("admin123", org.mindrot.jbcrypt.BCrypt.gensalt())
+                UsersTable.insert {
+                    it[name] = "Admin"
+                    it[email] = adminEmail
+                    it[password] = hashedPassword
+                    it[roleId] = 1
+                }
+            }
+        }
+    }
 }
