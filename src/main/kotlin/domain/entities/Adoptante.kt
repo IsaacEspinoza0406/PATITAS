@@ -1,5 +1,8 @@
 package com.patitas_web.domain.entities
 
+import kotlinx.serialization.Serializable
+
+@Serializable
 data class Adoptante(
     val id: Int = 0,
     val nombreCompleto: String,

@@ -73,6 +73,12 @@ fun Application.configureDogRoutes() {
                     return@post
                 }
                 
+                // Verify dog exists
+                if (service.findById(id) == null) {
+                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
+                    return@post
+                }
+                
                 try {
                     val multipart = call.receiveMultipart()
                     var photoUrl = ""
