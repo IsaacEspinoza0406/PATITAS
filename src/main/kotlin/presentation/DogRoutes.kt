@@ -80,6 +80,12 @@ fun Application.configureDogRoutes() {
                 }
                 
                 try {
+                    // Delete existing photos to simulate "update"
+                    val existingPhotos = Dependencies.dogPhotoService.findByDogId(id)
+                    existingPhotos.forEach { photo ->
+                        Dependencies.dogPhotoService.delete(photo.id)
+                    }
+
                     val multipart = call.receiveMultipart()
                     var photoUrl = ""
                     
