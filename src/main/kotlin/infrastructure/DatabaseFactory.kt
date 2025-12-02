@@ -3,10 +3,10 @@ package com.patitas_web.infrastructure
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
-import org.jetbrains.exposed.sql.Database
-import org.jetbrains.exposed.sql.SchemaUtils
+import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import com.patitas_web.infrastructure.tables.*
 
 object DatabaseFactory {
@@ -54,12 +54,12 @@ object DatabaseFactory {
             // 1. Seed Roles
             if (RolesTable.selectAll().count() == 0L) {
                 RolesTable.insert {
-                    it[id] = 1
-                    it[name] = "Admin"
+                    it[RolesTable.id] = 1
+                    it[RolesTable.name] = "Admin"
                 }
                 RolesTable.insert {
-                    it[id] = 2
-                    it[name] = "Adoptante"
+                    it[RolesTable.id] = 2
+                    it[RolesTable.name] = "Adoptante"
                 }
             }
 
@@ -68,10 +68,10 @@ object DatabaseFactory {
             if (UsersTable.select { UsersTable.email eq adminEmail }.count() == 0L) {
                 val hashedPassword = org.mindrot.jbcrypt.BCrypt.hashpw("admin123", org.mindrot.jbcrypt.BCrypt.gensalt())
                 UsersTable.insert {
-                    it[name] = "Admin"
-                    it[email] = adminEmail
-                    it[password] = hashedPassword
-                    it[roleId] = 1
+                    it[UsersTable.name] = "Admin"
+                    it[UsersTable.email] = adminEmail
+                    it[UsersTable.password] = hashedPassword
+                    it[UsersTable.roleId] = 1
                 }
             }
         }
