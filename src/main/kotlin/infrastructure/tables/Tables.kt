@@ -24,12 +24,12 @@ object AdoptantesTable : Table("adoptantes") {
     val ocupacion = varchar("ocupacion", 255)
     val ingresoMensual = varchar("ingreso_mensual", 255)
     val horasDeTrabajo = varchar("horas_de_trabajo", 255)
-    val tienePatio = varchar("tiene_patio", 10)
-    val ninosEnCasa = varchar("ninos_en_casa", 10)
-    val tipoVivienda = varchar("tipo_vivienda", 255)
-    val convivientes = varchar("convivientes", 255)
-    val mascotasAnteriores = varchar("mascotas_anteriores", 255)
-    val aunConservaMascotas = varchar("aun_conserva_mascotas", 255)
+    val tienePatio = varchar("tiene_patio", 50)
+    val ninosEnCasa = varchar("ninos_en_casa", 255)
+    val tipoVivienda = varchar("tipo_vivienda", 50)
+    val convivientes = varchar("convivientes", 255) // SQL was 10, we need 255
+    val mascotasAnteriores = text("mascotas_anteriores")
+    val aunConservaMascotas = text("aun_conserva_mascotas")
     val responsabilidadesMascota = text("responsabilidades_mascota")
     val opinionEsterilizacion = text("opinion_esterilizacion")
 

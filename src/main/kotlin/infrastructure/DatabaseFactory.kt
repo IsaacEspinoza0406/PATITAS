@@ -74,6 +74,19 @@ object DatabaseFactory {
                     it[UsersTable.roleId] = 1
                 }
             }
+            
+            // 3. Fix Schema Constraints (Migration)
+            try {
+                exec("ALTER TABLE adoptantes ALTER COLUMN convivientes TYPE varchar(255)") {}
+                exec("ALTER TABLE adoptantes ALTER COLUMN ninos_en_casa TYPE varchar(255)") {}
+                exec("ALTER TABLE adoptantes ALTER COLUMN mascotas_anteriores TYPE text") {}
+                exec("ALTER TABLE adoptantes ALTER COLUMN aun_conserva_mascotas TYPE text") {}
+                exec("ALTER TABLE adoptantes ALTER COLUMN tiene_patio TYPE varchar(50)") {}
+                exec("ALTER TABLE adoptantes ALTER COLUMN tipo_vivienda TYPE varchar(50)") {}
+            } catch (e: Exception) {
+                // Ignore if already altered or fails, to prevent startup crash
+                println("Schema migration warning: ${e.message}")
+            }
         }
     }
 }
