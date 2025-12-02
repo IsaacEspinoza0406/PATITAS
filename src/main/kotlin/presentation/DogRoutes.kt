@@ -96,7 +96,8 @@ fun Application.configureDogRoutes() {
                             
                             // Construct URL (assuming server runs on port 8080)
                             // Ideally, use a configuration for the base URL
-                            photoUrl = "/uploads/$fileName" 
+                            val baseUrl = "http://${call.request.host()}:${call.request.port()}"
+                            photoUrl = "$baseUrl/uploads/$fileName" 
                             part.dispose()
                         }
                     }
