@@ -40,20 +40,20 @@ class SqlAdoptanteRepository : AdoptanteRepository {
     override suspend fun create(adoptante: Adoptante): Adoptante {
         val result = dbQuery {
             val insertStatement = AdoptantesTable.insert { table ->
-                table[nombreCompleto] = adoptante.nombreCompleto
-                table[telefono] = adoptante.telefono
-                table[edad] = adoptante.edad
-                table[ocupacion] = adoptante.ocupacion
-                table[ingresoMensual] = adoptante.ingresoMensual
-                table[horasDeTrabajo] = adoptante.horasDeTrabajo
-                table[tienePatio] = adoptante.tienePatio
-                table[ninosEnCasa] = adoptante.ninosEnCasa
-                table[tipoVivienda] = adoptante.tipoVivienda
-                table[convivientes] = adoptante.convivientes
-                table[mascotasAnteriores] = adoptante.mascotasAnteriores
-                table[aunConservaMascotas] = adoptante.aunConservaMascotas
-                table[responsabilidadesMascota] = adoptante.responsabilidadesMascota
-                table[opinionEsterilizacion] = adoptante.opinionEsterilizacion
+                table[AdoptantesTable.nombreCompleto] = adoptante.nombreCompleto
+                table[AdoptantesTable.telefono] = adoptante.telefono
+                table[AdoptantesTable.edad] = adoptante.edad
+                table[AdoptantesTable.ocupacion] = adoptante.ocupacion
+                table[AdoptantesTable.ingresoMensual] = adoptante.ingresoMensual
+                table[AdoptantesTable.horasDeTrabajo] = adoptante.horasDeTrabajo
+                table[AdoptantesTable.tienePatio] = adoptante.tienePatio
+                table[AdoptantesTable.ninosEnCasa] = adoptante.ninosEnCasa
+                table[AdoptantesTable.tipoVivienda] = adoptante.tipoVivienda
+                table[AdoptantesTable.convivientes] = adoptante.convivientes
+                table[AdoptantesTable.mascotasAnteriores] = adoptante.mascotasAnteriores
+                table[AdoptantesTable.aunConservaMascotas] = adoptante.aunConservaMascotas
+                table[AdoptantesTable.responsabilidadesMascota] = adoptante.responsabilidadesMascota
+                table[AdoptantesTable.opinionEsterilizacion] = adoptante.opinionEsterilizacion
             }
             insertStatement.resultedValues?.singleOrNull()?.let(::toAdoptante)
         }
@@ -63,20 +63,20 @@ class SqlAdoptanteRepository : AdoptanteRepository {
     override suspend fun update(id: Int, adoptante: Adoptante): Adoptante? {
         val updated = dbQuery {
             AdoptantesTable.update({ AdoptantesTable.id eq id }) { table ->
-                table[nombreCompleto] = adoptante.nombreCompleto
-                table[telefono] = adoptante.telefono
-                table[edad] = adoptante.edad
-                table[ocupacion] = adoptante.ocupacion
-                table[ingresoMensual] = adoptante.ingresoMensual
-                table[horasDeTrabajo] = adoptante.horasDeTrabajo
-                table[tienePatio] = adoptante.tienePatio
-                table[ninosEnCasa] = adoptante.ninosEnCasa
-                table[tipoVivienda] = adoptante.tipoVivienda
-                table[convivientes] = adoptante.convivientes
-                table[mascotasAnteriores] = adoptante.mascotasAnteriores
-                table[aunConservaMascotas] = adoptante.aunConservaMascotas
-                table[responsabilidadesMascota] = adoptante.responsabilidadesMascota
-                table[opinionEsterilizacion] = adoptante.opinionEsterilizacion
+                table[AdoptantesTable.nombreCompleto] = adoptante.nombreCompleto
+                table[AdoptantesTable.telefono] = adoptante.telefono
+                table[AdoptantesTable.edad] = adoptante.edad
+                table[AdoptantesTable.ocupacion] = adoptante.ocupacion
+                table[AdoptantesTable.ingresoMensual] = adoptante.ingresoMensual
+                table[AdoptantesTable.horasDeTrabajo] = adoptante.horasDeTrabajo
+                table[AdoptantesTable.tienePatio] = adoptante.tienePatio
+                table[AdoptantesTable.ninosEnCasa] = adoptante.ninosEnCasa
+                table[AdoptantesTable.tipoVivienda] = adoptante.tipoVivienda
+                table[AdoptantesTable.convivientes] = adoptante.convivientes
+                table[AdoptantesTable.mascotasAnteriores] = adoptante.mascotasAnteriores
+                table[AdoptantesTable.aunConservaMascotas] = adoptante.aunConservaMascotas
+                table[AdoptantesTable.responsabilidadesMascota] = adoptante.responsabilidadesMascota
+                table[AdoptantesTable.opinionEsterilizacion] = adoptante.opinionEsterilizacion
             }
         }
         return if (updated > 0) findById(id) else null

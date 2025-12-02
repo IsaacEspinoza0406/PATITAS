@@ -29,16 +29,16 @@ class SqlDonationRepository : DonationRepository {
             val methodId = PaymentMethodsTable.select { PaymentMethodsTable.methodName eq donation.methodName }
                 .singleOrNull()?.get(PaymentMethodsTable.id)
                 ?: PaymentMethodsTable.insert {
-                    it[methodName] = donation.methodName
+                    it[PaymentMethodsTable.methodName] = donation.methodName
                 } get PaymentMethodsTable.id
 
             val insertStatement = DonationsTable.insert {
-                it[userId] = donation.userId
-                it[amount] = donation.amount.toBigDecimal()
+                it[DonationsTable.userId] = donation.userId
+                it[DonationsTable.amount] = donation.amount.toBigDecimal()
                 it[DonationsTable.methodId] = methodId
-                it[transactionId] = donation.transactionId
-                it[payerEmail] = donation.payerEmail
-                it[status] = donation.status ?: "Completed"
+                it[DonationsTable.transactionId] = donation.transactionId
+                it[DonationsTable.payerEmail] = donation.payerEmail
+                it[DonationsTable.status] = donation.status ?: "Completed"
             }
             
             val insertedRow = insertStatement.resultedValues?.singleOrNull()

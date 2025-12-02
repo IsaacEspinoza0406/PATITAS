@@ -80,8 +80,8 @@ class SqlAdoptionRepository : AdoptionRepository {
     override suspend fun create(adoption: Adoption): Adoption {
         val result = dbQuery {
             val insertStatement = AdoptionQuestionnairesTable.insert {
-                it[adoptanteId] = adoption.adoptanteId
-                it[dogId] = adoption.dogId
+                it[AdoptionQuestionnairesTable.adoptanteId] = adoption.adoptanteId
+                it[AdoptionQuestionnairesTable.dogId] = adoption.dogId
             }
             insertStatement.resultedValues?.singleOrNull()?.let { row ->
                 Adoption(
@@ -106,7 +106,7 @@ class SqlAdoptionRepository : AdoptionRepository {
             val dogId = request[AdoptionQuestionnairesTable.dogId]
             // Update dog status to Adopted
             DogsTable.update({ DogsTable.id eq dogId }) {
-                it[adopted] = "Si"
+                it[DogsTable.adopted] = "Si"
             }
             // Delete the request
             AdoptionQuestionnairesTable.deleteWhere { AdoptionQuestionnairesTable.id eq id } > 0

@@ -36,10 +36,10 @@ class SqlUserRepository : UserRepository {
     override suspend fun create(user: User): User {
         val id = dbQuery {
             UsersTable.insert {
-                it[name] = user.name
-                it[email] = user.email
-                it[password] = user.password
-                it[roleId] = user.roleId
+                it[UsersTable.name] = user.name
+                it[UsersTable.email] = user.email
+                it[UsersTable.password] = user.password
+                it[UsersTable.roleId] = user.roleId
             } get UsersTable.id
         }
         return findById(id) ?: throw IllegalStateException("Error creating user")

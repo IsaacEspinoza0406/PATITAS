@@ -1,5 +1,6 @@
 package com.patitas_web.application
 
+import com.patitas_web.domain.entities.Dog
 import com.patitas_web.domain.entities.DogPhoto
 import com.patitas_web.domain.ports.DogPhotoRepository
 import com.patitas_web.domain.ports.DogRepository

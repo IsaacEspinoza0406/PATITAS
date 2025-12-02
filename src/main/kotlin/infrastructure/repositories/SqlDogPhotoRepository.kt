@@ -30,9 +30,9 @@ class SqlDogPhotoRepository : DogPhotoRepository {
     override suspend fun create(photo: DogPhoto): DogPhoto {
         val result = dbQuery {
             val insertStatement = DogPhotosTable.insert {
-                it[dogId] = photo.dogId
-                it[photoUrl] = photo.photoUrl
-                it[description] = photo.description
+                it[DogPhotosTable.dogId] = photo.dogId
+                it[DogPhotosTable.photoUrl] = photo.photoUrl
+                it[DogPhotosTable.description] = photo.description
             }
             insertStatement.resultedValues?.singleOrNull()?.let(::toDogPhoto)
         }

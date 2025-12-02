@@ -18,5 +18,6 @@ data class Adoption(
     val mascotasAnteriores: String? = null,
     val aunConservaMascotas: String? = null,
     val responsabilidadesMascota: String? = null,
-    val opinionEsterilizacion: String? = null
+    val opinionEsterilizacion: String? = null,
+    val dogImageUrl: String? = null
 )
