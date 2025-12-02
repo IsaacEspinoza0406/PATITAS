@@ -80,6 +80,14 @@ object AdoptionQuestionnairesTable : Table("adoption_questionnaires") {
     override val primaryKey = PrimaryKey(id)
 }
 
+object AdoptionRequestsTable : Table("adoption_requests") {
+    val id = integer("id").autoIncrement()
+    val adoptanteId = integer("adoptante_id") references AdoptantesTable.id
+    val dogId = integer("dog_id") references DogsTable.id
+
+    override val primaryKey = PrimaryKey(id)
+}
+
 object DogPhotosTable : Table("dog_photos") {
     val id = integer("id").autoIncrement()
     val dogId = integer("dog_id") references DogsTable.id
