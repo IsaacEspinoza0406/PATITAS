@@ -85,7 +85,9 @@ fun Application.configureDogRoutes() {
                     
                     multipart.forEachPart { part ->
                         if (part is PartData.FileItem) {
-                            val fileName = "${System.currentTimeMillis()}_${part.originalFileName}"
+                            val originalName = part.originalFileName as String
+                            val sanitizedName = originalName.replace(" ", "_").replace("[^a-zA-Z0-9._-]".toRegex(), "")
+                            val fileName = "${System.currentTimeMillis()}_$sanitizedName"
                             val fileBytes = part.streamProvider().readBytes()
                             val uploadDir = java.io.File("uploads")
                             if (!uploadDir.exists()) {
