@@ -38,6 +38,7 @@ object DatabaseFactory {
                 UsersTable,
                 RolesTable,
                 AdoptionQuestionnairesTable,
+                AdoptionRequestsTable,
                 DogPhotosTable
             )
             
