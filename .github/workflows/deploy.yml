@@ -30,13 +30,13 @@ jobs:
               with:
                 distribution: microsoft
                 java-version: '21'
-                cache: 'gradle'
-
-            - name: Make Gradle wrapper executable
-              run: chmod +x gradlew
+            - name: Setup Gradle
+              uses: gradle/actions/setup-gradle@v3
+              with:
+                gradle-version: '8.5'
 
             - name: Build with Gradle and Shadowjar
-              run: ./gradlew clean shadowjar
+              run: gradle clean shadowjar
 
             - name: Print generated JAR path
               run: find app/build/libs -name "*.jar" -print
