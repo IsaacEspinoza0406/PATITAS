@@ -1,7 +1,9 @@
 package com.patitas_web.domain.entities
 
+import kotlinx.serialization.Serializable
 import com.patitas_web.domain.DogPhotoResponse
 
+@Serializable
 data class Dog(
     val id: Int = 0,
     val name: String,

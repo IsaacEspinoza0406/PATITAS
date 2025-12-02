@@ -37,5 +37,8 @@ fun Application.configureAuthRoutes() {
     }
 }
 
+@kotlinx.serialization.Serializable
 data class LoginRequest(val email: String, val password: String)
+
+@kotlinx.serialization.Serializable
 data class AuthResponse(val token: String, val user: User)
