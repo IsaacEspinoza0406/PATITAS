@@ -1,3 +1,5 @@
+package com.patitas_web.domain.entities
+
 import kotlinx.serialization.Serializable
 
 @Serializable
