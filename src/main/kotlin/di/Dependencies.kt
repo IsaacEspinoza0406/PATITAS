@@ -12,7 +12,7 @@ import com.patitas_web.application.AdoptionService
 import com.patitas_web.domain.ports.AdoptionRepository
 import com.patitas_web.infrastructure.repositories.SqlAdoptionRepository
 
-import com.patitas_web.application.AuthService
+import com.patitas_web.application.UserService
 import com.patitas_web.domain.ports.UserRepository
 import com.patitas_web.infrastructure.repositories.SqlUserRepository
 
