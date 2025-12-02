@@ -5,6 +5,8 @@ import com.patitas_web.domain.ports.DogRepository
 import com.patitas_web.domain.ports.DogPhotoRepository
 import com.patitas_web.infrastructure.DatabaseFactory.dbQuery
 import com.patitas_web.infrastructure.tables.DogsTable
+import com.patitas_web.infrastructure.tables.DogPhotosTable
+import com.patitas_web.infrastructure.tables.AdoptionQuestionnairesTable
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.statements.UpdateBuilder
@@ -78,6 +80,10 @@ class SqlDogRepository(private val photoRepository: DogPhotoRepository) : DogRep
 
     override suspend fun delete(id: Int): Boolean {
         return dbQuery {
+            // Manual Cascade Delete
+            DogPhotosTable.deleteWhere { DogPhotosTable.dogId eq id }
+            AdoptionQuestionnairesTable.deleteWhere { AdoptionQuestionnairesTable.dogId eq id }
+            
             DogsTable.deleteWhere { DogsTable.id eq id } > 0
         }
     }
