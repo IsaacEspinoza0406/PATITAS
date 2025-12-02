@@ -47,4 +47,8 @@ fun Application.module() {
     configureAdoptanteRoutes()
     configureAuthRoutes()
     configureDonationRoutes()
+    
+    routing {
+        staticFiles("/uploads", java.io.File("uploads"))
+    }
 }

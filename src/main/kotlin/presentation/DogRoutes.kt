@@ -56,26 +56,26 @@ fun Application.configureDogRoutes() {
             delete("/{id}") {
                 val id = call.parameters["id"]?.toIntOrNull()
                 if (id == null) {
-                    call.respond(HttpStatusCode.BadRequest, "ID inválido")
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "ID inválido"))
                     return@delete
                 }
                 if (service.delete(id)) {
-                    call.respond(HttpStatusCode.OK, "Perro eliminado")
+                    call.respond(HttpStatusCode.OK, mapOf("message" to "Perro eliminado"))
                 } else {
-                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
+                    call.respond(HttpStatusCode.NotFound, mapOf("error" to "Perro no encontrado"))
                 }
             }
 
             post("/{id}/photos/upload-photo") {
                 val id = call.parameters["id"]?.toIntOrNull()
                 if (id == null) {
-                    call.respond(HttpStatusCode.BadRequest, "ID inválido")
+                    call.respond(HttpStatusCode.BadRequest, mapOf("error" to "ID inválido"))
                     return@post
                 }
                 
                 // Verify dog exists
                 if (service.findById(id) == null) {
-                    call.respond(HttpStatusCode.NotFound, "Perro no encontrado")
+                    call.respond(HttpStatusCode.NotFound, mapOf("error" to "Perro no encontrado"))
                     return@post
                 }
                 
@@ -85,10 +85,18 @@ fun Application.configureDogRoutes() {
                     
                     multipart.forEachPart { part ->
                         if (part is PartData.FileItem) {
-                            val fileName = part.originalFileName as String
-                            // In a real scenario, save the file to storage (S3/Disk)
-                            // For demonstration, we generate a placeholder URL based on the filename
-                            photoUrl = "https://placehold.co/400x400?text=$fileName"
+                            val fileName = "${System.currentTimeMillis()}_${part.originalFileName}"
+                            val fileBytes = part.streamProvider().readBytes()
+                            val uploadDir = java.io.File("uploads")
+                            if (!uploadDir.exists()) {
+                                uploadDir.mkdirs()
+                            }
+                            val file = java.io.File(uploadDir, fileName)
+                            file.writeBytes(fileBytes)
+                            
+                            // Construct URL (assuming server runs on port 8080)
+                            // Ideally, use a configuration for the base URL
+                            photoUrl = "/uploads/$fileName" 
                             part.dispose()
                         }
                     }
@@ -97,10 +105,10 @@ fun Application.configureDogRoutes() {
                         val photo = service.addPhoto(id, photoUrl, "Uploaded photo")
                         call.respond(HttpStatusCode.Created, photo)
                     } else {
-                        call.respond(HttpStatusCode.BadRequest, "No file uploaded")
+                        call.respond(HttpStatusCode.BadRequest, mapOf("error" to "No file uploaded"))
                     }
                 } catch (e: Exception) {
-                    call.respond(HttpStatusCode.InternalServerError, "Error uploading photo: ${e.message}")
+                    call.respond(HttpStatusCode.InternalServerError, mapOf("error" to "Error uploading photo: ${e.message}"))
                 }
             }
         }
