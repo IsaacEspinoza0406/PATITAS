@@ -7,7 +7,7 @@ import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.experimental.newSuspendedTransaction
 import org.jetbrains.exposed.sql.transactions.transaction
-import com.patitas_web.infrastructure.repositories.*
+import com.patitas_web.infrastructure.tables.*
 
 object DatabaseFactory {
     fun init() {
