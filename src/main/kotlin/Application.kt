@@ -10,6 +10,8 @@ import io.ktor.server.netty.*
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
+import io.ktor.server.routing.*
+import io.ktor.server.http.content.*
 import com.patitas_web.infrastructure.security.JwtConfig
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
