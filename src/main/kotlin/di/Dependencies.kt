@@ -26,6 +26,7 @@ import com.patitas_web.infrastructure.repositories.SqlDogPhotoRepository
 
 object Dependencies {
     val dogPhotoRepository: DogPhotoRepository by lazy { SqlDogPhotoRepository() }
+    val dogPhotoService: DogPhotoService by lazy { DogPhotoService(dogPhotoRepository) }
 
     val dogRepository: DogRepository by lazy { SqlDogRepository(dogPhotoRepository) }
     val dogService: DogService by lazy { DogService(dogRepository, dogPhotoRepository) }
